@@ -10,7 +10,7 @@ export default class Homepage extends Component {
     return(
       <div className = 'HomepageHeader'>
         <div className = 'Menu'>
-          <p>hello</p>
+  
         </div>
       </div>
     );
