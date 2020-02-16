@@ -1,0 +1,12 @@
+.InsideProfile{
+  padding: 10% 10% 10% 10%;
+  margin: 10px 10px 10px 10px;
+  border: 1px solid  #FCC300;
+  height: 400px;
+}
+
+.Information{
+  width: 100%;
+  height: 230px;
+  background-color: yellow;
+}

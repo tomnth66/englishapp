@@ -1,0 +1,26 @@
+.MapSelection {
+  width: 70%;
+  height: 100%;
+  border: 1px solid #AAA;
+  text-align: center;
+  background-color: purple;
+  /* padding: 40px 10%; */
+}
+
+.MapSelectionInside{
+  display: inline-block;
+  width: 85%;
+  /* height: 100%; */
+  padding: 20px;
+  background-color:#FFF;
+  border-radius: 5px;
+  border: 1px solid #ff7f7f;
+  margin-top: 30px;
+  padding-left: 20px;
+}
+
+.Map {
+  width: 95%;
+  height: 200px;
+  border: 1px solid rgba(0,0,0,.07);
+}

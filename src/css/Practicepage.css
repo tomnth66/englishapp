@@ -14,10 +14,18 @@ a{
   margin: none;
 }
 
-.HomepageBody {
+.PracticepageBodyHeader {
+  width: 70%;
+  text-align: center;
+}
+
+.PracticepagePracticepageBodyHeader h1{
+  display: inline-block;
+}
+
+.PracticepageBody{
   width: 100%;
-  height: 500px;
-  background-color: red;
+  height: 1000px;
   display: flex;
   flex-direction: row;
 }

@@ -1,0 +1,21 @@
+.Button{
+  border-radius: 50px;
+  border: 2px solid #fff;
+  color: #fff;
+  width: 69px;
+  height: 27px;
+  background: #68b52a;
+  text-align: center;
+}
+
+.Button:active{
+  opacity: 0.5;
+}
+
+.Button:hover{
+  cursor: pointer;
+}
+
+.wordSpan{
+  display: inline-block;
+}

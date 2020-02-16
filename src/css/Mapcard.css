@@ -1,0 +1,61 @@
+.Mapcard {
+  width: 95%;
+  height: 230px;
+  border: 1px solid rgba(0,0,0,.07);
+  text-align: center;
+}
+
+.Header {
+  height: 45px;
+  width: 97%;
+  position: relative;
+  border-bottom: 1px solid #999;
+}
+
+.Title {
+  text-align: left;
+  text-transform: uppercase;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 20px;
+  padding-left: 5px;
+  padding-top: 10px;
+  width: 60%;
+}
+
+.Mapcontroller {
+  padding-right: 5px;
+  padding-top: 7px;
+  width: 10%;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+.Describe{
+  height: 75%;
+  width: 97%;
+  position: relative;
+}
+
+.Mappicture{
+  height: 100%;
+  width: 27%;
+  border-right: 1px solid #999;
+}
+
+.Mappictureinside {
+  height: 100%;
+  width: 100%;
+}
+
+.Instruction{
+  position: absolute;
+  width: 73%;
+  top: 0px;
+  right: 0px;
+}
+
+.Instruction p{
+  text-align: left;
+  padding-left: 10px;
+}

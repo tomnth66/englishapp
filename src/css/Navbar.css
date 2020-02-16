@@ -1,0 +1,29 @@
+.Menu {
+  height: 50px;
+  width: 100%;
+  background-color: #FCC300;
+  margin-top: 0px;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 15% 0px 20%;
+  margin: 0px 0px 0px 0px;
+  height: 100%;
+}
+
+li {
+  list-style: none;
+  border-right: 1px solid #777;
+  padding-right: 11%;
+  height: 100%;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+
+li:last-child {
+  border: none;
+}
