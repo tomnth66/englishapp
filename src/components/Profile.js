@@ -1,15 +1,15 @@
-import React,{Component} from 'react';
-import '../css/Profile.css';
-import InsideProfile from './InsideProfile.js';
+import React, { Component } from "react";
+import "../css/Profile.css";
+import InsideProfile from "./InsideProfile.js";
 
 export default class News extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
-  render(){
-    return(
-      <div className = 'Profile'>
+  render() {
+    return (
+      <div className="Profile">
         <InsideProfile></InsideProfile>
       </div>
     );

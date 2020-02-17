@@ -1,16 +1,12 @@
-import React,{Component} from 'react';
-import '../css/News.css';
+import React, { Component } from "react";
+import "../css/News.css";
 
 export default class News extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
-  render(){
-    return(
-      <div className = 'News'>
-          
-      </div>
-    );
+  render() {
+    return <div className="News"></div>;
   }
 }

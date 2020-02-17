@@ -1,21 +1,69 @@
-.Button{
-  border-radius: 50px;
-  border: 2px solid #fff;
-  color: #fff;
-  width: 69px;
-  height: 27px;
-  background: #68b52a;
-  text-align: center;
-}
-
-.Button:active{
-  opacity: 0.5;
-}
-
-.Button:hover{
+.btn {
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  /* if using <a> */
+  text-decoration: none;
+
+  /* default color */
+  color: #eceff4;
+  background-color: #5e81ac;
+  /* ------------- */
+
+  /* TEXT */
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  text-transform: uppercase;
+  /* ---- */
+
+  /* STYLE */
+  display: inline-block;
+  outline: 0;
+  border: none;
+  border-radius: 10px;
+  padding: 0 16px;
+  line-height: 36px;
+  height: 36px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  min-width: 60px;
+  /* ---- */
 }
 
-.wordSpan{
-  display: inline-block;
+/* color option for btn */
+.btn--green {
+  background: #a3be8c;
+}
+.btn--green::hover {
+  background: #7c916a;
+}
+
+.btn--yellow {
+  background: #ebcb8b;
+}
+
+.btn--orange {
+  background-color: #d08770;
+}
+
+.btn--red {
+  background: #bf616a;
+}
+
+.btn--purple {
+  background: #b48ead;
+}
+
+/* color for ripple effect // waves effect */
+.circle {
+  position: absolute;
+  background: #eceff4;
+  border-radius: 50%;
+}
+
+/* hover effect */
+.btn--hover {
+  filter: contrast(115%) brightness(80%);
 }
