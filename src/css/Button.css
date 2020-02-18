@@ -2,13 +2,14 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  margin: 0 .5rem;
 
   /* if using <a> */
   text-decoration: none;
 
   /* default color */
-  color: #eceff4;
-  background-color: #5e81ac;
+  color: #2E3440;
+  background-color: #88C0D0;
   /* ------------- */
 
   /* TEXT */
@@ -19,7 +20,7 @@
   /* ---- */
 
   /* STYLE */
-  display: inline-block;
+  display: inline-block !important;
   outline: 0;
   border: none;
   border-radius: 10px;
@@ -65,5 +66,7 @@
 
 /* hover effect */
 .btn--hover {
-  filter: contrast(115%) brightness(80%);
+  filter: contrast(115%) brightness(90%);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }

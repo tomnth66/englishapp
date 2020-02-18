@@ -1,29 +1,42 @@
-import React, { Component } from "react";
+import React from "react";
 import "../css/Navbar.css";
+import "flexboxgrid";
 
-export default class Navbar extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Navbar = () => {
+  const links = [
+    { id: 0, href: "./", name: "Home" },
+    { id: 1, href: "./Practice", name: "Practice" },
+    { id: 2, href: "./Ranking", name: "Ranking" },
+    { id: 3, href: "./AboutApp", name: "About App" }
+  ];
 
-  render() {
-    return (
-      <div className="Menu">
-        <ul>
-          <li>
-            <a href="./">Home</a>
-          </li>
-          <li>
-            <a href="./Practice">Practice</a>
-          </li>
-          <li>
-            <a href="./Ranking">Ranking</a>
-          </li>
-          <li>
-            <a href="./AboutApp">About App</a>
-          </li>
-        </ul>
-      </div>
-    );
-  }
-}
+  const hoverLink = e => {
+    e.currentTarget.classList.add("link-hover");
+  };
+
+  const leaveLink = e => {
+    e.currentTarget.classList.remove("link-hover");
+  };
+
+  return (
+    <div className="row nav">
+      <h3 className="title">SYNTAXI</h3>
+      <nav className="col-xs-5 nav-links">
+        {links.map(link => {
+          return (
+            <a
+              href={link.href}
+              key={link.id}
+              onMouseOver={hoverLink}
+              onMouseLeave={leaveLink}
+            >
+              {link.name}
+            </a>
+          );
+        })}
+      </nav>
+    </div>
+  );
+};
+
+export default Navbar;

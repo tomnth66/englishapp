@@ -1,7 +1,8 @@
 import "../css/Button.css";
 import React, { useState } from "react";
 import Ripples from "react-ripples";
-// var classNames = require("classnames");
+import '@fortawesome/fontawesome-free/css/all.css';
+  // var classNames = require("classnames");
 
 const Button = props => {
   // custom color button
@@ -12,31 +13,26 @@ const Button = props => {
     btnClass += btnColor;
   }
 
-  // set pos for ripple
-  let [pos, setPos] = useState({ X: 0, Y: 0 });
-
-  // default size
-  let maxSize = `${60 * 2}px`;
   const changeBackground = e => {
-    e.target.classList.add("btn--hover");
+    e.currentTarget.classList.add("btn--hover");
   };
 
   const returnBackground = e => {
-    e.target.classList.remove("btn--hover");
+    e.currentTarget.classList.remove("btn--hover");
   };
 
   return (
     <Ripples
-      color="rgba(216, 222, 233, 0.25)"
+      color="rgba(216, 222, 233, 0.35)"
       during="1200"
+      onMouseOver={changeBackground}
+      onMouseLeave={returnBackground}
+      className={btnClass}
+      onClick={props.onClick}
     >
-      <div
-        onMouseOver={changeBackground}
-        onMouseLeave={returnBackground}
-        className={btnClass}
-      >
         {props.keyword}
-      </div>
+        {"\t"}
+        <i className={`fa fa-${props.icon}`}></i>
     </Ripples>
   );
 };
