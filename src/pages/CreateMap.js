@@ -87,19 +87,19 @@ const CreateMap = props => {
       console.log("dữ liệu", data.data().Maplist);
       let Maplist = data.data().Maplist;
       Maplist.unshift({
-        Answer: ["word10", "word2", "word200"],
-        Clue: ["clue1", "clue2", "clue3"],
-        Mapname: "tmpname",
-        paragraph: para
-      });
-
-      ref.set({ Maplist: Maplist });
-      //  .then(()=>{window.location.href="/";})
-
+                        Answer:["word10","word2","word200"],
+                        Clue:["clue1","clue2","clue3"],
+                        Mapname: "tmpname",
+                        paragraph: para
+                      })
+      
+      ref.set({Maplist:Maplist})
+         .then(()=>{window.location.href="/";})
+      
       // window.location.href="/";
     });
 
-    window.location.href = "/";
+    // window.location.href="/";
   };
 
   return (
