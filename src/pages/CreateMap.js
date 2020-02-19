@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "../css/CreateMap.css";
+import firebase from "../firebase.js"
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "flexboxgrid";
+
+let para;
 
 const CreateMap = props => {
   let [flip, setFlip] = useState(false);
@@ -32,10 +35,11 @@ const CreateMap = props => {
   const returnAnswerSelector = () => {
     flipCard();
     let answerSelectorArea = document.getElementById("answerSelector");
-    let para = document.getElementById("inputArea").value;
+    para = document.getElementById("inputArea").value;
+
     console.log(para);
     let words = para.split("\n");
-    console.log(words);
+    // console.log('đây là từng từ một', words);
 
     let fullPara = "";
 
@@ -49,7 +53,7 @@ const CreateMap = props => {
           fullPara += '\t<div style="height: 1rem"></div>';
         }
       }
-      console.log(word);
+      console.log('đây là từng từ một',word);
       fullPara += `</div>\n`;
     }
 
@@ -68,7 +72,29 @@ const CreateMap = props => {
 
   const submit = () => {
     console.log("submitting...");
+
+    const db = firebase.firestore();
+    const ref = db.collection('Map').doc('wCj3hteHUHgCtiWl98yq');
+
+    ref.get().then((data) => {
+      console.log('dữ liệu', data.data().Maplist);
+      let Maplist = data.data().Maplist;
+      Maplist.unshift({
+                        Answer:["word10","word2","word200"],
+                        Clue:["clue1","clue2","clue3"],
+                        Mapname: "tmpname",
+                        paragraph: para
+                      })
+      
+      ref.set({Maplist:Maplist})
+        //  .then(()=>{window.location.href="/";})
+      
+      // window.location.href="/";
+    })
+
+    window.location.href="/";
   };
+
 
   return (
     <div style={{ height: "100vh" }}>
@@ -106,6 +132,7 @@ const CreateMap = props => {
                 </label>
               </div>
             </FrontSide>
+
             <BackSide>
               <div id="answerSelector"></div>
               <div className="button-area">
@@ -114,6 +141,7 @@ const CreateMap = props => {
                 <Button keyword="Submit" onClick={submit} icon="paper-plane" />
               </div>
             </BackSide>
+
           </Flippy>
         </div>
       </div>
