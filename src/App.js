@@ -12,7 +12,7 @@ function App() {
       <div className="App">
         <Route path="/" exact component={Homepage} />
         <Route path="/practice" exact component={Practicepage} />
-        <Route path="/create-map" exact component={CreateMap} />
+        <Route path="/createmap" exact component={CreateMap} />
       </div>
     </Router>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../css/Createmap.css";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
@@ -65,7 +66,11 @@ const CreateMap = props => {
     }
   };
 
-  const submit = () => {};
+  const submit = () => {
+    console.log('submitting...')
+  };
+
+
 
   return (
     <div style={{ height: "100vh" }}>
@@ -113,7 +118,7 @@ const CreateMap = props => {
                 {/* change to mode select answer */}
                 <label>
                   <Button
-                    keyword="Submit"
+                    keyword="Next"
                     onClick={returnAnswerSelector}
                     icon="paper-plane"
                   />
