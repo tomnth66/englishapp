@@ -3,10 +3,18 @@
 }
 
 #inputArea {
-  height: 350px;
+  height: 80%;
   width: 100%;
-  border: none;
+  border: 0.15rem solid rgba(136, 192, 208, 0);
   background: #eceff4;
+  resize: none;
+  padding: .5rem 0 0 .5rem;
+  font-size: 1rem;
+}
+
+#inputArea:focus {
+  border: 0.15rem solid rgba(136, 192, 208, 0.9);
+  border-radius: 10px;
 }
 
 .button-area {
@@ -23,10 +31,14 @@
   background: #eceff4;
   display: block;
   text-align: left;
+  border: 0.15rem solid rgba(136, 192, 208, 0);
+  padding: .5rem 0 0 .5rem;
+  font-size: 1rem;
 }
 
-.input-container {
+.flippy-container {
   height: 100%;
+  width: 100%;
 }
 
 #FileReader {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/CreateMap.css";
-import firebase from "../firebase.js"
+import firebase from "../firebase.js";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
@@ -32,6 +32,7 @@ const CreateMap = props => {
     }
   };
 
+  let correctAnswer = [];
   const returnAnswerSelector = () => {
     flipCard();
     let answerSelectorArea = document.getElementById("answerSelector");
@@ -43,17 +44,23 @@ const CreateMap = props => {
 
     let fullPara = "";
 
+    // id is start from 0
+    let currentID = 0;
+
+    // clear the old answer correctAnswer;
+
     for (let word of words) {
       fullPara += `<div>\n`;
       word = word.split(" ");
       for (let i = 0; i < word.length; ++i) {
-        if (word[i] !== "")
-          fullPara += `\t<span class="teacher-para">${word[i]}</span>\n`;
-        else {
+        if (word[i] !== "") {
+          fullPara += `\t<span id="${currentID}" class="teacher-para">${word[i]}</span>\n`;
+          ++currentID;
+        } else {
           fullPara += '\t<div style="height: 1rem"></div>';
         }
       }
-      console.log('đây là từng từ một',word);
+      console.log(`Đây là từng từ một ${word}`);
       fullPara += `</div>\n`;
     }
 
@@ -71,30 +78,29 @@ const CreateMap = props => {
   };
 
   const submit = () => {
-    console.log("Submitting... 🚀"
-    );
-    const db = firebase.firestore();
-    const ref = db.collection('Map').doc('wCj3hteHUHgCtiWl98yq');
+    console.log("Submitting... 🚀");
 
-    ref.get().then((data) => {
-      console.log('dữ liệu', data.data().Maplist);
+    const db = firebase.firestore();
+    const ref = db.collection("Map").doc("wCj3hteHUHgCtiWl98yq");
+
+    ref.get().then(data => {
+      console.log("dữ liệu", data.data().Maplist);
       let Maplist = data.data().Maplist;
       Maplist.unshift({
-                        Answer:["word10","word2","word200"],
-                        Clue:["clue1","clue2","clue3"],
-                        Mapname: "tmpname",
-                        paragraph: para
-                      })
-      
-      ref.set({Maplist:Maplist})
-        //  .then(()=>{window.location.href="/";})
-      
+        Answer: ["word10", "word2", "word200"],
+        Clue: ["clue1", "clue2", "clue3"],
+        Mapname: "tmpname",
+        paragraph: para
+      });
+
+      ref.set({ Maplist: Maplist });
+      //  .then(()=>{window.location.href="/";})
+
       // window.location.href="/";
-    })
+    });
 
-    window.location.href="/";
+    window.location.href = "/";
   };
-
 
   return (
     <div style={{ height: "100vh" }}>
@@ -109,16 +115,11 @@ const CreateMap = props => {
             flipOnClick={false} // default false
             flipDirection="horizontal" // horizontal or vertical
             isFlipped={flip}
-            className="box input-container"
           >
             <FrontSide>
               <textarea id="inputArea"></textarea>
               <div className="button-area">
-                <input
-                  type="file"
-                  id="FileReader"
-                  onChange={importFile}
-                />
+                <input type="file" id="FileReader" onChange={importFile} />
                 <label htmlFor="FileReader">
                   <Button keyword="UPLOAD" icon="cloud-upload-alt" />
                 </label>
@@ -141,7 +142,6 @@ const CreateMap = props => {
                 <Button keyword="Submit" onClick={submit} icon="paper-plane" />
               </div>
             </BackSide>
-
           </Flippy>
         </div>
       </div>
