@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/Createmap.css";
+import "../css/CreateMap.css";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
@@ -46,7 +46,7 @@ const CreateMap = props => {
         if (word[i] != "")
           fullPara += `\t<span class="teacher-para">${word[i]}</span>\n`;
         else {
-          fullPara += '\t<div style="height: 1rem"></div>'
+          fullPara += '\t<div style="height: 1rem"></div>';
         }
       }
       console.log(word);
@@ -62,15 +62,13 @@ const CreateMap = props => {
       p.addEventListener("click", e => {
         console.log(p);
         e.currentTarget.classList.toggle("selected-answer");
-      })
+      });
     }
   };
 
   const submit = () => {
-    console.log('submitting...')
+    console.log("submitting...");
   };
-
-
 
   return (
     <div style={{ height: "100vh" }}>
@@ -89,23 +87,8 @@ const CreateMap = props => {
             style={{ height: "100%" }}
           >
             <FrontSide>
-              <textarea
-                style={{
-                  height: "80%",
-                  width: "100%",
-                  border: "none",
-                  background: "#ECEFF4"
-                }}
-                id="inputArea"
-              ></textarea>
-              <div
-                style={{
-                  float: "right",
-                  height: "20%",
-                  display: "flex",
-                  alignItems: "center"
-                }}
-              >
+              <textarea id="inputArea"></textarea>
+              <div className="button-area">
                 <input
                   type="file"
                   id="FileReader"
@@ -126,25 +109,8 @@ const CreateMap = props => {
               </div>
             </FrontSide>
             <BackSide>
-              <div
-                style={{
-                  height: "80%",
-                  width: "100%",
-                  border: "none",
-                  background: "#ECEFF4",
-                  display: "block",
-                  textAlign: "left"
-                }}
-                id="answerSelector"
-              ></div>
-              <div
-                style={{
-                  float: "right",
-                  height: "20%",
-                  display: "flex",
-                  alignItems: "center"
-                }}
-              >
+              <div id="answerSelector"></div>
+              <div className="button-area">
                 <Button keyword="back" onClick={flipCard} icon="undo-alt" />
                 {/* submit to database */}
                 <Button keyword="Submit" onClick={submit} icon="paper-plane" />

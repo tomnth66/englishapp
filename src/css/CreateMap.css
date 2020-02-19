@@ -1,0 +1,22 @@
+#inputArea {
+  height: 80%;
+  width: 100%;
+  border: none;
+  background: #eceff4;
+}
+
+.button-area {
+  float: right;
+  height: 20%;
+  display: flex;
+  align-items: center;
+}
+
+#answerSelector {
+  height: 80%;
+  width: 100%;
+  border: none;
+  background: #eceff4;
+  display: block;
+  text-align: left;
+}

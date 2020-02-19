@@ -1,5 +1,5 @@
 import "../css/Button.css";
-import React, { useState } from "react";
+import React from "react";
 import Ripples from "react-ripples";
 import '@fortawesome/fontawesome-free/css/all.css';
   // var classNames = require("classnames");
