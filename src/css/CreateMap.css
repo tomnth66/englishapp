@@ -1,3 +1,7 @@
+.flip-card {
+  height: 80%;
+}
+
 #inputArea {
   height: 80%;
   width: 100%;
@@ -19,4 +23,12 @@
   background: #eceff4;
   display: block;
   text-align: left;
+}
+
+.input-container {
+  height: 100%;
+}
+
+#FileReader {
+  display: none;
 }

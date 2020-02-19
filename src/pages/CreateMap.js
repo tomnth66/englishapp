@@ -43,7 +43,7 @@ const CreateMap = props => {
       fullPara += `<div>\n`;
       word = word.split(" ");
       for (let i = 0; i < word.length; ++i) {
-        if (word[i] != "")
+        if (word[i] !== "")
           fullPara += `\t<span class="teacher-para">${word[i]}</span>\n`;
         else {
           fullPara += '\t<div style="height: 1rem"></div>';
@@ -77,14 +77,13 @@ const CreateMap = props => {
         className="row middle-xs center-xs"
         style={{ height: "calc(100% - 4rem)" }}
       >
-        <div className="col-xs-10" style={{ height: "80%" }}>
+        <div className="col-xs-10 flip-card">
           <Flippy
             flipOnHover={false} // default false
             flipOnClick={false} // default false
             flipDirection="horizontal" // horizontal or vertical
             isFlipped={flip}
             className="box input-container"
-            style={{ height: "100%" }}
           >
             <FrontSide>
               <textarea id="inputArea"></textarea>
@@ -93,7 +92,6 @@ const CreateMap = props => {
                   type="file"
                   id="FileReader"
                   onChange={importFile}
-                  style={{ display: "none" }}
                 />
                 <label htmlFor="FileReader">
                   <Button keyword="UPLOAD" icon="cloud-upload-alt" />
