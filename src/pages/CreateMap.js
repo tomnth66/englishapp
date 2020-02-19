@@ -71,8 +71,8 @@ const CreateMap = props => {
   };
 
   const submit = () => {
-    console.log("submitting...");
-
+    console.log("Submitting... 🚀"
+    );
     const db = firebase.firestore();
     const ref = db.collection('Map').doc('wCj3hteHUHgCtiWl98yq');
 
