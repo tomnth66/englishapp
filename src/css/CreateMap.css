@@ -10,7 +10,7 @@
   resize: none;
   padding: .5rem 0 0 .5rem;
   font-size: 1rem;
-  font-family: "Raleway", sans-serif;
+  font-family: "Raleway", sans-serif; 
 }
 
 #inputArea:focus {
@@ -35,6 +35,7 @@
   border: 0.15rem solid rgba(136, 192, 208, 0);
   padding: .5rem 0 0 .5rem;
   font-size: 1rem;
+  overflow-y: scroll;
 }
 
 .flippy-container {
