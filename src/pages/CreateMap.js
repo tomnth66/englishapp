@@ -32,7 +32,7 @@ const CreateMap = props => {
     }
   };
 
-  let correctAnswer = [];
+  // let correctAnswer = [];
   const returnAnswerSelector = () => {
     flipCard();
     let answerSelectorArea = document.getElementById("answerSelector");
@@ -86,16 +86,19 @@ const CreateMap = props => {
     ref.get().then(data => {
       console.log("dữ liệu", data.data().Maplist);
       let Maplist = data.data().Maplist;
+      console.log(para);
       Maplist.unshift({
-                        Answer:["word10","word2","word200"],
-                        Clue:["clue1","clue2","clue3"],
-                        Mapname: "tmpname",
-                        paragraph: para
-                      })
-      
-      ref.set({Maplist:Maplist})
-         .then(()=>{window.location.href="/";})
-      
+        Answer: ["word10", "word2", "word200"],
+        Clue: ["clue1", "clue2", "clue3"],
+        Mapname: "tmpname",
+        paragraph: para
+      });
+
+      ref
+        .set({ Maplist: Maplist })
+        // .then(()=>{window.location.href="/";})
+        .then(() => {});
+
       // window.location.href="/";
     });
 

@@ -10,6 +10,7 @@
   resize: none;
   padding: .5rem 0 0 .5rem;
   font-size: 1rem;
+  font-family: "Raleway", sans-serif;
 }
 
 #inputArea:focus {
