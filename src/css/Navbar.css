@@ -38,3 +38,13 @@
 .link-hover {
   background: rgba(163, 165, 168, 0.25);
 }
+
+.Menuitem {
+  border-radius: 10px;
+}
+
+.Menuitem:hover {
+  cursor: pointer;
+  /* background: rgba(163, 165, 168, 0.25); */
+  /* padding: 2px; */
+}
