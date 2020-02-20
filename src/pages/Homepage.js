@@ -19,8 +19,8 @@ export default class Homepage extends Component {
 
         <div className="HomepageBody">
           <News></News>
-          <Login></Login>
-          {/* <Profile></Profile> */}
+          {!localStorage.getItem('user') && <Login></Login>}
+          {localStorage.getItem('user') &&  <Profile></Profile>}
         </div>
       </div>
     );
