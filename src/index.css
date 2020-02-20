@@ -9,6 +9,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #ECEFF4;
+  color: #2e3440;
 }
 
 code {
@@ -18,11 +19,4 @@ code {
 a {
   text-decoration: none;
   margin: none;
-}
-
-.selected-answer {
-  padding: 0 0.3rem 0 0.3rem;
-  border-radius: 10px;
-  background: #3b4252;
-  color: #eceff4;
 }
