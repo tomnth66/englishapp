@@ -2,7 +2,8 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  margin: 0 .5rem;
+  /* margin: 0 .5rem; */
+  margin-right: 10px;
 
   /* if using <a> */
   text-decoration: none;

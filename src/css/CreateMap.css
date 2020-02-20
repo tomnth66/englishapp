@@ -47,3 +47,9 @@
 #FileReader {
   display: none;
 }
+
+span:hover {
+  cursor: pointer;
+  background-color: #999;
+  border-radius: 5px;
+}

@@ -107,8 +107,8 @@ const CreateMap = props => {
 
       ref
         .set({ Maplist: Maplist })
-        // .then(()=>{window.location.href="/";})
-        .then(() => {});
+        .then(()=>{window.location.href="/";})
+        // .then(() => {});
 
       // window.location.href="/";
     });
