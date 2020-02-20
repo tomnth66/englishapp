@@ -10,7 +10,7 @@
   height: 230px;
   background-color: yellow;
   text-align: center;
-  padding-top: 0.5rem;
+  padding: 0.5rem 0.7rem 0px 0.7rem;
 }
 
 .Action {
@@ -22,6 +22,7 @@ p {
   background-color: #DDD;
   height: 30px;
   padding-top: 10px;
+  border-radius: 15px;
 }
 
 .Information a {
@@ -29,5 +30,10 @@ p {
   background-color: #DDD;
   height: 30px;
   padding-top: 10px;
+  border-radius: 15px;
+}
+
+.Information a:hover{
+  opacity: 0.7;
 }
 
