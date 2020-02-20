@@ -6,7 +6,12 @@ import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "flexboxgrid";
 
+// input area value
 let para;
+// coontain true and false value
+// true = answer that teacher selected
+let correctAnswer = [];
+
 
 const CreateMap = props => {
   let [flip, setFlip] = useState(false);
@@ -40,7 +45,7 @@ const CreateMap = props => {
 
     console.log(para);
     let words = para.split("\n");
-    // console.log('đây là từng từ một', words);
+    console.log(`đây là từng đoạn một ${words}`);
 
     let fullPara = "";
 
@@ -48,6 +53,7 @@ const CreateMap = props => {
     let currentID = 0;
 
     // clear the old answer correctAnswer;
+    correctAnswer = [];
 
     for (let word of words) {
       fullPara += `<div>\n`;
@@ -56,7 +62,9 @@ const CreateMap = props => {
         if (word[i] !== "") {
           fullPara += `\t<span id="${currentID}" class="teacher-para">${word[i]}</span>\n`;
           ++currentID;
+          correctAnswer.push(false);
         } else {
+          //  don't count " " or "\n"
           fullPara += '\t<div style="height: 1rem"></div>';
         }
       }
@@ -73,6 +81,9 @@ const CreateMap = props => {
       p.addEventListener("click", e => {
         console.log(p);
         e.currentTarget.classList.toggle("selected-answer");
+        console.log(e.currentTarget.id);
+        correctAnswer[e.currentTarget.id] = !correctAnswer[e.currentTarget.id];
+        console.log(correctAnswer[e.currentTarget.id]);
       });
     }
   };
@@ -88,7 +99,7 @@ const CreateMap = props => {
       let Maplist = data.data().Maplist;
       console.log(para);
       Maplist.unshift({
-        Answer: ["word10", "word2", "word200"],
+        Answer: correctAnswer,
         Clue: ["clue1", "clue2", "clue3"],
         Mapname: "tmpname",
         paragraph: para
