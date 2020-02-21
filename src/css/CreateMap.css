@@ -10,13 +10,13 @@
   resize: none;
   padding: .5rem 0 0 .5rem;
   font-size: 1rem;
-  font-family: "Raleway", sans-serif;
+  font-family: Roboto;
   overflow-y: scroll;
   outline: none;
 }
 
 #inputArea:focus {
-  border: 0.15rem solid rgba(136, 192, 208, 0.9);
+  border: 0.15rem solid rgba(63, 81, 181, 0.6);
   border-radius: 10px;
 }
 

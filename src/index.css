@@ -1,22 +1,24 @@
-@import url("https://fonts.googleapis.com/css?family=Fira+Code|Raleway:400,700&display=swap&subset=latin-ext");
-
 body,
 html {
   width: 100vw;
   height: 100vh;
   margin: 0;
-  font-family: "Raleway", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #ECEFF4;
   color: #2e3440;
+  font-family: Roboto;
 }
 
 code {
-  font-family: "Fira Code", monospace;
+  font-family: monospace;
 }
 
 a {
   text-decoration: none;
   margin: none;
+}
+
+.MuiButton-root {
+  margin-left: 1rem !important;
 }
