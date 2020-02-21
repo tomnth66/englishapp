@@ -1,17 +1,184 @@
 import React, { useState } from "react";
 import "../css/CreateMap.css";
 import firebase from "../firebase.js";
-import Button from "../components/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "@material-ui/core";
+import {
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Input
+} from "@material-ui/core";
+import { Zoom, Slide, Fade } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "flexboxgrid";
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 240
+  }
+}));
+let titleName = "";
+let exerciseType = "";
+
+const setExercise = (name, type) => {
+  titleName = name;
+  exerciseType = type;
+};
+
+const PopOutForm = () => {
+  const classes = useStyles();
+  const [open, setOpen] = useState("true");
+  const [type, setType] = useState("");
+  const [name, setName] = useState("");
+
+  const handleChangeType = event => {
+    setType(event.target.value || "");
+  };
+
+  const handleChangeName = event => {
+    setName(event.target.value || "");
+  };
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+
+  const handleClose = () => {
+    setOpen(false);
+    setExercise(name, type);
+  };
+
+  return (
+    <Dialog
+      disableBackdropClick
+      disableEscapeKeyDown
+      open={open}
+      onClose={handleClose}
+    >
+      <DialogTitle>Fill the form</DialogTitle>
+      <DialogContent>
+        <form className={classes.container}>
+          <FormControl className={classes.formControl} required>
+            <InputLabel id="demo-dialog-select-label">Type</InputLabel>
+            <Select
+              labelId="demo-dialog-select-label"
+              id="demo-dialog-select"
+              value={type}
+              onChange={handleChangeType}
+              input={<Input />}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="10">Ten</MenuItem>
+              <MenuItem value="20">Twenty</MenuItem>
+              <MenuItem value="30">Thirty</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl} required>
+            <InputLabel htmlFor="my-input">Name</InputLabel>
+            <Input
+              id="my-input"
+              aria-describedby="my-helper-text"
+              value={name}
+              onChange={handleChangeName}
+            />
+            {/* <FormHelperText id="my-helper-text">
+                  We'll never share your email.
+                </FormHelperText> */}
+          </FormControl>
+        </form>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={handleClose}
+          color="primary"
+          onClick={() => {
+            window.location.href = "/Practice";
+          }}
+        >
+          Cancel
+        </Button>
+        <Button onClick={handleClose} color="primary" disabled={!type || !name}>
+          Ok
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+const PopOutAlert = ({ isOpen }) => {
+  const classes = useStyles();
+  const [open, setOpen] = useState(true);
+  const [type, setType] = useState("");
+  const [name, setName] = useState("");
+
+  const handleChangeType = event => {
+    setType(event.target.value || "");
+  };
+
+  const handleChangeName = event => {
+    setName(event.target.value || "");
+  };
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <Dialog
+      disableBackdropClick
+      disableEscapeKeyDown
+      open={open}
+      onClose={handleClose}
+    >
+      <DialogTitle>Succes</DialogTitle>
+      <DialogContent className={classes.container}>
+          <DialogContentText id="alert-dialog-description">
+            {/* Succes */}
+          </DialogContentText>
+        </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={handleClose}
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            window.location.href = "/Practice";
+          }}
+        >
+          Continue
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 // input area value
 let para;
 // coontain true and false value
 // true = answer that teacher selected
 let correctAnswer = [];
-
 
 const CreateMap = props => {
   let [flip, setFlip] = useState(false);
@@ -88,8 +255,11 @@ const CreateMap = props => {
     }
   };
 
+  let [confirm, setConfirm] = useState(false);
+
   const submit = () => {
-    console.log("Submitting... 🚀");
+    setConfirm(true);
+      console.log("Submitting... 🚀");
 
     const db = firebase.firestore();
     const ref = db.collection("Map").doc("wCj3hteHUHgCtiWl98yq");
@@ -101,14 +271,15 @@ const CreateMap = props => {
       Maplist.unshift({
         Answer: correctAnswer,
         Clue: ["clue1", "clue2", "clue3"],
-        Mapname: "tmpname",
+        Mapname: titleName,
+        Maptype: exerciseType,
         paragraph: para
       });
 
-      ref
-        .set({ Maplist: Maplist })
-        .then(()=>{window.location.href="/";})
-        // .then(() => {});
+      ref.set({ Maplist: Maplist }).then(() => {
+        // window.location.href = "/";
+      });
+      // .then(() => {});
 
       // window.location.href="/";
     });
@@ -118,6 +289,7 @@ const CreateMap = props => {
 
   return (
     <div style={{ height: "100vh" }}>
+      <PopOutForm />
       <Navbar />
       <div
         className="row middle-xs center-xs"
@@ -133,32 +305,44 @@ const CreateMap = props => {
             <FrontSide>
               <textarea id="inputArea"></textarea>
               <div className="button-area">
-                <input type="file" id="FileReader" onChange={importFile} />
+                <input
+                  id="FileReader"
+                  multiple
+                  type="file"
+                  onChange={importFile}
+                />
                 <label htmlFor="FileReader">
-                  <Button keyword="UPLOAD" icon="cloud-upload-alt" />
+                  <Button color="primary" component="span">
+                    Upload
+                  </Button>
                 </label>
                 {/* change to mode select answer */}
-                <label>
-                  <Button
-                    keyword="Next"
-                    onClick={returnAnswerSelector}
-                    icon="paper-plane"
-                  />
-                </label>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={returnAnswerSelector}
+                >
+                  Next
+                </Button>
               </div>
             </FrontSide>
 
             <BackSide>
               <div id="answerSelector"></div>
               <div className="button-area">
-                <Button keyword="back" onClick={flipCard} icon="undo-alt" />
+                <Button color="primary" onClick={flipCard}>
+                  Back
+                </Button>
                 {/* submit to database */}
-                <Button keyword="Submit" onClick={submit} icon="paper-plane" />
+                <Button color="primary" variant="contained" onClick={submit}>
+                  Submit
+                </Button>
               </div>
             </BackSide>
           </Flippy>
         </div>
       </div>
+      {confirm &&  <PopOutAlert />}
     </div>
   );
 };
