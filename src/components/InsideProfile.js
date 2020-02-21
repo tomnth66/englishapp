@@ -3,7 +3,7 @@ import "../css/InsideProfile.css";
 import Avatar from "./Avatar.js";
 import Button from './Button.js';
 
-export default class Navbar extends Component {
+export default class InsideProfile extends Component {
   constructor(props) {
     super(props);
   }
@@ -23,6 +23,7 @@ export default class Navbar extends Component {
           <p>Name: {localStorage.getItem('user')} ({localStorage.getItem('class')})</p>
 
           <div className = 'Action'>
+            {localStorage.getItem('class')==='admin' && <a href = '/createmap'> Post an announcement</a>}
             {localStorage.getItem('class')==='admin' && <a href = '/createmap'> Createmap</a>}
             {localStorage.getItem('class')==='admin' && <a href = '/studentmanagement'> Student Management</a>}
           </div>

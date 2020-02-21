@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/News.css";
+import InsideNews from './InsideNews.js'
 
 export default class News extends Component {
   constructor(props) {
@@ -7,6 +8,13 @@ export default class News extends Component {
   }
 
   render() {
-    return <div className="News"></div>;
+    return(
+      <div className="News">
+        <h1>Announcement</h1>
+        <InsideNews></InsideNews>
+        <InsideNews></InsideNews>
+        <InsideNews></InsideNews>
+      </div>
+    );
   }
 }

@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import "../css/InsideLogin.css";
 import Button from "./Button.js";
 import firebase from '../firebase';
+import RegisterForm from './RegisterForm.js'
 
 let acc,pass;
 let userInfo;
 
-export default class Navbar extends Component {
+export default class InsideLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      err:''
+      err:'',
+      registerForm: false
     }
 
     this.inputElement = React.createRef();
@@ -75,6 +77,12 @@ export default class Navbar extends Component {
     });
   }
 
+  register(){
+    this.setState({
+      registerForm: true
+    })
+  }
+
   render() {
     return (
       <div className="InsideLogin">
@@ -96,8 +104,11 @@ export default class Navbar extends Component {
         </div>
 
         <Button keyword="Login" onClick =  {this.handleForm.bind(this)}></Button>
+        <Button keyword="Register" onClick = {this.register.bind(this)}></Button>
 
+        {this.state.registerForm && <RegisterForm></RegisterForm>}
         {this.state.err && <p>{this.state.err}</p>}
+
       </div>
     );
   }

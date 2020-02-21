@@ -11,8 +11,9 @@ export default class Studentlist extends Component {
       <div className="Studentlist">
         <table>
           <tr>
-            <td colspan='3' style={{color: '#C36'}}>Tổng số thành viên: 10</td>"
-            <td colspan="2"></td>
+            <td colspan='3' style={{color: '#C36'}}>Tổng số thành viên: 10</td>
+            <td colspan='3'></td>
+            {/* <td colspan='1'></td> */}
           </tr>
           <tr style={{background: '#0F6' , color: '#fff'}}>
             <th>STT</th>

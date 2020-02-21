@@ -1,0 +1,53 @@
+.InsideNews {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  /* height: 65vh; */
+  border: 2px solid #999999;
+  border-radius: 3px;
+  box-shadow: ;
+  /* padding: 1rem 20px; */
+}
+
+.InsideNews p{
+  margin: 0px;
+}
+
+.Auther{
+  display: flex;
+  flex-direction: row;
+  height: 15vh;
+}
+
+.AutherAvatar{
+  border-radius: 50%;
+  margin: 5px 0px 5px 8px;
+  display: block;
+  width: 10vh;
+  height: 10vh;
+  border: 5px solid #fff;
+}
+
+.AutherName{
+  /* padding: 5vh 0; */
+  height: 14vh;
+  line-height: 14vh;
+  margin-left: 0.5rem;
+}
+
+.AutherName span{
+  /* padding: 10% 0; */
+  font-size: 20px;
+}
+/* .Picture{
+  width: 100%; 
+  height: 100%; 
+  border-radius: 50%;
+} */
+
+.NewsContent{
+  width: 94%;
+  margin: 10px auto;
+  margin-top: 0px;
+}
