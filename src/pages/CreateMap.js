@@ -71,11 +71,11 @@ const PopOutForm = () => {
       open={open}
       onClose={handleClose}
     >
-      <DialogTitle>Fill the form</DialogTitle>
+      <DialogTitle>Quick create</DialogTitle>
       <DialogContent>
         <form className={classes.container}>
           <FormControl className={classes.formControl} required>
-            <InputLabel id="demo-dialog-select-label">Type</InputLabel>
+            <InputLabel id="demo-dialog-select-label">Map Type</InputLabel>
             <Select
               labelId="demo-dialog-select-label"
               id="demo-dialog-select"
@@ -92,7 +92,7 @@ const PopOutForm = () => {
             </Select>
           </FormControl>
           <FormControl className={classes.formControl} required>
-            <InputLabel htmlFor="my-input">Name</InputLabel>
+            <InputLabel htmlFor="my-input">Map Name</InputLabel>
             <Input
               id="my-input"
               aria-describedby="my-helper-text"
@@ -152,10 +152,10 @@ const PopOutAlert = ({ isOpen }) => {
       open={open}
       onClose={handleClose}
     >
-      <DialogTitle>Succes</DialogTitle>
+      <DialogTitle>Success</DialogTitle>
       <DialogContent className={classes.container}>
           <DialogContentText id="alert-dialog-description">
-            {/* Succes */}
+            {/* Success */}
           </DialogContentText>
         </DialogContent>
       <DialogActions>
