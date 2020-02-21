@@ -5,6 +5,7 @@ import Homepage from "./pages/Homepage.js";
 import Practicepage from "./pages/Practicepage.js";
 import CreateMap from "./pages/CreateMap";
 import Test from "./pages/Test";
+import Studentmanagement from './pages/Studentmanagement.js'
 
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
           <Route path="/" exact component={Homepage} />
           <Route path="/practice" exact component={Practicepage} />
           <Route path="/createmap" exact component={CreateMap} />
+          <Route path="/studentmanagement" exact component={Studentmanagement} />
           <Route path="/test" exact component={Test} />
         </div>
       </Router>

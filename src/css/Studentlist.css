@@ -1,0 +1,28 @@
+/* body {
+  margin: 0px;
+  padding: 0px;
+} */
+
+.Studentlist{
+  width: 70%;
+  height: 100%;
+  text-align: center;
+}
+
+.Studentlist table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: auto;
+  margin-top: 3%;
+  text-align: center;
+}
+
+.Studentlist table tr{
+  border: 1px solid #0C6;
+	line-height: 30px;
+}
+
+.Studentlist table td{
+  border: 1px solid #0C6;
+	color: #666;
+}
