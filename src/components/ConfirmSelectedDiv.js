@@ -28,13 +28,11 @@ export default class ConfirmSelectedDiv extends Component {
     const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
     ref.get().then((data)=>{
       let Users = data.data().Users;
-      
+
       let idx = Users.findIndex(user=>user.Id===this.props.Id);
       Users[idx].Activated = !Users[idx].Activated;
 
-      this.setState({
-        Users:Users
-      })
+      ref.set({ Users: Users })
     });
   }
 
