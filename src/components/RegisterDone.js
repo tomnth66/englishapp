@@ -15,7 +15,7 @@ export default class RegisterDone extends Component {
     window.location.href = '/';
   }
 
-  
+
   render() {
     return (
       <div className="RegisterDone">
@@ -24,6 +24,7 @@ export default class RegisterDone extends Component {
 
         <div className = 'RegisterDoneInside'>
           <h1>Thank you for joining SYNTAXI</h1>
+          <h2>Please wait until your account is activated</h2>
           <div className = 'RegisterDoneButton'>
                 <Button keyword = 'Back to homepage' 
                         onClick = {this.BackToHomepage.bind(this)}></Button>

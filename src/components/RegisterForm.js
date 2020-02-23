@@ -91,12 +91,13 @@ export default class RegisterForm extends Component {
         Password:this.state.password,
         Course:this.state.course,
         Email:this.state.email,
-        TotalScore:0
+        TotalScore:0,
+        Activated:false
       });
 
-      localStorage.setItem('user',this.state.studentName);
-      localStorage.setItem('class','student');
-      localStorage.setItem('userId',this.state.Id);
+      // localStorage.setItem('user',this.state.studentName);
+      // localStorage.setItem('class','student');
+      // localStorage.setItem('userId',this.state.Id);
 
       ref.set({ Users: Users }).then(() => {
         func()

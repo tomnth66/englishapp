@@ -50,7 +50,7 @@ export default class InsideLogin extends Component {
       if(!UserAccount.length){
         this.setState({
           redirect:this.state.redirect,
-          err: 'Không có tài khoản này'
+          err: 'This account is not exist'
         }) 
       }
       else{
@@ -61,16 +61,24 @@ export default class InsideLogin extends Component {
         if(!User.length){
           this.setState({
             redirect:this.state.redirect,
-            err: 'Sai mật khẩu'
+            err: 'Wrong password'
           }) 
         }
         else{
           userInfo = User[0];
-          localStorage.setItem('user',userInfo.Name);
-          localStorage.setItem('class',userInfo.Class);
-          localStorage.setItem('userId',userInfo.Id);
-          window.location.href="/";
-          return;
+          if(!userInfo.Activated){
+            this.setState({
+              err: 'Sorry, this account is inactivated, please wait until it is activated'
+            }) 
+          }
+
+          else{
+            localStorage.setItem('user',userInfo.Name);
+            localStorage.setItem('class',userInfo.Class);
+            localStorage.setItem('userId',userInfo.Id);
+            window.location.href="/";
+            return;
+          }
           // this.hello();
         }
       }
