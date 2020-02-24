@@ -26,3 +26,12 @@
   border: 1px solid #0C6;
 	color: #666;
 }
+
+.DetailCss:hover{
+  cursor: pointer;
+  background-color: #999999;
+}
+
+.DetailCss:active{
+  opacity: 0.7;
+}

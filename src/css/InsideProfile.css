@@ -1,9 +1,9 @@
 .InsideProfile{
-  padding: 10% 10% 10% 10%;
+  padding: 5% 10% 10% 10%;
   margin: 10px 10px 10px 10px;
   /* border: 1px solid  #FCC300; */
   border: 1px solid #337ab7;
-  height: 400px;
+  height: 430px;
 }
 
 .Information{
@@ -32,6 +32,7 @@
   border-radius: 15px;
   width: 90%;
   margin: auto;
+  margin-bottom: 15px;
 }
 
 .Information a {

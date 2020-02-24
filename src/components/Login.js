@@ -3,7 +3,7 @@ import "../css/Login.css";
 import InsideLogin from "./InsideLogin.js";
 // import Test from "../pages/Test";
 
-export default class News extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
   }

@@ -1,17 +1,21 @@
 // import React, { Component } from "react";
 // import "../css/InsideLogin.css";
 // import Button from "./Button.js";
-// import firebase from "../firebase";
+// import firebase from '../firebase';
+// import RegisterForm from './RegisterForm.js'
+// import RegisterDone from './RegisterDone.js'
 
 // let acc, pass;
 // let userInfo;
 
-// export default class Navbar extends Component {
+// export default class InsideLogin extends Component {
 //   constructor(props) {
 //     super(props);
 //     this.state = {
-//       err: ""
-//     };
+//       err:'',
+//       registerForm: false,
+//       registerDone: false
+//     }
 
 //     this.inputElement = React.createRef();
 //   }
@@ -137,7 +141,7 @@ const useStyles = makeStyles(theme => ({
 
 let userInfo;
 
-const Test = () => {
+const InsideLogin = () => {
   const classes = useStyles();
   const [values, setValues] = useState({
     userName: "",
@@ -276,4 +280,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default InsideLogin;
