@@ -20,7 +20,7 @@ class App extends Component {
   // }
 
   render(){
-    if(window.location.pathname != '/' && window.location.pathname != '/AboutApp'){
+    if(window.location.pathname !== '/' && window.location.pathname !== '/AboutApp'){
       if(!localStorage.getItem('user')){
         window.location.href="/";
         return null;

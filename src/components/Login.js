@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css/Login.css";
 import InsideLogin from "./InsideLogin.js";
+// import Test from "../pages/Test";
 
 export default class News extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class News extends Component {
     return (
       <div className="Login">
         <InsideLogin></InsideLogin>
+        {/* <Test></Test> */}
       </div>
     );
   }

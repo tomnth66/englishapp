@@ -5,8 +5,7 @@
   justify-content: space-around;
   padding-top: 0;
   padding-bottom: 0;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
   box-shadow: rgba(216, 222, 233, 0.35) 0px 5px 10px 0px;
 }
 
@@ -27,19 +26,15 @@
   height: 100%;
 }
 
-.nav-links a {
-  color: #2e3440;
-  transition: background 600ms ease-in-out;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 10px;
-}
-
 .link-hover {
   background: rgba(163, 165, 168, 0.25);
 }
 
 .Menuitem {
+  color: #2e3440;
+  transition: background 600ms ease-in-out;
+  cursor: pointer;
+  padding: 0.5rem;
   border-radius: 10px;
 }
 

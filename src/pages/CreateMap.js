@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: 240
   }
 }));
+
 let titleName = "";
 let exerciseType = "";
 
@@ -43,7 +44,7 @@ const setExercise = (name, type) => {
 
 const PopOutForm = () => {
   const classes = useStyles();
-  const [open, setOpen] = useState("true");
+  const [open, setOpen] = useState(true);
   const [type, setType] = useState("");
   const [name, setName] = useState("");
 

@@ -1,120 +1,180 @@
-// this file is use for example component
 import React, { useState } from "react";
-import Navbar from "../components/Navbar.js";
-import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle
-} from "@material-ui/core";
+import firebase from "../firebase";
 import {
   TextField,
   FormControl,
   InputLabel,
-  Select,
-  MenuItem,
-  Input
+  InputAdornment,
+  IconButton,
+  OutlinedInput,
+  FormHelperText
 } from "@material-ui/core";
-import { Zoom, Slide } from "@material-ui/core";
-import "flexboxgrid";
+import { Card, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const useStyles = makeStyles(theme => ({
-  container: {
+  root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexDirection: "column",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "10px 10px 0 0",
+    padding: "1rem 0",
+    background: "#f3f5f8"
+    // border: "1px solid #fff"
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 240
+    width: "80%"
   }
 }));
 
+let acc, pass;
+let userInfo;
+
+const login = (event, funct) => {
+  // console.log(event.keyCode);
+  if (event.keyCode === 13) {
+    funct();
+  }
+};
+
 const Test = () => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [type, setType] = useState("");
-  const [name, setName] = useState("");
+  const [values, setValues] = useState({
+    userName: "",
+    password: "",
+    showPassword: false,
+    errorMesseage: "",
+    isError: false
+  });
 
-  const handleChangeType = event => {
-    setType(event.target.value || "");
+  const handleChange = prop => e => {
+    setValues({ ...values, [prop]: e.target.value });
   };
 
-  const handleChangeName = event => {
-    setName(event.target.value || "");
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleMouseDownPassword = e => {
+    e.preventDefault();
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleLogIn = () => {
+    // console.log(acc,pass);
+    const db = firebase.firestore();
+    const ref = db.collection("Users").doc("45GCoMKDwQWciXc8193A");
+    ref.get().then(data => {
+      // console.log('data after update in mount',data.data().ContractList);
+      let Users = data.data().Users;
+      // console.log(Users);
+      let UserAccount = Users.filter(user => {
+        return user.Account === values.userName;
+      });
+      // console.log(UserAccount);
+      if (!UserAccount.length) {
+        // this.setState({
+        //   redirect: this.state.redirect
+        // });
+        setValues({
+          ...values,
+          isError: true,
+          errorMesseage: "Tài khoản hoặc mật khẩu không tồn tại"
+        });
+        console.log(values);
+      } else {
+        let User = UserAccount.filter(function(user) {
+          return user.Password === values.password;
+        });
+
+        if (!User.length) {
+          // this.setState({
+          //   redirect: this.state.redirect
+          // });
+          setValues({
+            ...values,
+            isError: true,
+            errorMesseage: "Tài khoản hoặc mật khẩu không tồn tại"
+          });
+          console.log(values);
+        } else {
+          userInfo = User[0];
+          localStorage.setItem("user", userInfo.Name);
+          localStorage.setItem("class", userInfo.Class);
+          localStorage.setItem("userId", userInfo.Id);
+          window.location.href = "/";
+          return;
+          // this.hello();
+        }
+      }
+
+      // console.log(this.state.err);
+    });
   };
+
   return (
-    <div style={{ height: "100vh" }}>
-      <Navbar />
-      <div
-        className="row middle-xs center-xs"
-        style={{ height: "calc(100% - 4rem)" }}
-      >
-        <Button onClick={handleClickOpen}>Open select dialog</Button>
-        <Dialog
-          disableBackdropClick
-          disableEscapeKeyDown
-          open={open}
-          onClose={handleClose}
-        >
-          <DialogTitle>Fill the form</DialogTitle>
-          <DialogContent>
-            <form className={classes.container}>
-              <FormControl className={classes.formControl} required>
-                <InputLabel id="demo-dialog-select-label">Type</InputLabel>
-                <Select
-                  labelId="demo-dialog-select-label"
-                  id="demo-dialog-select"
-                  value={type}
-                  onChange={handleChangeType}
-                  input={<Input />}
+    <div>
+      <Card className={classes.root}>
+        <FormControl className={classes.formControl}>
+          <TextField
+            error={values.isError}
+            variant="outlined"
+            label="User Name"
+            onChange={handleChange("userName")}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl} variant="outlined">
+          <InputLabel
+            error={values.isError}
+            htmlFor="outlined-adornment-password"
+          >
+            Password
+          </InputLabel>
+          <OutlinedInput
+            error={values.isError}
+            id="outlined-adornment-password"
+            type={values.showPassword ? "text" : "password"}
+            value={values.password}
+            onChange={handleChange("password")}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
                 >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl className={classes.formControl} required>
-                <InputLabel htmlFor="my-input">Email address</InputLabel>
-                <Input
-                  id="my-input"
-                  aria-describedby="my-helper-text"
-                  value={name}
-                  onChange={handleChangeName}
-                />
-                {/* <FormHelperText id="my-helper-text">
-                  We'll never share your email.
-                </FormHelperText> */}
-              </FormControl>
-            </form>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button
-              onClick={handleClose}
-              color="primary"
-              disabled={!type || !name}
-            > 
-              Ok
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={70}
+          />
+          <FormHelperText error={values.isError}>{values.errorMesseage}</FormHelperText>
+        </FormControl>
+        <div
+          style={{
+            display: "flex",
+            width: "80%",
+            height: "3em",
+            alignItems: "center",
+            justifyContent: "flex-end"
+          }}
+        >
+          <Button
+            color="primary"
+            variant="contained"
+            disabled={!values.userName || !values.password}
+            onClick={handleLogIn}
+          >
+            LogIn
+          </Button>
+        </div>
+      </Card>
     </div>
   );
 };
