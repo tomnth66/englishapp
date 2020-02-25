@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../css/Login.css";
 import InsideLogin from "./InsideLogin.js";
-// import Test from "../pages/Test";
+import Test from "../pages/Test";
 
 export default class Login extends Component {
   constructor(props) {
@@ -11,8 +11,8 @@ export default class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <InsideLogin></InsideLogin>
-        {/* <Test></Test> */}
+        {/* <InsideLogin></InsideLogin> */}
+        <Test></Test>
       </div>
     );
   }

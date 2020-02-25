@@ -13,6 +13,7 @@ import { Card, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import RegisterDialog from "../components/RegisterDialog"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,7 +33,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-let acc, pass;
 let userInfo;
 
 const login = (event, funct) => {
@@ -49,7 +49,8 @@ const Test = () => {
     password: "",
     showPassword: false,
     errorMesseage: "",
-    isError: false
+    isError: false,
+    openRegister: false
   });
 
   const handleChange = prop => e => {
@@ -116,6 +117,11 @@ const Test = () => {
     });
   };
 
+  const openRegisterDialog = () => {
+    setValues({ ...values, openRegister: true });
+    console.log(values);
+  };
+
   return (
     <div>
       <Card className={classes.root}>
@@ -154,7 +160,9 @@ const Test = () => {
             }
             labelWidth={70}
           />
-          <FormHelperText error={values.isError}>{values.errorMesseage}</FormHelperText>
+          <FormHelperText error={values.isError}>
+            {values.errorMesseage}
+          </FormHelperText>
         </FormControl>
         <div
           style={{
@@ -165,6 +173,9 @@ const Test = () => {
             justifyContent: "flex-end"
           }}
         >
+          <Button color="primary" onClick={openRegisterDialog}>
+            Register
+          </Button>
           <Button
             color="primary"
             variant="contained"
@@ -174,6 +185,7 @@ const Test = () => {
             LogIn
           </Button>
         </div>
+        {values.openRegister && <RegisterDialog isOpen={true} />}
       </Card>
     </div>
   );
