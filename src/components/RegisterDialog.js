@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import firebase from "../firebase";
 import Ids from "short-id";
 import { makeStyles } from "@material-ui/core/styles";
+import theme from "../theme/muiTheme"
 import { Button } from "@material-ui/core";
 import {
   Dialog,
@@ -109,7 +110,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
   };
 
   return (
-    <Dialog open={values.open} onClose={handleClose}>
+    <Dialog open={values.open} onClose={handleClose} theme={theme}>
       <DialogTitle id="form-dialog-title" style={{ background: "#f3f5f8" }}>
         Register
       </DialogTitle>

@@ -10,7 +10,8 @@ import {
   FormHelperText
 } from "@material-ui/core";
 import { Card, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+import theme from "../theme/muiTheme"
+import { makeStyles, ThemeProvider } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import RegisterDialog from "../components/RegisterDialog";
@@ -24,8 +25,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     margin: "76px 10px 0 0",
     padding: "1rem 0",
-    background: "#f3f5f8"
-    // border: "1px solid #fff"
+    background: "#f3f5f8",
+    border: "2px solid #5e81ac",
   },
   formControl: {
     margin: theme.spacing(1),
@@ -123,7 +124,7 @@ const Test = () => {
   };
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Card className={classes.root}>
         <FormControl className={classes.formControl}>
           <TextField
@@ -194,7 +195,7 @@ const Test = () => {
           />
         )}
       </Card>
-    </div>
+    </ThemeProvider>
   );
 };
 
