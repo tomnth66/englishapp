@@ -37,8 +37,7 @@ const Navbar = () => {
   };
 
   const Validate = link => {
-    // console.log('vallidating...',link);
-
+    console.log('vallidating...',link);
     if (
       !localStorage.getItem("user") &&
       link !== "./" &&
@@ -66,7 +65,7 @@ const Navbar = () => {
               key={link.id}
               onMouseOver={hoverLink}
               onMouseLeave={leaveLink}
-              onClick={Validate}
+              onClick={() => {Validate(link.href)}}
             >
               {link.name}
             </div>

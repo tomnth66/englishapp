@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../css/CreateMap.css";
 import firebase from "../firebase.js";
-import { makeStyles } from "@material-ui/core/styles";
+import theme from "../theme/muiTheme";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import {
   Dialog,
@@ -11,14 +12,12 @@ import {
   DialogTitle
 } from "@material-ui/core";
 import {
-  TextField,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   Input
 } from "@material-ui/core";
-import { Zoom, Slide, Fade } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "flexboxgrid";
@@ -111,12 +110,17 @@ const PopOutForm = () => {
           onClick={handleClose}
           color="primary"
           onClick={() => {
-            window.location.href = "/Practice";
+            window.location.href = "/";
           }}
         >
           Cancel
         </Button>
-        <Button onClick={handleClose} color="primary" disabled={!type || !name}>
+        <Button
+          onClick={handleClose}
+          color="primary"
+          variant="contained"
+          disabled={!type || !name}
+        >
           Ok
         </Button>
       </DialogActions>
@@ -155,10 +159,10 @@ const PopOutAlert = ({ isOpen }) => {
     >
       <DialogTitle>Success</DialogTitle>
       <DialogContent className={classes.container}>
-          <DialogContentText id="alert-dialog-description">
-            {/* Success */}
-          </DialogContentText>
-        </DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          {/* Success */}
+        </DialogContentText>
+      </DialogContent>
       <DialogActions>
         <Button
           onClick={handleClose}
@@ -260,7 +264,7 @@ const CreateMap = props => {
 
   const submit = () => {
     setConfirm(true);
-      console.log("Submitting... 🚀");
+    console.log("Submitting... 🚀");
 
     const db = firebase.firestore();
     const ref = db.collection("Map").doc("wCj3hteHUHgCtiWl98yq");
@@ -289,62 +293,64 @@ const CreateMap = props => {
   };
 
   return (
-    <div style={{ height: "100vh" }}>
-      <PopOutForm />
-      <Navbar />
-      <div
-        className="row middle-xs center-xs"
-        style={{ height: "calc(100% - 4rem)" }}
-      >
-        <div className="col-xs-10 flip-card">
-          <Flippy
-            flipOnHover={false} // default false
-            flipOnClick={false} // default false
-            flipDirection="horizontal" // horizontal or vertical
-            isFlipped={flip}
-          >
-            <FrontSide>
-              <textarea id="inputArea"></textarea>
-              <div className="button-area">
-                <input
-                  id="FileReader"
-                  multiple
-                  type="file"
-                  onChange={importFile}
-                />
-                <label htmlFor="FileReader">
-                  <Button color="primary" component="span">
-                    Upload
+    <ThemeProvider theme={theme}>
+      <div style={{ height: "100vh" }}>
+        <PopOutForm />
+        <Navbar />
+        <div
+          className="row middle-xs center-xs"
+          style={{ height: "calc(100% - 4rem)" }}
+        >
+          <div className="col-xs-10 flip-card">
+            <Flippy
+              flipOnHover={false} // default false
+              flipOnClick={false} // default false
+              flipDirection="horizontal" // horizontal or vertical
+              isFlipped={flip}
+            >
+              <FrontSide>
+                <textarea id="inputArea"></textarea>
+                <div className="button-area">
+                  <input
+                    id="FileReader"
+                    multiple
+                    type="file"
+                    onChange={importFile}
+                  />
+                  <label htmlFor="FileReader">
+                    <Button color="primary" component="span">
+                      Upload
+                    </Button>
+                  </label>
+                  {/* change to mode select answer */}
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={returnAnswerSelector}
+                  >
+                    Next
                   </Button>
-                </label>
-                {/* change to mode select answer */}
-                <Button
-                  color="primary"
-                  variant="contained"
-                  onClick={returnAnswerSelector}
-                >
-                  Next
-                </Button>
-              </div>
-            </FrontSide>
+                </div>
+              </FrontSide>
 
-            <BackSide>
-              <div id="answerSelector"></div>
-              <div className="button-area">
-                <Button color="primary" onClick={flipCard}>
-                  Back
-                </Button>
-                {/* submit to database */}
-                <Button color="primary" variant="contained" onClick={submit}>
-                  Submit
-                </Button>
-              </div>
-            </BackSide>
-          </Flippy>
+              <BackSide>
+                <div id="answerSelector"></div>
+                <div className="button-area">
+                  <Button color="primary" onClick={flipCard}>
+                    Back
+                  </Button>
+                  {/* submit to database */}
+                  <Button color="primary" variant="contained" onClick={submit}>
+                    Submit
+                  </Button>
+                </div>
+              </BackSide>
+            </Flippy>
+          </div>
         </div>
+        {confirm && <PopOutAlert />}
       </div>
-      {confirm &&  <PopOutAlert />}
-    </div>
+    </ThemeProvider>
   );
 };
 
