@@ -18,7 +18,7 @@ export default class RegisterDone extends Component {
 
   render() {
     return (
-      <div className="RegisterDone">
+      <div className="RegisterDone">  
         <div className = 'Cover'>
         </div>
 

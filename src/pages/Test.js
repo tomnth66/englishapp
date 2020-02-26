@@ -13,7 +13,7 @@ import { Card, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import RegisterDialog from "../components/RegisterDialog"
+import RegisterDialog from "../components/RegisterDialog";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
-    margin: "10px 10px 0 0",
+    margin: "76px 10px 0 0",
     padding: "1rem 0",
     background: "#f3f5f8"
     // border: "1px solid #fff"
@@ -185,7 +185,14 @@ const Test = () => {
             LogIn
           </Button>
         </div>
-        {values.openRegister && <RegisterDialog isOpen={true} />}
+        {values.openRegister && (
+          <RegisterDialog
+            isOpen={values.openRegister}
+            closeRegister={() => {
+              setValues({ ...values, openRegister: false });
+            }}
+          />
+        )}
       </Card>
     </div>
   );
