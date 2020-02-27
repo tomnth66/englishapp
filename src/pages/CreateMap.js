@@ -156,11 +156,12 @@ const PopOutAlert = ({ isOpen }) => {
       disableEscapeKeyDown
       open={open}
       onClose={handleClose}
+      style={{ minWidth: "400" }}
     >
       <DialogTitle>Success</DialogTitle>
       <DialogContent className={classes.container}>
         <DialogContentText id="alert-dialog-description">
-          {/* Success */}
+          {`You have successed add exercise ${titleName} in group ${exerciseType}`}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -169,7 +170,7 @@ const PopOutAlert = ({ isOpen }) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            window.location.href = "/Practice";
+            window.location.href = "/";
           }}
         >
           Continue
