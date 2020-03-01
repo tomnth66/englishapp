@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import "../css/Login.css";
-// import InsideLogin from "./InsideLogin.js";
-import Test from "../pages/Test";
+import InsideLogin from "./InsideLogin.js";
+// import Teust from "../pages/Test";
 
 const Login = () => {
     return (
       <div className="Login">
-        {/* <InsideLogin></InsideLogin> */}
-        <Test></Test>
+        <InsideLogin></InsideLogin>
+        {/* <Test></Test> */}
       </div>
     );
 }

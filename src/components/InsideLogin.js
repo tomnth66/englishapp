@@ -455,12 +455,12 @@ const InsideLogin = () => {
     <ThemeProvider theme={theme}>
       <Card
         className={classes.root}
-        // onKeyPress={e => {
-        //   console.log(e.key);
-        //   if (e.key === "Enter") {
-        //     handleLogIn();
-        //   }
-        // }}
+        onKeyPress={e => {
+          console.log(e.key);
+          if (e.key === "Enter" && !values.openRegister) {
+            handleLogIn();
+          }
+        }}
       >
         <FormControl className={classes.formControl}>
           <TextField
