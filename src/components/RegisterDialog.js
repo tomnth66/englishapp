@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "../firebase";
 import Ids from "short-id";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,7 +12,7 @@ import {
   DialogTitle
 } from "@material-ui/core";
 import {
-  TextField,
+  Input,
   FormControl,
   InputLabel,
   OutlinedInput,
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 400
+    minWidth: 500
   }
 }));
 
@@ -78,7 +78,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
     }
   };
 
-  const register = func => {
+  const register = () => {
     const db = firebase.firestore();
     const ref = db.collection("Users").doc("45GCoMKDwQWciXc8193A");
     ref.get().then(data => {
@@ -102,10 +102,10 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
       // localStorage.setItem('userId',this.state.Id);
 
       ref.set({ Users: Users }).then(() => {
-        func();
+        // finishRegister();
       });
-      handleClose();
-      alert("You have registered. Now let's wait for confirmation");
+      // handleClose();
+      setValues({ ...values, stage: "finished" });
     });
   };
 
@@ -125,20 +125,34 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
       >
         Register
       </DialogTitle>
-      {values.stage === "setUserName" && (
+      {values.stage === "setUserName" ? (
         <div>
           <DialogContent style={{ background: "#f3f5f8" }}>
             <form className={classes.container}>
-              <FormControl className={classes.formControl} required>
-                <TextField
-                  // error={values.isError}
-                  variant="outlined"
-                  label="User Name"
-                  onChange={handleChange("userName")}
-                />
-              </FormControl>
-              <FormControl className={classes.formControl} variant="outlined">
+              <FormControl
+                className={classes.formControl}
+                variant="outlined"
+                required
+              >
                 <InputLabel
+                  htmlFor="outlined-adornment-userName"
+                  style={{ background: "#f3f5f8" }}
+                >
+                  User Name
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-userName"
+                  value={values.userName}
+                  onChange={handleChange("userName")}
+                ></OutlinedInput>
+              </FormControl>
+              <FormControl
+                className={classes.formControl}
+                variant="outlined"
+                required
+              >
+                <InputLabel
+                  style={{ background: "#f3f5f8" }}
                   error={values.isError}
                   htmlFor="outlined-adornment-password"
                 >
@@ -173,17 +187,18 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                 className={classes.formControl}
                 variant="outlined"
                 style={{ marginBottom: "0" }}
+                required
               >
                 <InputLabel
                   error={values.isError}
-                  htmlFor="outlined-adornment-password"
+                  htmlFor="outlined-adornment-reTypePass"
                   style={{ background: "#f3f5f8" }}
                 >
                   Re-type Password
                 </InputLabel>
                 <OutlinedInput
                   error={values.isError}
-                  id="outlined-adornment-password"
+                  id="outlined-adornment-reTypePass"
                   type={values.showReTypePass ? "text" : "password"}
                   value={values.reTypePass}
                   onChange={handleChange("reTypePass")}
@@ -222,7 +237,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
             <div
               style={{
                 display: "flex",
-                width: "400px",
+                width: "500px",
                 justifyContent: "flex-end"
               }}
             >
@@ -242,34 +257,61 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
             </div>
           </div>
         </div>
-      )}
-      {values.stage === "setCourse" && (
+      ) : values.stage === "setCourse" ? (
         <div>
           <DialogContent style={{ background: "#f3f5f8" }}>
             <form className={classes.container}>
-              <FormControl className={classes.formControl} required>
-                <TextField
-                  // error={values.isError}
-                  variant="outlined"
-                  label="Full Name"
+              <FormControl
+                className={classes.formControl}
+                variant="outlined"
+                required
+              >
+                <InputLabel
+                  htmlFor="outlined-adornment-studentName"
+                  style={{ background: "#f3f5f8" }}
+                >
+                  Student's Name
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-studentName"
+                  value={values.studentName}
                   onChange={handleChange("studentName")}
-                />
+                ></OutlinedInput>
               </FormControl>
-              <FormControl className={classes.formControl} required>
-                <TextField
-                  // error={values.isError}
-                  variant="outlined"
-                  label="Course"
+              <FormControl
+                className={classes.formControl}
+                variant="outlined"
+                required
+              >
+                <InputLabel
+                  htmlFor="outlined-adornment-course"
+                  style={{ background: "#f3f5f8" }}
+                >
+                  Course
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-userName"
+                  value={values.course}
                   onChange={handleChange("course")}
-                />
+                ></OutlinedInput>
               </FormControl>
-              <FormControl className={classes.formControl} required>
-                <TextField
-                  // error={values.isError}
-                  variant="outlined"
-                  label="Email"
+              <FormControl
+                className={classes.formControl}
+                variant="outlined"
+                style={{ marginBottom: "0" }}
+                required
+              >
+                <InputLabel
+                  htmlFor="outlined-adornment-email"
+                  style={{ background: "#f3f5f8" }}
+                >
+                  Email
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-email"
+                  value={values.email}
                   onChange={handleChange("email")}
-                />
+                ></OutlinedInput>
               </FormControl>
             </form>
           </DialogContent>
@@ -286,7 +328,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
             <div
               style={{
                 display: "flex",
-                width: "400px",
+                width: "500px",
                 justifyContent: "flex-end"
               }}
             >
@@ -306,7 +348,37 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                   !values.studentName || !values.course || !values.email
                 }
               >
-                Register
+                Submit
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <DialogContent style={{ background: "#f3f5f8" }}>
+          <DialogContentText id="alert-dialog-description">
+            You have successed sending request to join course. Now wait for your confirmation.
+          </DialogContentText>
+          </DialogContent>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              height: "4em",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "#f3f5f8"
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                width: "500px",
+                justifyContent: "flex-end"
+              }}
+            >
+              <Button onClick={handleClose} color="primary">
+                Continue
               </Button>
             </div>
           </div>
