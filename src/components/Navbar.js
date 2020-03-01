@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import Collapse from "@material-ui/core/Collapse";
+import { IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import "../css/Navbar.css";
 import "flexboxgrid";
 
@@ -37,7 +39,7 @@ const Navbar = () => {
   };
 
   const Validate = link => {
-    console.log('vallidating...',link);
+    console.log("vallidating...", link);
     if (
       !localStorage.getItem("user") &&
       link !== "./" &&
@@ -65,7 +67,9 @@ const Navbar = () => {
               key={link.id}
               onMouseOver={hoverLink}
               onMouseLeave={leaveLink}
-              onClick={() => {Validate(link.href)}}
+              onClick={() => {
+                Validate(link.href);
+              }}
             >
               {link.name}
             </div>
@@ -74,21 +78,29 @@ const Navbar = () => {
         <div
           style={{
             position: "absolute",
-            bottom: "1rem",
+            top: "5.5rem",
             left: "0",
             display: "flex",
             justifyContent: "center",
             width: "100vw"
           }}
         >
-          <Collapse in={!logIn} style={{width: "50%"}}>
+          <Collapse in={!logIn} style={{ width: "50%" }}>
             <Alert
-              style={{ width: "100%" }}
-              variant="filled"
+              // variant="outlined"
               severity="error"
-              onClose={() => {
-                setLogIn(true);
-              }}
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setLogIn(true);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
             >
               Bạn chưa đăng nhập
             </Alert>

@@ -12,9 +12,9 @@ import {
   DialogTitle
 } from "@material-ui/core";
 import {
-  Input,
   FormControl,
   InputLabel,
+  FormHelperText,
   OutlinedInput,
   InputAdornment,
   IconButton
@@ -50,7 +50,8 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
     email: "",
     studentName: "",
     course: "",
-    stage: "setUserName"
+    stage: "setUserName",
+    wrongReTypePass: false
   });
 
   const handleChange = prop => e => {
@@ -72,7 +73,8 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 
   const next = () => {
     if (values.password !== values.reTypePass) {
-      alert("ERROR: Your password and confirmation password do not match.");
+      // alert("ERROR: Your password and confirmation password do not match.");
+      setValues({ ...values, wrongReTypePass: true });
     } else {
       setValues({ ...values, stage: "setCourse" });
     }
@@ -153,13 +155,13 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
               >
                 <InputLabel
                   style={{ background: "#f3f5f8" }}
-                  error={values.isError}
+                  error={values.wrongReTypePass}
                   htmlFor="outlined-adornment-password"
                 >
                   Password
                 </InputLabel>
                 <OutlinedInput
-                  error={values.isError}
+                  error={values.wrongReTypePass}
                   id="outlined-adornment-password"
                   type={values.showPassword ? "text" : "password"}
                   value={values.password}
@@ -190,14 +192,14 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                 required
               >
                 <InputLabel
-                  error={values.isError}
+                  error={values.wrongReTypePass}
                   htmlFor="outlined-adornment-reTypePass"
                   style={{ background: "#f3f5f8" }}
                 >
                   Re-type Password
                 </InputLabel>
                 <OutlinedInput
-                  error={values.isError}
+                  error={values.wrongReTypePass}
                   id="outlined-adornment-reTypePass"
                   type={values.showReTypePass ? "text" : "password"}
                   value={values.reTypePass}
@@ -220,7 +222,11 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                   }
                   labelWidth={70}
                 />
-                {/* <FormHelperText error={values.isError}>{values.errorMesseage}</FormHelperText> */}
+                {values.wrongReTypePass && (
+                  <FormHelperText error>
+                    Your password and your re-type password is not the same
+                  </FormHelperText>
+                )}
               </FormControl>
             </form>
           </DialogContent>
@@ -356,9 +362,10 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
       ) : (
         <div>
           <DialogContent style={{ background: "#f3f5f8" }}>
-          <DialogContentText id="alert-dialog-description">
-            You have successed sending request to join course. Now wait for your confirmation.
-          </DialogContentText>
+            <DialogContentText id="alert-dialog-description">
+              You have successed sending request to join course. Now wait for
+              your confirmation.
+            </DialogContentText>
           </DialogContent>
           <div
             style={{
