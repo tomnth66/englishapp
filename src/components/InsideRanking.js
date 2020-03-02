@@ -146,13 +146,16 @@ export default class InsideRanking extends Component {
           >
             <InputLabel htmlFor="RankingCourseSelectId">Course</InputLabel>
             <Select
+              native
               id="RankingCourseSelectId"
               onChange={this.ChangeCourse.bind(this)}
               labelWidth={60}
               value={curCourse}
+              focused
             >
+              <option value={-1} />
               {Course.map((item, idx) => (
-                <MenuItem value={idx}>{item}</MenuItem>
+                <option value={idx}>{item}</option>
               ))}
             </Select>
           </FormControl>
