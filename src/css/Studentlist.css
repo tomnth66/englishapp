@@ -1,37 +1,69 @@
-/* body {
-  margin: 0px;
-  padding: 0px;
-} */
-
-.Studentlist{
+.Studentlist {
   width: 70%;
   height: 100%;
-  text-align: center;
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.Studentlist table{
+.student--amount {
+  width: 90%;
+  margin-bottom: 0;
+}
+
+.Studentlist table {
   width: 90%;
   border-collapse: collapse;
   margin: auto;
   margin-top: 3%;
   text-align: center;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.Studentlist table tr{
-  border: 1px solid #0C6;
-	line-height: 30px;
+.studentlist--head {
+  background: #2e3440;
+  color: #eceff4;
+  overflow: hidden;
+  border: none !important;
 }
 
-.Studentlist table td{
-  border: 1px solid #0C6;
-	color: #666;
+.studentlist--head th {
+  height: 4rem;
+  font-size: 1.1rem;
+  background: #2e3440;
 }
 
-.DetailCss:hover{
+.Studentlist table tr {
+  border-bottom: 1px solid rgba(46, 52, 64, 0.5);
+  line-height: 30px;
+}
+
+.Studentlist table tr:last-child {
+  /* border-bottom: 1px solid #0c6; */
+  line-height: 30px;
+  border: none !important;
+}
+
+.Studentlist table td {
+  padding: 0.75rem 0;
+  color: #2e3440;
+}
+
+.DetailCss {
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
   cursor: pointer;
-  background-color: #999999;
+  transition: all 600ms ease-in-out;
 }
 
-.DetailCss:active{
+.DetailCss:hover {
+  background: rgba(136, 192, 208, 0.35);
+}
+
+.DetailCss:active {
   opacity: 0.7;
 }

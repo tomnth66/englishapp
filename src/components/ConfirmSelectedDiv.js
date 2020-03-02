@@ -1,57 +1,65 @@
 import React, { Component } from "react";
 import "../css/ConfirmSelectedDiv.css";
-import Button from "./Button.js";
-import firebase from '../firebase';
-
+import { Button } from "@material-ui/core";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import theme from "../theme/muiTheme"
+import firebase from "../firebase";
 
 export default class ConfirmSelectedDiv extends Component {
   constructor(props) {
     super(props);
   }
 
-  Unconfirmed(){
+  Unconfirmed() {
     this.props.CloseConfirmSelected();
     let SelectedDiv = document.getElementById(this.props.SelectedId);
 
-    if(SelectedDiv.value == 'Y') SelectedDiv.value = 'N';
-    else SelectedDiv.value = 'Y';
+    if (SelectedDiv.value == "Y") SelectedDiv.value = "N";
+    else SelectedDiv.value = "Y";
   }
 
-  Confirmed(){
+  Confirmed() {
     this.props.CloseConfirmSelected();
     this.updateDB();
   }
 
-  updateDB(){
+  updateDB() {
     // console.log(this.props.Id);
     const db = firebase.firestore();
-    const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
-    ref.get().then((data)=>{
+    const ref = db.collection("Users").doc("45GCoMKDwQWciXc8193A");
+    ref.get().then(data => {
       let Users = data.data().Users;
 
-      let idx = Users.findIndex(user=>user.Id===this.props.Id);
+      let idx = Users.findIndex(user => user.Id === this.props.Id);
       Users[idx].Activated = !Users[idx].Activated;
 
-      ref.set({ Users: Users })
+      ref.set({ Users: Users });
     });
   }
 
   render() {
     return (
-      <div className="ConfirmSelectedDiv">
-        <div className = 'Cover'>
-        </div>
+      <ThemeProvider theme={theme}>
+        <div className="ConfirmSelectedDiv">
+          <div className="Cover"></div>
 
-        <div className = 'ConfirmSelectedDivInside'>
-          <h1>Are you sure?</h1>
-          <div className = 'ConfirmSelectedDivButton'>
-                <Button keyword = 'NO' 
-                        onClick = {this.Unconfirmed.bind(this)}></Button>
-                <Button keyword = 'YES' 
-                        onClick = {this.Confirmed.bind(this)}></Button>
+          <div className="ConfirmSelectedDivInside">
+            <h2 style={{margin: 0}}>Are you sure?</h2>
+            <div className="ConfirmSelectedDivButton">
+              <Button color="primary" onClick={this.Unconfirmed.bind(this)}>
+                No
+              </Button>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={this.Confirmed.bind(this)}
+              >
+                Yes
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      </ThemeProvider>
     );
   }
 }

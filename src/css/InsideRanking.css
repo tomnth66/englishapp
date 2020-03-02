@@ -11,7 +11,7 @@
   border-right: none;
 }
 
-.CourseSelector{
+.CourseSelector {
   display: flex;
   flex-direction: row;
   width: 96%;
@@ -20,7 +20,7 @@
   padding-bottom: 0.3rem;
 }
 
-.CourseSelector select{
+.CourseSelector select {
   width: 30%;
   height: 31px;
   text-align: center;
@@ -29,14 +29,13 @@
   margin-right: 10px;
 }
 
-.InsideRanking h1{
+.InsideRanking h1 {
   width: 70%;
   text-align: left;
   /* margin: 0px auto; */
   margin-top: 0.5rem;
   margin-bottom: 0px;
   padding-left: 15px;
-  
 }
 
 /* body {
@@ -50,7 +49,7 @@
   text-align: center;
 } */
 
-.InsideRankingMain table{
+.InsideRankingMain table {
   width: 93%;
   border-collapse: collapse;
   margin: auto;
@@ -59,21 +58,20 @@
   text-align: center;
 }
 
-.InsideRankingMain table tr{
-  border: 1px solid #0C6;
-	line-height: 30px;
+.InsideRankingMain table tr {
+  border: 1px solid #0c6;
+  line-height: 30px;
 }
 
-.InsideRankingMain table td{
-  border: 1px solid #0C6;
-	color: #666;
+.InsideRankingMain table td {
+  border: 1px solid #0c6;
+  color: #666;
 }
 
-.DetailCss:hover{
-  cursor: pointer;
-  background-color: #999999;
+.DetailCss:hover {
+  background: rgba(136, 192, 208, 0.35);
 }
 
-.DetailCss:active{
+.DetailCss:active {
   opacity: 0.7;
 }
