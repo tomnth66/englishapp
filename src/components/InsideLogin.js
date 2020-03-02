@@ -388,7 +388,7 @@ const InsideLogin = () => {
   // };
 
   const handleLogIn = () => {
-    if (values.userName === '' || values.password === '') {
+    if (values.userName === "" || values.password === "") {
       setValues({
         ...values,
         isError: true,
@@ -437,14 +437,13 @@ const InsideLogin = () => {
             setValues({
               ...values,
               isError: true,
-              errorMesseage: "Sorry, this account is inactivated, please wait until it is activated"
+              errorMesseage:
+                "Sorry, this account is inactivated, please wait until it is activated"
             });
-          }
-
-          else {
-            localStorage.setItem('user', userInfo.Name);
-            localStorage.setItem('class', userInfo.Class);
-            localStorage.setItem('userId', userInfo.Id);
+          } else {
+            localStorage.setItem("user", userInfo.Name);
+            localStorage.setItem("class", userInfo.Class);
+            localStorage.setItem("userId", userInfo.Id);
             window.location.href = "/";
             return;
           }
@@ -494,12 +493,13 @@ const InsideLogin = () => {
             value={values.password}
             onChange={handleChange("password")}
             endAdornment={
-              <InputAdornment position="end">
+              <InputAdornment position="end" tabIndex="-1">
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
+                  tabIndex="-1"
                 >
                   {values.showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
@@ -507,7 +507,7 @@ const InsideLogin = () => {
             }
             labelWidth={70}
           />
-          <FormHelperText style = {{ marginTop: '1rem'}} error={values.isError}>
+          <FormHelperText style={{ marginTop: "1rem" }} error={values.isError}>
             {values.errorMesseage}
           </FormHelperText>
         </FormControl>

@@ -167,7 +167,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
       </DialogTitle>
       {values.stage === "setUserName" ? (
         <div>
-          <DialogContent style={{ background: "#f3f5f8", paddingTop: '0px' }}>
+          <DialogContent style={{ background: "#f3f5f8", paddingTop: "0px" }}>
             <form className={classes.container}>
               <FormControl
                 className={classes.formControl}
@@ -212,12 +212,13 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                   value={values.password}
                   onChange={handleChange("password")}
                   endAdornment={
-                    <InputAdornment position="end">
+                    <InputAdornment position="end" tabIndex="-1">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword("showPassword")}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
+                        tabIndex="-1"
                       >
                         {values.showPassword ? (
                           <Visibility />
@@ -250,12 +251,13 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                   value={values.reTypePass}
                   onChange={handleChange("reTypePass")}
                   endAdornment={
-                    <InputAdornment position="end">
+                    <InputAdornment position="end" tabIndex="-1">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword("showReTypePass")}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
+                        tabIndex="-1"
                       >
                         {values.showReTypePass ? (
                           <Visibility />
@@ -406,13 +408,19 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
         </div>
       ) : (
         <div>
-          <DialogContent style={{ background: "#f3f5f8" }}>
+          <DialogContent
+            style={{
+              background: "#f3f5f8",
+              width: "360px",
+              boxSizing: "border-box",
+              paddingTop: "0"
+            }}
+          >
             <DialogContentText id="alert-dialog-description">
-              <h4 style = {{marginTop: '0px'}}>Thank you for joining SYNTAXI</h4>
-              <h4 style = {{marginBottom: '0px'}}>Please wait until your account is activated</h4>
-              {/* Thank you for joining SYNTAXI. Please wait until your account is activated */}
-              {/* You have successed sending request to join course. Now wait for
-              your confirmation. */}
+              {`Thank you for joining SYNTAXI`}
+            </DialogContentText>
+            <DialogContentText id="alert-dialog-description">
+              {`Please wait until your account is activated`}
             </DialogContentText>
           </DialogContent>
           <div
@@ -428,14 +436,17 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
             <div
               style={{
                 display: "flex",
-                width: "500px",
+                width: "360px",
                 justifyContent: "flex-end"
               }}
             >
-              <Button style={{
-                marginRight:'10px'
-              }}
-                onClick={handleClose} color="primary">
+              <Button
+                style={{
+                  marginRight: "10px"
+                }}
+                onClick={handleClose}
+                color="primary"
+              >
                 Continue
               </Button>
             </div>

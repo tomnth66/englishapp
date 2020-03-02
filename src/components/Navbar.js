@@ -87,7 +87,7 @@ const Navbar = () => {
         >
           <Collapse in={!logIn} style={{ width: "50%" }}>
             <Alert
-              // variant="outlined"
+              variant="filled"
               severity="error"
               action={
                 <IconButton
@@ -102,7 +102,7 @@ const Navbar = () => {
                 </IconButton>
               }
             >
-              Bạn chưa đăng nhập
+              You haven't log in yet.
             </Alert>
           </Collapse>
         </div>
