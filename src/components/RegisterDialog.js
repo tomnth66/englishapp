@@ -407,9 +407,11 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
       ) : (
         <div>
           <DialogContent style={{ background: "#f3f5f8" }}>
+            <DialogContentText id="alert-dialog-description" style={{minWidth: "500px"}}>
+              {`You have successed sending request to join course.`}
+            </DialogContentText>
             <DialogContentText id="alert-dialog-description">
-              You have successed sending request to join course. Now wait for
-              your confirmation.
+              {`Now let's wait until your account is confirmed.`}
             </DialogContentText>
           </DialogContent>
           <div
