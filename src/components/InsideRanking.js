@@ -6,6 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Loading from './Loading.js';
 
 export default class InsideRanking extends Component {
   constructor(props) {
@@ -14,11 +15,18 @@ export default class InsideRanking extends Component {
       Users: [],
       Course: [],
       curCourse: 0,
-      loading: false
+      isLoading: false
     };
   }
 
+  showLoading(){
+    this.setState({
+      isLoading:true
+    })
+  }
+
   componentDidMount() {
+    this.showLoading();
     this.GetDB1(this.GetDB2.bind(this));
     // this.GetDB();
   }
@@ -63,7 +71,8 @@ export default class InsideRanking extends Component {
 
       // console.log('after sorting ',Users);
       this.setState({
-        Users: CurUsers
+        Users: CurUsers,
+        isLoading:false
       });
     });
   }
@@ -112,8 +121,9 @@ export default class InsideRanking extends Component {
   };
 
   ChangeCourse(e) {
+    this.showLoading();
     // console.log('changing... ', document.getElementById('RankingCourseSelectId').value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
     this.setState(
       {
         curCourse: e.target.value
@@ -124,9 +134,10 @@ export default class InsideRanking extends Component {
   }
 
   render() {
-    const { Users, Course, curCourse } = this.state;
+    const { Users, Course, curCourse, isLoading } = this.state;
     return (
       <div className="InsideRanking">
+        {isLoading && <Loading></Loading>}
         <div className="CourseSelector">
           <h1>Ranking</h1>
           <FormControl
@@ -178,7 +189,7 @@ export default class InsideRanking extends Component {
 
             {Users.map((user, idx) => (
               <tr>
-                <td width="6%">{++idx}</td>
+                <td style = {{paddingLeft: '0.8rem'}} width="6%">{++idx}</td>
                 <td width="65%">{user.Name}</td>
                 <td width="17%">{user.TotalScore}</td>
                 <td>

@@ -59,6 +59,10 @@
   /* padding:0px; */
 }
 
+.studentlist--head th:first-child{
+  padding-left: 0.8rem;
+}
+
 .InsideRanking h1 {
   width: 70%;
   text-align: left;
