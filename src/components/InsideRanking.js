@@ -6,24 +6,44 @@ export default class InsideRanking extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Users:[]
+      Users:[],
+      Course:[],
+      curCourse:0
     }
   }
 
   componentDidMount(){
-    this.GetDB();
+    this.GetDB1(this.GetDB2.bind(this))
+    // this.GetDB();
+  }
+
+  GetDB1(func){
+    const db = firebase.firestore();
+    const ref = db.collection('Course').doc('0zc3RakYtmCwitHgM64g');
+    ref.get().then((data)=>{
+      let Course = data.data().CourseList;
+      // console.log(Course);
+      this.setState({
+        Course:Course
+      },func())
+    });
+
+
+    // func();
   }
 
 
-  GetDB(){
+  GetDB2(){
     const db = firebase.firestore();
     const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
     ref.get().then((data)=>{
       let Users = data.data().Users;
       // console.log(Users);
       // console.log('test', 'a'.localeCompare('b'))
+      let CurUsers = Users.filter( user =>
+        user.Course === this.state.Course[this.state.curCourse]);
 
-      Users.sort(function (user1, user2) {
+      CurUsers.sort(function (user1, user2) {
         let diff = user2.TotalScore - user1.TotalScore
           if(diff!==0)
             return user2.TotalScore - user1.TotalScore;
@@ -33,21 +53,29 @@ export default class InsideRanking extends Component {
 
       // console.log('after sorting ',Users);
       this.setState({
-        Users:Users
+        Users:CurUsers
       })
     });
   }
 
+  ChangeCourse(){
+    // console.log('changing... ', document.getElementById('RankingCourseSelectId').value);
+    this.setState({
+      curCourse:document.getElementById('RankingCourseSelectId').value
+    },this.GetDB1(this.GetDB2.bind(this)))
+  }
+
   render() {
-    const {Users} = this.state;
+    const {Users,Course,curCourse} = this.state;
     return (
       <div className = 'InsideRanking'>
         <div className = 'CourseSelector'>
           <h1>Ranking</h1>
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>   
+          <select id = 'RankingCourseSelectId' 
+                  onChange = {this.ChangeCourse.bind(this)}>
+                    {Course.map((item,idx)=>(
+                      <option value = {idx}>{item}</option>
+                    ))}
           </select>
         </div>
 
