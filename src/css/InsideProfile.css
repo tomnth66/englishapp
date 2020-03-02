@@ -6,6 +6,10 @@
   height: 430px;
 }
 
+.InsideProfile a{
+  color: #111;
+}
+
 .Information{
   width: 100%;
   height: 230px;
@@ -23,6 +27,14 @@
   flex-direction: column;
   width: 80%;
   margin: 10px auto;
+}
+
+.Action a:visited{
+  color: #111;
+}
+
+.Information a:visited{
+  color: #111;
 }
 
 .Information p {

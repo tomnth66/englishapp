@@ -167,7 +167,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
       </DialogTitle>
       {values.stage === "setUserName" ? (
         <div>
-          <DialogContent style={{ background: "#f3f5f8" }}>
+          <DialogContent style={{ background: "#f3f5f8", paddingTop: '0px' }}>
             <form className={classes.container}>
               <FormControl
                 className={classes.formControl}
@@ -408,15 +408,18 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
         <div>
           <DialogContent style={{ background: "#f3f5f8" }}>
             <DialogContentText id="alert-dialog-description">
-              You have successed sending request to join course. Now wait for
-              your confirmation.
+              <h4 style = {{marginTop: '0px'}}>Thank you for joining SYNTAXI</h4>
+              <h4 style = {{marginBottom: '0px'}}>Please wait until your account is activated</h4>
+              {/* Thank you for joining SYNTAXI. Please wait until your account is activated */}
+              {/* You have successed sending request to join course. Now wait for
+              your confirmation. */}
             </DialogContentText>
           </DialogContent>
           <div
             style={{
               display: "flex",
               width: "100%",
-              height: "4em",
+              height: "3em",
               alignItems: "center",
               justifyContent: "center",
               background: "#f3f5f8"
@@ -429,7 +432,10 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                 justifyContent: "flex-end"
               }}
             >
-              <Button onClick={handleClose} color="primary">
+              <Button style={{
+                marginRight:'10px'
+              }}
+                onClick={handleClose} color="primary">
                 Continue
               </Button>
             </div>
