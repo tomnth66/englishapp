@@ -1,5 +1,27 @@
+
+.CourseSelector {
+  display: flex;
+  flex-direction: row;
+  width: 96%;
+  margin: 0px auto;
+  border-bottom: 1px solid #bbbbbb;
+  padding-bottom: 0.3rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: space-around;
+}
+/* 
+.CourseSelector select {
+  width: 30%;
+  height: 31px;
+  text-align: center;
+  border-radius: 5px;
+  margin: auto;
+  margin-right: 10px;
+} */
+
 .InsideRanking {
-  width: 80%;
+  width: 70%;
   /* margin: auto; */
   margin-bottom: 20px;
   margin-top: 10px;
@@ -11,22 +33,30 @@
   border-right: none;
 }
 
-.CourseSelector {
-  display: flex;
-  flex-direction: row;
-  width: 96%;
-  margin: 0px auto;
-  border-bottom: 1px solid #bbbbbb;
-  padding-bottom: 0.3rem;
+.InsideRanking table {
+  width: 90%;
+  border-collapse: collapse;
+  margin: auto;
+  margin-top: 3%;
+  text-align: center;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.CourseSelector select {
-  width: 30%;
-  height: 31px;
-  text-align: center;
-  border-radius: 5px;
-  margin: auto;
-  margin-right: 10px;
+.studentlist--head {
+  background: #2e3440;
+  color: #eceff4;
+  overflow: hidden;
+  border: none !important;
+}
+
+.studentlist--head th {
+  height: 3rem;
+  font-size: 1.1rem;
+  background: #2e3440;
+  /* padding:0px; */
 }
 
 .InsideRanking h1 {
@@ -38,17 +68,6 @@
   padding-left: 15px;
 }
 
-/* body {
-  margin: 0px;
-  padding: 0px;
-} */
-
-/* .Studentlist{
-  width: 70%;
-  height: 100%;
-  text-align: center;
-} */
-
 .InsideRankingMain table {
   width: 93%;
   border-collapse: collapse;
@@ -59,13 +78,20 @@
 }
 
 .InsideRankingMain table tr {
-  border: 1px solid #0c6;
+  border-bottom: 1px solid rgba(46, 52, 64, 0.5);
   line-height: 30px;
 }
 
+.InsideRankingMain table tr:last-child {
+  /* border-bottom: 1px solid #0c6; */
+  line-height: 30px;
+  border: none !important;
+}
+
 .InsideRankingMain table td {
-  border: 1px solid #0c6;
-  color: #666;
+  padding: 0.75rem 0;
+  color: #2e3440;
+  background: #f3f5f8;
 }
 
 .DetailCss:hover {

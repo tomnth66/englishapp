@@ -27,17 +27,17 @@
   width: 350px;
   height: 150px;
   z-index: 15;
-  top: 45%;
-  left: 48%;
+  top: 50%;
+  left: 50%;
   background: #f3f5f8;
   animation: secondss 300ms forwards;
   text-align: center;
   transform: translate(-50%, -50%);
 }
 
-.ConfirmSelectedDivButton{
+/* .ConfirmSelectedDivButton{
   margin-right: 1.9rem;
-}
+} */
 
 @keyframes secondss {
   0% {

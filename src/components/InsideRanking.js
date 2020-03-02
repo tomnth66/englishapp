@@ -1,100 +1,168 @@
 import React, { Component } from "react";
 import "../css/InsideRanking.css";
-import firebase from '../firebase.js';
+import firebase from "../firebase.js";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 export default class InsideRanking extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Users:[],
-      Course:[],
-      curCourse:0
-    }
+      Users: [],
+      Course: [],
+      curCourse: 0,
+      loading: false
+    };
   }
 
-  componentDidMount(){
-    this.GetDB1(this.GetDB2.bind(this))
+  componentDidMount() {
+    this.GetDB1(this.GetDB2.bind(this));
     // this.GetDB();
   }
 
-  GetDB1(func){
+  GetDB1(func) {
     const db = firebase.firestore();
-    const ref = db.collection('Course').doc('0zc3RakYtmCwitHgM64g');
-    ref.get().then((data)=>{
+    const ref = db.collection("Course").doc("0zc3RakYtmCwitHgM64g");
+    ref.get().then(data => {
       let Course = data.data().CourseList;
       // console.log(Course);
-      this.setState({
-        Course:Course
-      },func())
+      this.setState(
+        {
+          Course: Course
+        },
+        func()
+      );
     });
-
 
     // func();
   }
 
-
-  GetDB2(){
+  GetDB2() {
+    this.setState({
+      Users: []
+    });
     const db = firebase.firestore();
-    const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
-    ref.get().then((data)=>{
+    const ref = db.collection("Users").doc("45GCoMKDwQWciXc8193A");
+    ref.get().then(data => {
       let Users = data.data().Users;
       // console.log(Users);
       // console.log('test', 'a'.localeCompare('b'))
-      let CurUsers = Users.filter( user =>
-        user.Course === this.state.Course[this.state.curCourse]);
+      let CurUsers = Users.filter(
+        user => user.Course === this.state.Course[this.state.curCourse]
+      );
 
-      CurUsers.sort(function (user1, user2) {
-        let diff = user2.TotalScore - user1.TotalScore
-          if(diff!==0)
-            return user2.TotalScore - user1.TotalScore;
+      CurUsers.sort(function(user1, user2) {
+        let diff = user2.TotalScore - user1.TotalScore;
+        if (diff !== 0) return user2.TotalScore - user1.TotalScore;
 
-          return user1.Name.localeCompare(user2.Name);
+        return user1.Name.localeCompare(user2.Name);
       });
 
       // console.log('after sorting ',Users);
       this.setState({
-        Users:CurUsers
-      })
+        Users: CurUsers
+      });
     });
   }
 
-  ChangeCourse(){
+  getDB = async _ => {
+    const db = firebase.firestore();
+    console.time("Course");
+    await db
+      .collection("Course")
+      .doc("0zc3RakYtmCwitHgM64g")
+      .get()
+      .then(data => {
+        let Course = data.data().CourseList;
+        // console.log(Course);
+        this.setState({
+          Course: Course
+        });
+      });
+    console.timeEnd("Course");
+
+    console.time("Users");
+    db.collection("Users")
+      .doc("45GCoMKDwQWciXc8193A")
+      .get()
+      .then(data => {
+        let Users = data.data().Users;
+        // console.log(Users);
+        // console.log('test', 'a'.localeCompare('b'))
+        let CurUsers = Users.filter(
+          user => user.Course === this.state.Course[this.state.curCourse]
+        );
+
+        CurUsers.sort(function(user1, user2) {
+          let diff = user2.TotalScore - user1.TotalScore;
+          if (diff !== 0) return user2.TotalScore - user1.TotalScore;
+
+          return user1.Name.localeCompare(user2.Name);
+        });
+
+        // console.log('after sorting ',Users);
+        this.setState({
+          Users: CurUsers
+        });
+      });
+    console.timeEnd("Users");
+  };
+
+  ChangeCourse(e) {
     // console.log('changing... ', document.getElementById('RankingCourseSelectId').value);
-    this.setState({
-      curCourse:document.getElementById('RankingCourseSelectId').value
-    },this.GetDB1(this.GetDB2.bind(this)))
+    console.log(e.target.value);
+    this.setState(
+      {
+        curCourse: e.target.value
+      },
+      this.GetDB1(this.GetDB2.bind(this))
+      // this.getDB()
+    );
   }
 
   render() {
-    const {Users,Course,curCourse} = this.state;
+    const { Users, Course, curCourse } = this.state;
     return (
-      <div className = 'InsideRanking'>
-        <div className = 'CourseSelector'>
+      <div className="InsideRanking">
+        <div className="CourseSelector">
           <h1>Ranking</h1>
-          <select id = 'RankingCourseSelectId' 
-                  onChange = {this.ChangeCourse.bind(this)}>
-                    {Course.map((item,idx)=>(
-                      <option value = {idx}>{item}</option>
-                    ))}
-          </select>
+          <FormControl
+            variant="outlined"
+            style={{ width: "30%", margin: "10 0" }}
+          >
+            <InputLabel htmlFor="RankingCourseSelectId">Course</InputLabel>
+            <Select
+              id="RankingCourseSelectId"
+              onChange={this.ChangeCourse.bind(this)}
+              labelWidth={60}
+              value={curCourse}
+            >
+              {Course.map((item, idx) => (
+                <MenuItem value={idx}>{item}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
 
-        <div className = 'InsideRankingMain'>
+        <div className="InsideRankingMain">
           <table>
-          {/* <tr>
+            {/* <tr>
             <td colspan='3' style={{color: '#C36'}}>Tổng số học sinh: {Users.length}</td>
             <td colspan='3'></td>
             <td colspan='1'></td>
           </tr> */}
 
-          <tr style={{background: '#0F6' , color: '#fff'}}>
-            <th>STT</th>
-            <th>Name</th>
-            <th>Score</th>
-            <th></th>
-			    </tr>
+            <tr className="studentlist--head">
+              <th>STT</th>
+              <th>Name</th>
+              <th>Score</th>
+              <th></th>
+            </tr>
 
-          {/* <tr>
+            {/* <tr>
             <td width = '6%'>1</td>
             <td width = '65%'>Leminh</td>
             <td width = '17%'>100</td>
@@ -107,16 +175,17 @@ export default class InsideRanking extends Component {
             <td>200</td>
             <td className = 'DetailCss'>Detail</td>
           </tr> */}
-          
-          {Users.map((user,idx)=>(
-            <tr>
-              <td width = '6%'>{++idx}</td>
-              <td width = '65%'>{user.Name}</td>
-              <td width = '17%'>{user.TotalScore}</td>
-              <td className = 'DetailCss'>Detail</td>
-            </tr>
-          ))}
 
+            {Users.map((user, idx) => (
+              <tr>
+                <td width="6%">{++idx}</td>
+                <td width="65%">{user.Name}</td>
+                <td width="17%">{user.TotalScore}</td>
+                <td>
+                  <span className="DetailCss">Detail</span>
+                </td>
+              </tr>
+            ))}
           </table>
         </div>
       </div>
