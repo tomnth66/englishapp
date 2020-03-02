@@ -32,9 +32,10 @@
 }
 
 .studentlist--head th {
-  height: 4rem;
+  height: 3rem;
   font-size: 1.1rem;
   background: #2e3440;
+  /* padding:0px; */
 }
 
 .Studentlist table tr {
