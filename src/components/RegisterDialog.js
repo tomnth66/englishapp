@@ -51,7 +51,8 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
     studentName: "",
     course: "",
     stage: "setUserName",
-    wrongReTypePass: false
+    wrongReTypePass: false,
+    existedAccount: false
   });
 
   const handleChange = prop => e => {
@@ -71,13 +72,50 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
     e.preventDefault();
   };
 
-  const next = () => {
-    if (values.password !== values.reTypePass) {
-      // alert("ERROR: Your password and confirmation password do not match.");
-      setValues({ ...values, wrongReTypePass: true });
-    } else {
-      setValues({ ...values, stage: "setCourse" });
-    }
+  const next = async _ => {
+    let existedAccount = false;
+
+    const db = firebase.firestore();
+    console.time("concatenation");
+    await db
+      .collection("Users")
+      .doc("45GCoMKDwQWciXc8193A")
+      .get()
+      .then(async data => {
+        console.time("getUser: ");
+        let Users = await data.data().Users;
+        console.timeEnd("getUser: ");
+        console.time("Check existed user name: ");
+        await Users.map(student => {
+          if (student.Account === values.userName) existedAccount = true;
+          return student;
+        });
+        console.timeEnd("Check existed user name: ");
+      });
+    console.timeEnd("concatenation");
+    // if (existedAccount) setValues({ ...values, existedAccount: true });
+
+    // console.log(existedAccount);
+    // values.password !== values.reTypePass
+    //   ? setValues({ ...values, wrongReTypePass: true })
+    //   : !existedAccount
+    //   ? setValues({ ...values, stage: "setCourse" })
+    //   : console.log("tmp");
+
+    existedAccount
+      ? values.password !== values.reTypePass
+        ? setValues({ ...values, wrongReTypePass: true, existedAccount: true })
+        : setValues({ ...values, existedAccount: true, wrongReTypePass: false })
+      : values.password !== values.reTypePass
+      ? setValues({ ...values, existedAccount: false, wrongReTypePass: true })
+      : setValues({
+          ...values,
+          stage: "setCourse",
+          existedAccount: false,
+          wrongReTypePass: false
+        });
+
+    console.log(values);
   };
 
   const register = () => {
@@ -139,6 +177,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                 <InputLabel
                   htmlFor="outlined-adornment-userName"
                   style={{ background: "#f3f5f8" }}
+                  error={values.existedAccount}
                 >
                   User Name
                 </InputLabel>
@@ -146,7 +185,13 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
                   id="outlined-adornment-userName"
                   value={values.userName}
                   onChange={handleChange("userName")}
+                  error={values.existedAccount}
                 ></OutlinedInput>
+                {values.existedAccount && (
+                  <FormHelperText error>
+                    This User Name is already existed.
+                  </FormHelperText>
+                )}
               </FormControl>
               <FormControl
                 className={classes.formControl}
