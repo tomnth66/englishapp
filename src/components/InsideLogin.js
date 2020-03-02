@@ -388,7 +388,7 @@ const InsideLogin = () => {
   // };
 
   const handleLogIn = () => {
-    if (values.userName === '' || values.password === '') {
+    if (values.userName === "" || values.password === "") {
       setValues({
         ...values,
         isError: true,
@@ -413,7 +413,7 @@ const InsideLogin = () => {
         setValues({
           ...values,
           isError: true,
-          errorMesseage: "Tài khoản hoặc mật khẩu không tồn tại"
+          errorMesseage: "This account is not exist"
         });
         console.log(values);
       } else {
@@ -428,16 +428,25 @@ const InsideLogin = () => {
           setValues({
             ...values,
             isError: true,
-            errorMesseage: "Tài khoản hoặc mật khẩu không tồn tại"
+            errorMesseage: "Wrong password"
           });
           console.log(values);
         } else {
           userInfo = User[0];
-          localStorage.setItem("user", userInfo.Name);
-          localStorage.setItem("class", userInfo.Class);
-          localStorage.setItem("userId", userInfo.Id);
-          window.location.href = "/";
-          return;
+          if (!userInfo.Activated) {
+            setValues({
+              ...values,
+              isError: true,
+              errorMesseage:
+                "Sorry, this account is inactivated, please wait until it is activated"
+            });
+          } else {
+            localStorage.setItem("user", userInfo.Name);
+            localStorage.setItem("class", userInfo.Class);
+            localStorage.setItem("userId", userInfo.Id);
+            window.location.href = "/";
+            return;
+          }
           // this.hello();
         }
       }
@@ -484,12 +493,13 @@ const InsideLogin = () => {
             value={values.password}
             onChange={handleChange("password")}
             endAdornment={
-              <InputAdornment position="end">
+              <InputAdornment position="end" tabIndex="-1">
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
+                  tabIndex="-1"
                 >
                   {values.showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
@@ -497,7 +507,7 @@ const InsideLogin = () => {
             }
             labelWidth={70}
           />
-          <FormHelperText error={values.isError}>
+          <FormHelperText style={{ marginTop: "1rem" }} error={values.isError}>
             {values.errorMesseage}
           </FormHelperText>
         </FormControl>
