@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 import React, { useState } from "react";
 import "../css/CreateMap.css";
 import firebase from "../firebase.js";
@@ -86,9 +87,9 @@ const PopOutForm = () => {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value="10">Ten</MenuItem>
-              <MenuItem value="20">Twenty</MenuItem>
-              <MenuItem value="30">Thirty</MenuItem>
+              <MenuItem value="Vocabulary">Vocabulary</MenuItem>
+              <MenuItem value="Grammar">Grammar</MenuItem>
+              <MenuItem value="Logic">Logic</MenuItem>
             </Select>
           </FormControl>
           <FormControl className={classes.formControl} required>
@@ -131,16 +132,6 @@ const PopOutForm = () => {
 const PopOutAlert = ({ isOpen }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
-  const [type, setType] = useState("");
-  const [name, setName] = useState("");
-
-  const handleChangeType = event => {
-    setType(event.target.value || "");
-  };
-
-  const handleChangeName = event => {
-    setName(event.target.value || "");
-  };
 
   // const handleClickOpen = () => {
   //   setOpen(true);
@@ -235,7 +226,7 @@ const CreateMap = props => {
         if (word[i] !== "") {
           fullPara += `\t<span id="${currentID}" class="teacher-para">${word[i]}</span>\n`;
           ++currentID;
-          correctAnswer.push(false);
+          // correctAnswer.push(false);
         } else {
           //  don't count " " or "\n"
           fullPara += '\t<div style="height: 1rem"></div>';
@@ -254,9 +245,42 @@ const CreateMap = props => {
       p.addEventListener("click", e => {
         console.log(p);
         e.currentTarget.classList.toggle("selected-answer");
-        console.log(e.currentTarget.id);
-        correctAnswer[e.currentTarget.id] = !correctAnswer[e.currentTarget.id];
-        console.log(correctAnswer[e.currentTarget.id]);
+        // console.log(e.currentTarget.id);
+        // correctAnswer[e.currentTarget.id] = !correctAnswer[e.currentTarget.id];
+        // console.log(correctAnswer[e.currentTarget.id]);
+        let start = 0;
+        let end = correctAnswer.length - 1;
+        let mid;
+        switch (correctAnswer) {
+          case []:
+            correctAnswer.push(parseInt(e.currentTarget.id));
+            break;
+          default:
+            while (start <= end) {
+              mid = Math.floor((start + end) / 2);
+              // console.log(start, mid, end);
+              // can't use === for some reasons :)))
+              // eslint-disable-next-line eqeqeq
+              if (correctAnswer[mid] == (parseInt(e.currentTarget.id))) {
+                start = mid;
+                console.log(mid);
+                break;
+              }
+              switch (correctAnswer[mid] > parseInt(e.currentTarget.id)) {
+                case true:
+                  end = mid - 1;
+                  break;
+                default:
+                  start = mid + 1;
+                  break;
+              }
+            }
+            correctAnswer[mid] === parseInt(e.currentTarget.id)
+              ? correctAnswer.splice(mid, 1)
+              : correctAnswer.splice(start, 0, parseInt(e.currentTarget.id));
+            break;
+        }
+        console.log(correctAnswer);
       });
     }
   };

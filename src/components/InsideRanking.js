@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../css/InsideRanking.css";
 import firebase from "../firebase.js";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
