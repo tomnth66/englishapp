@@ -67,7 +67,7 @@ const MapPlay = ({ match }) => {
 	useEffect(() => {
 		console.log(match);
 		getMap();
-	}, [getMap, match]);
+	}, []);
 
 	return (
 		<div className="mapPlay">

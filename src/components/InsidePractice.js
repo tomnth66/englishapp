@@ -62,7 +62,7 @@ const InsidePractice = () => {
 		getDB();
 
 		// console.log(mapList, typeList);
-	}, [getDB]);
+	}, []);
 
 	const handleChangeType = e => {
 		setType(e.target.value);
