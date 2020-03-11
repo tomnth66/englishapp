@@ -8,6 +8,7 @@ import CreateMap from './pages/CreateMap';
 import Studentmanagement from './pages/Studentmanagement.js';
 import Ranking from './pages/Ranking.js';
 import MapPlay from './components/MapPlay';
+import ProfileDetail from './pages/ProfileDetail.js';
 
 class App extends Component {
 	constructor() {
@@ -45,6 +46,7 @@ class App extends Component {
 						/>
 						<Route path="/ranking" exact component={Ranking} />
 						<Route path="/practice/:id/:idx" exact component={MapPlay} />
+						<Route path="/Profile/:id" exact render={(props) => ( <ProfileDetail {...props} /> )}/>
 					</Switch>
 				</div>
 			</Router>

@@ -151,7 +151,7 @@ export default class InsideRanking extends Component {
                 <td width="65%">{user.Name}</td>
                 <td width="17%">{user.TotalScore}</td>
                 <td>
-                  <span className="DetailCss">Detail</span>
+                  <a href = {'../Profile/'+user.Id}><span className="DetailCss">Detail</span></a>
                 </td>
               </tr>
             ))}

@@ -95,10 +95,11 @@ export default class Studentlist extends Component {
                 )}
               </td>
               <td>
-                <span className="DetailCss">Detail</span>
+                <a href = {'./Profile/'+user.Id}><span className="DetailCss">Detail</span></a>
               </td>
               {ConfirmSelected && SelectedId === "select" + user.Id && (
                 <ConfirmSelectedDiv
+                  Keyword = 'Are you sure?'
                   CloseConfirmSelected={this.CloseConfirmSelected.bind(this)}
                   SelectedId={"select" + user.Id}
                   Id={user.Id}

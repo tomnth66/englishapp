@@ -24,10 +24,10 @@ const Navbar = () => {
   const classes = useStyles();
 
   const links = [
-    { id: 0, href: "./", name: "Home" },
-    { id: 1, href: "./Practice", name: "Practice" },
-    { id: 2, href: "./Ranking", name: "Ranking" },
-    { id: 3, href: "./AboutApp", name: "About App" }
+    { id: 0, href: "../", name: "Home" },
+    { id: 1, href: "../Practice", name: "Practice" },
+    { id: 2, href: "../Ranking", name: "Ranking" },
+    { id: 3, href: "../AboutApp", name: "About App" }
   ];
 
   const hoverLink = e => {
@@ -102,7 +102,7 @@ const Navbar = () => {
                 </IconButton>
               }
             >
-              You haven't log in yet.
+              Please Login first
             </Alert>
           </Collapse>
         </div>

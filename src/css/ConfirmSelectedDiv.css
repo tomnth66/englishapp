@@ -35,9 +35,9 @@
   transform: translate(-50%, -50%);
 }
 
-/* .ConfirmSelectedDivButton{
-  margin-right: 1.9rem;
-} */
+.ConfirmSelectedDivButton{
+  margin-right: 0.9rem;
+}
 
 @keyframes secondss {
   0% {

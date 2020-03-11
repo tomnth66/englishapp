@@ -55,11 +55,20 @@
   background: #f3f5f8;
 }
 
+.Studentlist table td a{
+  color: #111;
+}
+
+.Studentlist table td a:visited{
+  color: #111;
+}
+
 .DetailCss {
   padding: 0.5rem 0.7rem;
   border-radius: 10px;
   cursor: pointer;
   transition: all 600ms ease-in-out;
+  color: #111;
 }
 
 .DetailCss:hover {

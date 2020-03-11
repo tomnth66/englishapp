@@ -5,20 +5,17 @@ import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import theme from "../theme/muiTheme"
 import firebase from "../firebase";
 
-export default class ConfirmSelectedDiv extends Component {
+export default class DeleteConfirm extends Component {
   constructor(props) {
     super(props);
   }
 
   Unconfirmed() {
     this.props.CloseConfirmSelected();
-    let SelectedDiv = document.getElementById(this.props.SelectedId);
-
-    if (SelectedDiv.value == "Y") SelectedDiv.value = "N";
-    else SelectedDiv.value = "Y";
   }
 
   Confirmed() {
+    this.props.showLoading();
     this.props.CloseConfirmSelected();
     this.updateDB();
   }
@@ -31,9 +28,10 @@ export default class ConfirmSelectedDiv extends Component {
       let Users = data.data().Users;
 
       let idx = Users.findIndex(user => user.Id === this.props.Id);
-      Users[idx].Activated = !Users[idx].Activated;
-
-      ref.set({ Users: Users });
+      
+      // console.log(Users[idx]);
+      Users.splice(idx, 1);
+      ref.set({ Users: Users }).then( ()=> window.location.href = "/studentmanagement");
     });
   }
 

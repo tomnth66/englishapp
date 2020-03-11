@@ -23,6 +23,7 @@ export default class InsideProfile extends Component {
           <p>Name: {localStorage.getItem('user')} ({localStorage.getItem('class')})</p>
 
           <div className = 'Action'>
+            <a href = {'../Profile/'+localStorage.getItem('userId')}> Profile</a>
             {localStorage.getItem('class')==='admin' && <a href = '/createmap'> Post an announcement</a>}
             {localStorage.getItem('class')==='admin' && <a href = '/createmap'> Createmap</a>}
             {localStorage.getItem('class')==='admin' && <a href = '/studentmanagement'> Student Management</a>}
