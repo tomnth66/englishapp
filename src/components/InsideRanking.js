@@ -4,6 +4,7 @@ import firebase from "../firebase.js";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import MenuItem from "@material-ui/core/MenuItem";
 import Loading from "./Loading.js";
 
 export default class InsideRanking extends Component {
@@ -98,16 +99,16 @@ export default class InsideRanking extends Component {
           >
             <InputLabel htmlFor="RankingCourseSelectId">Course</InputLabel>
             <Select
-              native
+              // native
               id="RankingCourseSelectId"
               onChange={this.ChangeCourse.bind(this)}
               labelWidth={60}
               value={curCourse}
               focused
             >
-              <option value={-1} />
+              {/* <MenuItem value={-1} /> */}
               {Course.map((item, idx) => (
-                <option value={idx}>{item}</option>
+                <MenuItem value={idx}>{item}</MenuItem>
               ))}
             </Select>
           </FormControl>
