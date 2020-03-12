@@ -41,7 +41,7 @@ let exerciseTypeList = [];
 let ids = new Ids();
 
 const setExercise = (name, type, typeList) => {
-	titleName = name;
+	titleName = name.trim();
 	exerciseType = type;
 	exerciseTypeList = typeList;
 };
@@ -78,7 +78,7 @@ const PopOutForm = () => {
 	// };
 
 	const handleClose = () => {
-		setOpen(false);
+    setOpen(false);
 		setExercise(name, type, typeList);
 		console.log(type);
 	};
@@ -185,7 +185,7 @@ const PopOutAlert = ({ isOpen }) => {
 					variant="contained"
 					color="primary"
 					onClick={() => {
-						window.location.href = '/';
+						window.location.href = '/Practice';
 					}}
 				>
 					Finish
