@@ -85,7 +85,7 @@ export default class InsideProfileDetail extends Component {
               <li>Email: {User.Email}</li>
               <li>Course: {User.Course}</li>
               <li>Total Score: {User.TotalScore}</li>
-              {localStorage.getItem('class')==='admin' && 
+              {localStorage.getItem('class')==='admin' || localStorage.getItem('userId') === User.Id && 
               <li><span className="DeleteCss" onClick = {this.DeleteConfirmActivate.bind(this)}>Delete</span></li>
               }
             </ul>
