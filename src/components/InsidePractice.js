@@ -7,7 +7,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Loading from './Loading.js';
 import { Link } from 'react-router-dom';
 import '../css/InsidePractice.css';
-// import Loading from "./Loading.js";
 
 const InsidePractice = () => {
 	// get typeList

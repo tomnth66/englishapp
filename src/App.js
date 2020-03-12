@@ -9,6 +9,8 @@ import Studentmanagement from './pages/Studentmanagement.js';
 import Ranking from './pages/Ranking.js';
 import MapPlay from './pages/MapPlay';
 import ProfileDetail from './pages/ProfileDetail.js';
+import theme from './theme/muiTheme';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 class App extends Component {
 	constructor() {
@@ -33,6 +35,7 @@ class App extends Component {
 		}
 
 		return (
+		<ThemeProvider theme={theme}>
 			<Router>
 				<div className="App">
 					<Switch>
@@ -50,6 +53,7 @@ class App extends Component {
 					</Switch>
 				</div>
 			</Router>
+              </ThemeProvider>
 		);
 	}
 }
