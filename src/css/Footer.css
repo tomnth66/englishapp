@@ -37,6 +37,7 @@
 }
 
 .footer-distributed .footer-links a{
+  margin-right: 0.7rem;
 	display:inline-block;
 	line-height: 1.8;
 	text-decoration: none;
