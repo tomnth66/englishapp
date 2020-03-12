@@ -1,47 +1,51 @@
 .nav {
-  height: 5rem;
-  background-color: #f3f5f8;
-  /* background: #fff; */
-  display: flex;
-  justify-content: space-around;
-  padding-top: 0;
-  padding-bottom: 0;
-  margin: 0;
-  box-shadow: rgba(216, 222, 233, 0.35) 0px 5px 10px 0px;
-  /* position: fixed; */
+	height: 5rem;
+	background-color: #f3f5f8;
+	/* background: #fff; */
+	display: flex;
+	justify-content: space-around;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin: 0;
+	box-shadow: rgba(216, 222, 233, 0.35) 0px 5px 10px 0px;
+	position: fixed;
+	width: 100vw;
+	z-index: 100;
+	top: 0;
 }
 
 .title {
-  font-size: 2rem;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.4rem;
-  cursor: pointer;
+	font-size: 2rem;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.4rem;
+	cursor: pointer;
 }
 
 .nav-links {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	height: 100%;
 }
 
 .link-hover {
-  background: rgba(136, 192, 208, 0.35);
+	background: rgba(136, 192, 208, 0.35);
 }
 
 .Menuitem {
-  color: #2e3440;
-  transition: background 600ms ease-in-out;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 10px;
+	color: #2e3440;
+	transition: background 600ms ease-in-out;
+	cursor: pointer;
+	padding: 0.5rem;
+	border-radius: 10px;
 }
 
 .Menuitem:hover {
-  cursor: pointer;
-  /* background: rgba(163, 165, 168, 0.25); */
-  /* padding: 2px; */
+	cursor: pointer;
+	/* background: rgba(163, 165, 168, 0.25); */
+	/* padding: 2px; */
 }
+
