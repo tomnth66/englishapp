@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Practicepage.css';
 import Navbar from '../components/Navbar.js';
+import Footer from '../components/Footer.js';
 import InsidePractice from '../components/InsidePractice';
 import Profile from '../components/Profile.js';
 
@@ -21,6 +22,10 @@ const Practice = () => {
 				<div></div>
 				<Profile></Profile>
 			</div>
+
+			<div className ="HomepageFooter">
+          <Footer></Footer>
+      </div>
 		</div>
 	);
 };

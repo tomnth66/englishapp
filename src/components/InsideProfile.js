@@ -32,7 +32,7 @@ class InsideProfile extends Component {
 							Profile
 						</a>
 						{localStorage.getItem('class') === 'admin' && (
-							<a href="/createmap"> Post an announcement</a>
+							<a href="/createannouncement"> Post an announcement</a>
 						)}
 						{localStorage.getItem('class') === 'admin' && (
 							<a href="/createmap"> Createmap</a>

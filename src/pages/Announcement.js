@@ -4,9 +4,10 @@ import Navbar from "../components/Navbar.js";
 import Footer from '../components/Footer.js';
 import Profile from "../components/Profile.js";
 // import InsideRanking from "../components/InsideRanking.js";
-import InsideProfileDetail from "../components/InsideProfileDetail.js";
+import InsideAnnouncement from "../components/InsideAnnouncement.js";
 
-export default class ProfileDetail extends Component {
+
+export default class Announcement extends Component {
   constructor(props) {
     super(props);
   }
@@ -19,7 +20,7 @@ export default class ProfileDetail extends Component {
         </div>
 
         <div className="HomepageBody">
-          <InsideProfileDetail match = {this.props.match}></InsideProfileDetail>
+          <InsideAnnouncement></InsideAnnouncement>
           {localStorage.getItem('user') &&  <Profile></Profile>}
         </div>
 

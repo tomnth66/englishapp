@@ -1,0 +1,65 @@
+
+.InsideAnnouncementHeader {
+  display: flex;
+  flex-direction: row;
+  width: 96%;
+  margin: 0px auto;
+  border-bottom: 1px solid #bbbbbb;
+  padding-bottom: 0.2rem;
+  height: 3.5rem;
+  align-items: left;
+  /* justify-content: space-around; */
+}
+
+
+.InsideAnnouncement {
+  width: 70%;
+  /* margin: auto; */
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 5px;
+  /* background-color: red; */
+  /* height: 65vh; */
+  border-top: 2px solid #dddddd;
+}
+
+
+.InsideAnnouncement h1 {
+  width: 70%;
+  text-align: left;
+  /* margin: 0px auto; */
+  margin-top: 0.5rem;
+  margin-bottom: 0px;
+  padding-left: 15px;
+}
+
+.InsideAnnouncementMain {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 10px auto;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 7px;
+  padding: 1em 1em 0 1em;
+  height: 67vh;
+}
+
+
+.AnnouncementInputArea  {
+  height: 22rem;
+  width: 100%;
+  border: 0.15rem solid rgba(136, 192, 208, 0);
+  background: #eceff4;
+  resize: none;
+  padding: .5rem 0 0 .5rem;
+  font-size: 1rem;
+  font-family: Roboto;
+  overflow-y: scroll;
+  outline: none;
+}
+
+.AnnouncementInputArea:focus {
+  border: 0.15rem solid rgba(63, 81, 181, 0.6);
+  border-radius: 10px;
+}
+

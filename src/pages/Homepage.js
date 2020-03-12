@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css/Homepage.css";
 import Navbar from "../components/Navbar.js";
+import Footer from '../components/Footer.js';
 import News from "../components/News.js";
 import Login from "../components/Login.js";
 import Profile from "../components/Profile.js";
@@ -21,6 +22,10 @@ export default class Homepage extends Component {
           <News></News>
           {!localStorage.getItem('user') && <Login></Login>}
           {localStorage.getItem('user') &&  <Profile></Profile>}
+        </div>
+
+        <div className ="HomepageFooter">
+          <Footer></Footer>
         </div>
       </div>
     );
