@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
 import React, { useEffect, useState } from 'react';
 import firebase from '../firebase.js';
@@ -77,6 +78,7 @@ const MapPlay = ({ match }) => {
 	return (
 		<div className="mapPlay">
 			{isLoading && <Loading />}
+			<Navbar />
 			<div className="answerSelector" id="studentAnswer"></div>
 			<Button color="primary" variant="contained" onClick={submit}>
 				Submit
