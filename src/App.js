@@ -7,7 +7,7 @@ import CreateMap from './pages/CreateMap';
 // import Test from "./pages/Test";
 import Studentmanagement from './pages/Studentmanagement.js';
 import Ranking from './pages/Ranking.js';
-import MapPlay from './components/MapPlay';
+import MapPlay from './pages/MapPlay';
 import ProfileDetail from './pages/ProfileDetail.js';
 
 class App extends Component {
