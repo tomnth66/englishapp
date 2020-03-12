@@ -1,70 +1,75 @@
-.Newsfooter{
-  /* height: 10vh;
-  line-height: 10vh; */
-  background-color: #FFF;
+.Newsfooter {
+	/* height: 10vh; */
+	/* line-height: 10vh; */
+	background: transparent;
+	background-color: #3f51b5;
+	/* background: #fff; */
+	/* border-radius: 10px; */
+	color: #eceff4;
 }
 
-.Counter{
-  border-bottom: 0.5px solid #999999;
-  /* background-color: #FFF; */
-  height: 6vh;
-  line-height: 6vh;
-  width: 98%;
-  margin: 0px auto;
-  padding-left: 10px;
+.Counter {
+	/* border-bottom: 0.5px solid #999999; */
+	/* background-color: #fff; */
+	height: 6vh;
+	line-height: 6vh;
+	width: 98%;
+	margin: 0px auto;
+	padding-left: 10px;
 }
 
-.Button-3{
-  height: 6vh;
-  line-height: 6vh;
-  background-color: #DDD;
+.Button-3 {
+	height: 6vh;
+	line-height: 6vh;
+	/* background-color: #ddd; */
 }
 
-.LikeCnt{
-  float: left;
-  width: 13%;
-  text-align: left;
+.LikeCnt {
+	float: left;
+	width: 13%;
+	text-align: left;
 }
 
-.DisLikeCnt{
-  float: left;
-  width: 13%;
-  text-align: left;
+.DisLikeCnt {
+	float: left;
+	width: 13%;
+	text-align: left;
 }
 
-.CommentCnt{
-  float: left;
-  width: 23%;
-  text-align: left;
+.CommentCnt {
+	float: left;
+	width: 23%;
+	text-align: left;
 }
 
-.Like{
-  float: left;
-  width: 20%;
-  border-right: 1px solid #999999;
-  text-align: center;
+.Like {
+	float: left;
+	width: 20%;
+	/* border-right: 1px solid #999999; */
+	text-align: center;
 }
 
-.DisLike{
-  float: left;
-  width: 20%; 
-  border-right: 1px solid #999999;
-  text-align: center;
+.DisLike {
+	float: left;
+	width: 20%;
+	/* border-right: 1px solid #999999; */
+	text-align: center;
 }
 
-.Comment{
-  float: left;
-  width: 20%; 
-  border-right: 1px solid #999999;
-  text-align: center;
+.Comment {
+	float: left;
+	width: 20%;
+	/* border-right: 1px solid #999999; */
+	text-align: center;
 }
 
-.Date{
-  text-align: end;
-  padding-right: 20px;
+.Date {
+	text-align: end;
+	padding-right: 20px;
 }
 
-.Click:hover{
-  cursor: pointer;
-  background-color: #999999;
+.Click:hover {
+	cursor: pointer;
+	/* background-color: #999999; */
 }
+

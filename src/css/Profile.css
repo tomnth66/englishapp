@@ -1,9 +1,10 @@
-.Profile{
-  width: 30%;
-  height: 500px;
-  /* background-color: #FFEE75; */
-  /* background-color: rgb(242, 244, 248); */
-  background-color: #ECEFF4;
-  /* display: flex;
+.Profile {
+	width: 30%;
+	height: 500px;
+	/* background-color: #ffee75; */
+	/* background-color: rgb(242, 244, 248); */
+	/* background-color: #f3f5f8; */
+	/* display: flex;
   flex-direction: column; */
 }
+

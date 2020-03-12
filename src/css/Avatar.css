@@ -1,14 +1,15 @@
-.Avatar{
-  border-radius: 50%;
-  margin: 10px auto;
-  display: block;
-  width: 150px;
-  height: 150px;
-  border: 5px solid #fff;
+.Avatar {
+	border-radius: 50%;
+	margin: 10px auto;
+	display: block;
+	width: 150px;
+	height: 150px;
+	border: 5px solid #fff;
 }
 
-.Picture{
-  width: 100%; 
-  height: 100%; 
-  border-radius: 50%;
+.Picture {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
 }
+
