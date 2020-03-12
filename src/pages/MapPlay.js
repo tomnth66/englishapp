@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import Loading from '../components/Loading';
 import React, { useEffect, useState } from 'react';
 import firebase from '../firebase.js';
 
@@ -6,7 +7,10 @@ import firebase from '../firebase.js';
 // import "../css/MapPlay.css"
 
 const MapPlay = ({ match }) => {
+	// get map
 	let [map, setMap] = useState({});
+	// loading screen while getting map
+	let [isLoading, setIsLoading] = useState(true);
 
 	// console.log(match);
 	console.time('getMap');
@@ -24,6 +28,7 @@ const MapPlay = ({ match }) => {
 				curMap = data.data().MapList[match.params.idx];
 			});
 		console.timeEnd('getMap');
+		setIsLoading(false);
 
 		let studentAnswerSelector = document.getElementById('studentAnswer');
 		let para = curMap.paragraph;
@@ -71,6 +76,7 @@ const MapPlay = ({ match }) => {
 
 	return (
 		<div className="mapPlay">
+			{isLoading && <Loading />}
 			<div className="answerSelector" id="studentAnswer"></div>
 			<Button color="primary" variant="contained" onClick={submit}>
 				Submit
