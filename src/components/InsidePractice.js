@@ -10,11 +10,15 @@ import '../css/InsidePractice.css';
 // import Loading from "./Loading.js";
 
 const InsidePractice = () => {
+	// get typeList
 	let [type, setType] = useState(0);
 	let [typeList, setTypeList] = useState([]);
+	// get maplist of each type then sort
 	let [mapList, setMapList] = useState([]);
 	let [mapType, setMapType] = useState([]);
 	let [mapCurType, setMapCurType] = useState([]);
+	// set up loading screen while sorting the maplist
+	let [isLoading, setIsLoading] = useState(true);
 
 	async function getDB() {
 		let typeArr = [];
@@ -40,7 +44,7 @@ const InsidePractice = () => {
 				setMapList(data.data().MapList);
 				map = data.data().MapList;
 			});
-
+		setIsLoading(false);
 		let typeMap = [];
 		typeArr.map(item => {
 			typeMap.push([]);
@@ -53,7 +57,22 @@ const InsidePractice = () => {
 			typeMap[id].push(item);
 			return item;
 		});
-		console.log(typeMap);
+
+		typeMap.map(mapEachType => {
+			let tmp = [];
+			tmp = mapEachType.sort((a, b) => {
+				let aName = a.Mapname.toLowerCase();
+				let bName = b.Mapname.toLowerCase();
+				switch (aName.charCodeAt(0)) {
+          case bName.charCodeAt(0):
+            return b.idx - a.idx;
+					default:
+						return aName.charCodeAt(0) - bName.charCodeAt(0);
+				}
+			});
+			console.log(tmp);
+		});
+		// console.log(typeMap);
 		setMapType(typeMap);
 		setMapCurType(typeMap[type]);
 		console.timeEnd('test');
@@ -73,7 +92,7 @@ const InsidePractice = () => {
 
 	return (
 		<div className="InsidePractice">
-			{/* {isLoading && <Loading />} */}
+			{isLoading && <Loading />}
 			<div className="CourseSelector">
 				<h1>Practice</h1>
 				<FormControl
