@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/Studentlist.css";
 import firebase from "../firebase";
 import ConfirmSelectedDiv from "./ConfirmSelectedDiv.js";
+// import { Button } from '@material-ui/core';
 
 export default class Studentlist extends Component {
   constructor(props) {
@@ -40,6 +41,10 @@ export default class Studentlist extends Component {
     });
   }
 
+  showCourseList(){
+
+  }
+
   render() {
     const { Users, ConfirmSelected, SelectedId } = this.state;
     return (
@@ -47,17 +52,24 @@ export default class Studentlist extends Component {
         <h2 className="student--amount">
           The numbers of the student: {Users.length}
         </h2>
-        <table>
-          <tr className="studentlist--head">
-            <th>STT</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Course</th>
-            <th>Activated</th>
-            <th></th>
-          </tr>
+        <div className = 'studentlistTable'>
+          <table>
+            <tr className="studentlist--head">
+              <th>STT</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th className = 'CourseBtn'>
+                {/* <Button color="primary" variant="contained" onClick={this.showCourseList.bind(this)}>
+                        Course
+                </Button> */}
+                {/* <span className = 'CourseBtn'>Course</span> */}
+                Course
+              </th>
+              <th>Activated</th>
+              <th></th>
+            </tr>
 
-          {Users.map((user, idx) => (
+            {Users.map((user, idx) => (
             <tr>
               <td>{++idx}</td>
               <td>{user.Name}</td>
@@ -94,9 +106,11 @@ export default class Studentlist extends Component {
                   </select>
                 )}
               </td>
+
               <td>
                 <a href = {'./Profile/'+user.Id}><span className="DetailCss">Detail</span></a>
               </td>
+
               {ConfirmSelected && SelectedId === "select" + user.Id && (
                 <ConfirmSelectedDiv
                   Keyword = 'Are you sure?'
@@ -106,8 +120,9 @@ export default class Studentlist extends Component {
                 ></ConfirmSelectedDiv>
               )}
             </tr>
-          ))}
-        </table>
+            ))}
+          </table>
+        </div>
       </div>
     );
   }

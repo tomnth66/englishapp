@@ -8,15 +8,6 @@
 	color: #eceff4;
 }
 
-.Counter {
-	/* border-bottom: 0.5px solid #999999; */
-	/* background-color: #fff; */
-	height: 6vh;
-	line-height: 6vh;
-	width: 98%;
-	margin: 0px auto;
-	padding-left: 10px;
-}
 
 .Button-3 {
 	height: 6vh;
@@ -24,44 +15,6 @@
 	/* background-color: #ddd; */
 }
 
-.LikeCnt {
-	float: left;
-	width: 13%;
-	text-align: left;
-}
-
-.DisLikeCnt {
-	float: left;
-	width: 13%;
-	text-align: left;
-}
-
-.CommentCnt {
-	float: left;
-	width: 23%;
-	text-align: left;
-}
-
-.Like {
-	float: left;
-	width: 20%;
-	/* border-right: 1px solid #999999; */
-	text-align: center;
-}
-
-.DisLike {
-	float: left;
-	width: 20%;
-	/* border-right: 1px solid #999999; */
-	text-align: center;
-}
-
-.Comment {
-	float: left;
-	width: 20%;
-	/* border-right: 1px solid #999999; */
-	text-align: center;
-}
 
 .Date {
 	text-align: end;

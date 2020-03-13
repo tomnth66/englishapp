@@ -61,7 +61,7 @@ const Navbar = () => {
 				style={{ height: '5em', width: '100vw', background: 'transparent' }}
 			/>
 			<div className="row nav">
-				<h3 className="title">SYNTAXI</h3>
+				<h3 className="title"><a href = '/'>SYNTAXI</a></h3>
 				<nav className="col-xs-5 nav-links">
 					{links.map(link => {
 						return (

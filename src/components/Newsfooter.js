@@ -7,6 +7,7 @@ export default class Newsfooter extends Component {
   }
 
   render() {
+    const {Announcement} = this.props;
     return (
       <div className="Newsfooter">
         {/* <div className = 'Counter'>
@@ -18,7 +19,14 @@ export default class Newsfooter extends Component {
           {/* <div className = 'Like Click'>Like</div>
           <div className = 'DisLike Click'>Dislike</div>
           <div className = 'Comment Click'>Comment</div> */}
-          <div className = 'Date'>10:10:20, 23/02/2020</div>
+          <div className = 'Date'>
+            Post on: {Announcement.Time.hours}:
+                    {Announcement.Time.minutes}:
+                    {Announcement.Time.seconds <10 && 0}{Announcement.Time.seconds}, 
+                    {Announcement.Time.day}/
+                    {Announcement.Time.month}/
+                    {Announcement.Time.year}
+          </div>
         </div>
       </div>
     );

@@ -23,6 +23,10 @@
 	cursor: pointer;
 }
 
+.title a{
+  color: #5E81AC;
+}
+
 .nav-links {
 	display: flex;
 	flex-direction: row;

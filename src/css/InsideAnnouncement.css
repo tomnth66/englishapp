@@ -35,19 +35,19 @@
 
 .InsideAnnouncementMain {
   display: flex;
-  flex-direction: row;
-  width: 90%;
+  flex-direction: column;
+  width: 91%;
   margin: 10px auto;
   border: 1px solid rgb(185, 185, 185);
   border-radius: 7px;
-  padding: 1em 1em 0 1em;
+  padding: 1em 1em 0 0;
   height: 67vh;
 }
 
 
-.AnnouncementInputArea  {
-  height: 22rem;
-  width: 100%;
+#AnnouncementInputArea  {
+  height: 20rem;
+  width: 97%;
   border: 0.15rem solid rgba(136, 192, 208, 0);
   background: #eceff4;
   resize: none;
@@ -56,9 +56,11 @@
   font-family: Roboto;
   overflow-y: scroll;
   outline: none;
+  margin-left: 14px;
+  margin-bottom: 0.2rem;
 }
 
-.AnnouncementInputArea:focus {
+#AnnouncementInputArea:focus {
   border: 0.15rem solid rgba(63, 81, 181, 0.6);
   border-radius: 10px;
 }
