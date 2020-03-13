@@ -46,11 +46,13 @@
   flex-direction: row;
   width: 90%;
   margin: 10px auto;
+  margin-bottom: 0;
   /* border: 1px solid rgb(185, 185, 185); */
   border: 2px solid #5e81ac;
   border-radius: 7px;
   padding: 1em 1em 0 1em;
   height: 50vh;
+  position: relative;
 }
 
 .Left {
@@ -105,11 +107,27 @@
 }
 
 .ProfileFooter{
-  /* height: 10vh; */
-	/* line-height: 10vh; */
+  height: 7vh;
+  line-height: 7vh;
+  width: 65.67%;
+  margin: 10px auto;
+  margin-top: 0px;
 	background: transparent;
 	background-color: #5e81ac;
 	/* background: #fff; */
 	/* border-radius: 10px; */
-	color: #eceff4;
+  color: #eceff4;
+  position: absolute;
+  bottom: 6rem;
+  left: 1.93rem;
+  border-radius: 0 0 10px 10px;
+}
+
+.ProfileFooter:hover{
+  cursor: pointer;
+  background-color: rgb(65, 90, 120);
+}
+
+.ProfileFooter span {
+  margin-left: 29vw;
 }

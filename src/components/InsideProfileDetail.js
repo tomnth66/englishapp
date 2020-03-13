@@ -98,11 +98,12 @@ export default class InsideProfileDetail extends Component {
                 ></DeleteConfirm>
               )}
           </div>
-
           {/* <div className = 'ProfileFooter'></div> */}
         </div>
 
-        {/* <div className = 'ProfileFooter'></div> */}
+        <div className = 'ProfileFooter'>
+          <span>Edit Profile</span>
+        </div>
       </div>
     );
   }

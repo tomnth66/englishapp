@@ -118,7 +118,7 @@ const InsidePractice = () => {
 					<tr className="studentlist--head">
 						<th>STT</th>
 						<th>Name</th>
-						<th>Score</th>
+						<th></th>
 						<th></th>
 					</tr>
 
