@@ -57,6 +57,22 @@
 	margin-top: 40px;
 }
 
+.footer-distributed .footer-icons span{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
+}
+
 .footer-distributed .footer-icons a{
 	display: inline-block;
 	width: 35px;
@@ -78,6 +94,7 @@
 
 .footer-distributed .footer-right{
 	float: right;
+	position: relative;
 }
 
 .footer-distributed .footer-right p{
@@ -130,8 +147,8 @@
 }
 
 .footer-distributed .footerForm textarea{
-	height: 100px;
-	margin-bottom: 20px;
+	height: 120px;
+	margin-bottom: 10px;
 }
 
 .footer-distributed .footerForm button{
@@ -195,4 +212,33 @@
 	.footer-distributed .footer.footerForm button{
 		float: none;
 	}
+}
+
+.footerFormBtn:hover{
+	cursor: pointer;
+}
+
+
+
+.backBtn{
+	position: absolute;
+	top: 1.3rem;
+	left: 5rem;
+}
+
+.show{
+	animation: secondss 500ms forwards;
+}
+
+.hide{
+	display: none;
+}
+
+@keyframes secondss {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

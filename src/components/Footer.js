@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../css/Footer.css";
 import 'font-awesome/css/font-awesome.min.css';
-import firebase from "../firebase.js";
+import { Button } from '@material-ui/core';
 
 // import {useParams} from 'react-router-dom';
 
@@ -9,25 +9,21 @@ export default class Footer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false
-    };
+      footerState:false
+    }
   }
 
-  showLoading() {
+
+changeFooterState(){
     this.setState({
-      isLoading: true
-    });
+      footerState:!this.state.footerState
+    })
   }
-
-
-  componentDidMount() {
-
-  }
-
 
 
   render() {
-    const {isLoading} = this.state;
+    const classFirst = this.state.footerState===true?'hide':'show';
+    const classSecond = this.state.footerState===false?'hide':'show'
     return (
       <footer class="footer-distributed">
         <div class="footer-left">
@@ -54,11 +50,32 @@ export default class Footer extends Component {
 
 			<div class="footer-right">
 				<p>Contact Us</p>
-				<div className = 'footerForm'>
-          <input type="text" name="email" placeholder="Email"></input>
-					<textarea name="message" placeholder="Message"></textarea>
-					<button>Send</button>
-        </div>
+				{/* <form className = 'footerForm' onSubmit={this.handleSubmit.bind(this)} method="POST">
+          <input type="text" id="FormEmail" name="email" placeholder="Email"></input>
+					<textarea id="FormMessage" name="message" placeholder="Message"></textarea>
+					<button type = 'submit'>Send</button>
+        </form> */}
+
+        <form id="contactform" className = 'footerForm' action="https://formspree.io/xknzgbno" method="POST">
+          
+              <div className = {classFirst}>
+                <input type="text" name="name" placeholder="Your name"></input>
+                <input put type="email" name="_replyto" placeholder="Your email"></input>
+                <Button color="primary" variant="contained" onClick={this.changeFooterState.bind(this)}>
+                            Next
+                </Button>
+              </div>
+            
+              <div className = {classSecond}>
+                <div class="footer-icons backBtn">
+                  <span onClick = {this.changeFooterState.bind(this)}><i className ="fa fa-arrow-left"></i></span>
+                </div>
+                <textarea name="message" placeholder="Your message"></textarea>
+                <input className = 'footerFormBtn' type="submit" value="Send"></input>
+              </div>
+            
+        </form>
+
 			</div>
 		</footer>
     );
