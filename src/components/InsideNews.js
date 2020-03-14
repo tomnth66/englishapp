@@ -31,7 +31,9 @@ export default class InsideNews extends Component {
   updateRenderDB(){
     let curAnn = this.state.value;
     let words = curAnn.split('\n');
-		let fullPara = '';
+    let fullPara = '';
+    
+    fullPara+=`#${this.props.Announcement.id}\n`;
 
 		for (let word of words) {
 			fullPara += `<div>\n`;
@@ -101,6 +103,8 @@ export default class InsideNews extends Component {
     let words = curAnn.split('\n');
 		let fullPara = '';
 
+    fullPara+=`#${this.props.Announcement.id}\n`;
+    
 		for (let word of words) {
 			fullPara += `<div>\n`;
 			word = word.split(' ');
