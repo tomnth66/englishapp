@@ -127,6 +127,11 @@
   overflow-y: auto;
   outline: none;
   /* margin-left: 14px; */
-  margin-bottom: 0.2rem;
+	margin-bottom: 0.2rem;
+	white-space: pre-line;
 }
 
+.EditNewsBtn {
+	text-align: end;
+	margin: 1em 1.5em 0 0;
+}

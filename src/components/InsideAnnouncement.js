@@ -29,9 +29,10 @@ export default class InsideProfileDetail extends Component {
 
   handleSubmit(){
     this.showLoading();
-    let curAnn = document.getElementById('AnnouncementInputArea').value;
+    let curAnn = document.getElementById('AnnouncementInputArea').value.toString();
     let time = new Date();
-    console.log(curAnn);
+
+    // console.log(curAnn);
 
     const db = firebase.firestore();
     const ref = db.collection('Announcement').doc('A4TT0kGAgjKUxs2wrj8p');
@@ -54,12 +55,8 @@ export default class InsideProfileDetail extends Component {
 
        ref.set({AnnouncementList:AnnouncementList}).then(()=> window.location.href = "/");
     });
+
   }
-
-
-
-
-
 
 
   render() {

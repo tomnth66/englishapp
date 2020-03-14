@@ -317,9 +317,9 @@ const CreateMap = () => {
 		const ref = db.collection('Map').doc('wCj3hteHUHgCtiWl98yq');
 
 		ref.get().then(data => {
-			console.log('dữ liệu', data.data().Maplist);
+			// console.log('dữ liệu', data.data().Maplist);
 			let MapList = data.data().MapList;
-			console.log(para);
+			// console.log(para);
 
 			MapList.push({
 				Answer: correctAnswer,

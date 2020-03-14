@@ -1,22 +1,57 @@
 import React, { Component } from "react";
 import "../css/InsideNews.css";
+import firebase from '../firebase.js'
 import Ava from '../img/stitch.jpg'
 import Newsfooter from './Newsfooter.js'
 import 'font-awesome/css/font-awesome.min.css';
 import { Button } from '@material-ui/core';
+import Loading from "./Loading.js";
 
 export default class InsideNews extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isShowSetting: false,
-      EditState:false
+      EditState:false,
+      originValue:this.props.Announcement.AnnouncementContent,
+      value:this.props.Announcement.AnnouncementContent,
+      content: '',
+      isLoading: false
     }
 
     this.inputElement1 = React.createRef();
     this.inputElement2 = React.createRef();
     // this.EditTextRef = React.createRef();
   }
+
+  componentDidMount(){
+    this.updateRenderDB();
+  }
+
+  updateRenderDB(){
+    let curAnn = this.state.value;
+    let words = curAnn.split('\n');
+		let fullPara = '';
+
+		for (let word of words) {
+			fullPara += `<div>\n`;
+			word = word.split(' ');
+			for (let i = 0; i < word.length; ++i) {
+				if (word[i] !== '') {
+					fullPara += `${word[i]} `;
+        } 
+        else {
+					fullPara += '<div style="height: 1rem"></div>';
+				}
+			}
+			fullPara += `</div>\n`;
+    }
+    
+    this.setState({
+      content:fullPara
+    })
+  }
+ 
 
   showSetting(){
     this.setState({
@@ -37,7 +72,7 @@ export default class InsideNews extends Component {
   }
 
   EditNews(){
-    console.log('editting...');
+    // console.log('editting...');
     this.setState({
       isShowSetting:false,
       EditState:true
@@ -49,7 +84,84 @@ export default class InsideNews extends Component {
     })
   }
 
+  closeEdit(){
+    this.setState({
+      EditState:false,
+      value: this.state.originValue
+    })
+  }
+
+  saveEdit(){
+    this.setState({
+      isLoading:true
+    })
+    const db = firebase.firestore();
+    const ref = db.collection("Announcement").doc("A4TT0kGAgjKUxs2wrj8p");
+    let curAnn = document.getElementById('EditTextArea').value;
+    let words = curAnn.split('\n');
+		let fullPara = '';
+
+		for (let word of words) {
+			fullPara += `<div>\n`;
+			word = word.split(' ');
+			for (let i = 0; i < word.length; ++i) {
+				if (word[i] !== '') {
+					fullPara += `${word[i]} `;
+        } 
+        else {
+					fullPara += '<div style="height: 1rem"></div>';
+				}
+			}
+			fullPara += `</div>\n`;
+    }
+
+    ref.get().then(data => {
+      let AnnouncementList = data.data().AnnouncementList;
+      let idx = AnnouncementList.findIndex(Ann => Ann.id === this.props.Announcement.id);
+
+      AnnouncementList[idx].AnnouncementContent = curAnn;
+
+      ref.set({ AnnouncementList: AnnouncementList })
+         .then(()=>{
+                    // this.closeEdit() ; 
+                    // this.props.GetDB() ; 
+                    this.setState({
+                      EditState:false,
+                      content:fullPara,
+                      isLoading: false,
+                      originValue:this.state.value
+                    })
+                   });
+    });
+  }
+
+  handleTextChange(e){
+    this.setState({
+      value: e.target.value
+    });
+  }
+
   DeleteNews(){
+    this.setState({
+      isLoading:true
+    })
+    const db = firebase.firestore();
+    const ref = db.collection("Announcement").doc("A4TT0kGAgjKUxs2wrj8p");
+    ref.get().then(data => {
+      let AnnouncementList = data.data().AnnouncementList;
+      let idx = AnnouncementList.findIndex(Ann => Ann.id === this.props.Announcement.id);
+      
+      // console.log(Users[idx]);
+      AnnouncementList.splice(idx, 1);
+      ref.set({ AnnouncementList: AnnouncementList })
+         .then( ()=>{
+                      this.setState({
+                        isShowSetting:false,
+                        isLoading: false
+                      },()=>this.props.GetDB())
+                    })
+        //  .then( ()=> window.location.href = "/studentmanagement");
+    });
 
   }
 
@@ -57,6 +169,7 @@ export default class InsideNews extends Component {
     const {Announcement} = this.props;
     return (
       <div className = 'InsideNews'>
+        {this.state.isLoading && <Loading />}
         <div className = 'Auther'>
           <div className = 'AutherAvatar'>
             <img className="Picture" src={Ava}></img>
@@ -83,14 +196,25 @@ export default class InsideNews extends Component {
         </div>
 
         <div className = 'NewsContent'>
-          {!this.state.EditState && <p>{Announcement.AnnouncementContent}</p> }
+          {!this.state.EditState && <div dangerouslySetInnerHTML={{__html: this.state.content}}>
+                                    </div>}
+          {/* {!this.state.EditState && <div> <p></p> </div>} */}
 
           {this.state.EditState && 
             <div>
-              <textarea ref = {ref => this.EditTextRef = ref} value = {Announcement.AnnouncementContent} id = 'EditTextArea'></textarea> 
-              <Button color="primary" variant="contained">
-                          Post
-              </Button>
+              <textarea ref = {ref => this.EditTextRef = ref} 
+                        value = {this.state.value} 
+                        onChange = {this.handleTextChange.bind(this)}
+                        id = 'EditTextArea'></textarea> 
+              <div className = 'EditNewsBtn'>
+                <Button color="primary" variant="contained" onClick = {this.closeEdit.bind(this)}> 
+                            Cancel
+                </Button>
+
+                <Button color="primary" variant="contained" onClick = {this.saveEdit.bind(this)}> 
+                            Save
+                </Button>
+              </div>
             </div>
           }
         </div>

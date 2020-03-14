@@ -25,6 +25,8 @@ export default class News extends Component {
     });
   }
 
+  
+
   render() {
     const {AnnouncementList} = this.state;
     return(
@@ -34,7 +36,7 @@ export default class News extends Component {
         <div className = 'NewsMain'>
           {
             AnnouncementList.map((Announcement,idx)=>(
-              <InsideNews Announcement = {Announcement}></InsideNews>
+              <InsideNews GetDB = {this.GetDB.bind(this)} Announcement = {Announcement}></InsideNews>
             ))
           }
         </div>
