@@ -20,7 +20,7 @@ export default class Newsfooter extends Component {
           <div className = 'DisLike Click'>Dislike</div>
           <div className = 'Comment Click'>Comment</div> */}
           <div className = 'Date'>
-            Post on:{Announcement.Time.hours <10 && 0}{Announcement.Time.hours}:
+            Post on: {Announcement.Time.hours <10 && 0}{Announcement.Time.hours}:
                     {Announcement.Time.minutes <10 && 0}{Announcement.Time.minutes}:
                     {Announcement.Time.seconds <10 && 0}{Announcement.Time.seconds}, 
                     {Announcement.Time.day <10 && 0}{Announcement.Time.day}/
