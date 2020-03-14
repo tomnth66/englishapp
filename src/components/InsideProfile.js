@@ -27,7 +27,7 @@ class InsideProfile extends Component {
 					</p>
 
 					<div className="Action">
-						<a href={'../Profile/' + localStorage.getItem('userId')}>
+						<a href={'/Profile/' + localStorage.getItem('userId')}>
 							{' '}
 							Profile
 						</a>

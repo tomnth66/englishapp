@@ -20,6 +20,7 @@
 	display: flex;
 	flex-direction: row;
 	height: 15vh;
+	position: relative;
 }
 
 .AutherAvatar {
@@ -48,11 +49,84 @@
   border-radius: 50%;
 } */
 
+.News-icons{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	border-radius: 2px;
+
+	font-size: 25px;
+	opacity: 0.7;
+	/* color: #ffffff; */
+	text-align: center;
+	line-height: 35px;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
+
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.News-icons:hover{
+	opacity: 1;
+}
+
+.News-setting{
+	position: absolute;
+
+	right: 0.5rem;
+	top: 1.5rem;
+
+	background-clip: padding-box;
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius: 3px;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+}
+
+.News-setting ul{
+	padding: 0;
+	margin: 0;
+}
+
+.News-setting ul li{
+	list-style: none;
+	padding: 0.4rem 0.7rem;
+	text-align: center;
+}
+
+/* .News-setting ul li:first-child{
+	padding-bottom: 0;
+} */
+
+.News-setting ul li:hover{
+	cursor: pointer;
+	background-color:#f3f5f8;
+}
+
 .NewsContent {
 	width: 94%;
 	margin: 10px auto;
 	margin-top: 0px;
 	border-radius: 10px;
 	margin-bottom: 2.6rem;
+}
+
+#EditTextArea {
+	height: 10rem;
+  width: 97%;
+  border: 0.15rem solid rgba(136, 192, 208, 0);
+  background: #eceff4;
+  resize: none;
+  padding: .5rem 0 0 .5rem;
+  font-size: 1rem;
+  font-family: Roboto;
+  overflow-y: auto;
+  outline: none;
+  /* margin-left: 14px; */
+  margin-bottom: 0.2rem;
 }
 
