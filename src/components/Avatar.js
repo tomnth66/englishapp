@@ -1,17 +1,16 @@
-import React, { Component } from "react";
-import "../css/Avatar.css";
-import Ava from "../img/stitch.jpg";
+import React, { Component } from 'react';
+import '../css/Avatar.css';
+import Ava from '../img/stitch.jpg';
+import { Link } from 'react-router-dom';
 
-export default class Avatar extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Avatar = ({ id }) => {
+	return (
+    <Link to={`/Profile/${id}`}>
+			<div className="Avatar">
+				<img className="Picture" src={Ava}></img>
+			</div>
+    </Link>
+	);
+};
 
-  render() {
-    return (
-      <div className="Avatar">
-        <img className="Picture" src={Ava}></img>
-      </div>
-    );
-  }
-}
+export default Avatar;

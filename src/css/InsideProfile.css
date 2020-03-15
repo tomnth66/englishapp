@@ -1,13 +1,10 @@
 .InsideProfile {
-	padding: 5% 10% 10% 10%;
-	/* margin: 15px 10px 10px 10px; */
 	margin: 76px 10px 0 0;
-	/* border: 1px solid  #FCC300; */
-	/* border: 2px solid rgb(185, 185, 185);; */
 	border: 2px solid #5e81ac;
-	background: #f3f5f8;
-	border-radius: 10px;
-	height: 31rem;
+	background: #f3f5f8 !important;
+	border-radius: 10px !important;
+	height: auto;
+	padding: 1rem 0;
 }
 
 .InsideProfile a {
@@ -16,49 +13,36 @@
 
 .Information {
 	width: 100%;
-	height: 230px;
+	height: auto;
 	/* background-color: #d9edf7; */
 	/* background-color: #eceff4; */
+	/* padding-top: 0.5rem; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
-	/* padding: 0.5rem 0.7rem 0px 0.7rem; */
-	padding-top: 0.5rem;
-	display: block;
-	margin: 10px auto;
+	/* margin: 10px auto; */
 }
 
 .Action {
+	width: 100%;
+	margin-bottom: 10px;
 	display: flex;
 	flex-direction: column;
-	width: 80%;
-	margin: 10px auto;
 }
 
-.Action a:visited {
-	color: #111;
+.Action button {
+	width: 200px;
+	text-align: center;
+	vertical-align: center;
+	border-radius: 10px;
 }
 
 .Information a:visited {
 	color: #111;
 }
 
-.Information p {
-	background-color: #ddd;
-	height: 30px;
-	padding-top: 10px;
-	border-radius: 15px;
-	width: 90%;
-	margin: auto;
-	margin-bottom: 15px;
-}
-
-.Information a {
-	margin-bottom: 0.9rem;
-	background-color: #ddd;
-	height: 30px;
-	padding-top: 10px;
-	border-radius: 15px;
-}
-
-.Information a:hover {
-	opacity: 0.7;
+.UserInfo {
+	margin-bottom: 10px;
 }

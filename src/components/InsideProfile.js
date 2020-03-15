@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import '../css/InsideProfile.css';
 import Avatar from './Avatar.js';
 // import Button from './Button.js';
-import { Button } from '@material-ui/core';
+import { Button, Card, Tab } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 class InsideProfile extends Component {
 	constructor(props) {
@@ -17,38 +18,39 @@ class InsideProfile extends Component {
 
 	render() {
 		return (
-			<div className="InsideProfile">
-				<Avatar></Avatar>
+			<Card className="InsideProfile">
+				<Avatar id={localStorage.getItem('userId')}></Avatar>
 				{/* <Button></Button> */}
 				<div className="Information">
-					<p>
-						Name: {localStorage.getItem('user')} (
-						{localStorage.getItem('class')})
-					</p>
-
-					<div className="Action">
-						<a href={'/Profile/' + localStorage.getItem('userId')}>
-							{' '}
-							Profile
-						</a>
-						{localStorage.getItem('class') === 'admin' && (
-							<a href="/createannouncement"> Post an announcement</a>
-						)}
-						{localStorage.getItem('class') === 'admin' && (
-							<a href="/createmap"> Createmap</a>
-						)}
-						{localStorage.getItem('class') === 'admin' && (
-							<a href="/studentmanagement"> Student Management</a>
-						)}
+					<div className="UserInfo">
+						<h1 style={{ margin: '0' }}>{localStorage.getItem('user')}</h1>
+						<span style={{ fontWeight: '300', fontSize: '0.85rem' }}>
+							{localStorage.getItem('class')}
+						</span>
 					</div>
 
+					{localStorage.getItem('class') === 'admin' && (
+						<div className="Action">
+							<Link to="/createannouncement">
+								<Tab label="Create Announcement" />
+							</Link>
+							<Link to="/createmap">
+								<Tab label="Create Map" />
+							</Link>
+							<Link to="/studentmanagement">
+								<Tab label="Student Management" />
+							</Link>
+						</div>
+					)}
 					<Button
 						variant="contained"
 						color="primary"
 						onClick={this.handleLogOut.bind(this)}
-					>Log Out</Button>
+					>
+						Log Out
+					</Button>
 				</div>
-			</div>
+			</Card>
 		);
 	}
 }

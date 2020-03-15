@@ -19,7 +19,7 @@ export default class ProfileDetail extends Component {
         </div>
 
         <div className="HomepageBody">
-          <InsideProfileDetail match = {this.props.match}></InsideProfileDetail>
+          <InsideProfileDetail match={this.props.match}></InsideProfileDetail>
           {localStorage.getItem('user') &&  <Profile></Profile>}
         </div>
 
