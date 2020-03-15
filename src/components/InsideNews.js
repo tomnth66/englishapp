@@ -104,7 +104,7 @@ export default class InsideNews extends Component {
 		let fullPara = '';
 
     fullPara+=`#${this.props.Announcement.id}\n`;
-    
+
 		for (let word of words) {
 			fullPara += `<div>\n`;
 			word = word.split(' ');
@@ -185,7 +185,7 @@ export default class InsideNews extends Component {
           {localStorage.getItem('class') === 'admin' &&
           <div className = 'News-icons'>
             <span ref = {this.inputElement1} 
-                  onClick = {this.showSetting.bind(this)}><i class="fa fa-ellipsis-h"></i></span>
+                  onClick = {this.showSetting.bind(this)}><i id = 'curIcon' class="fa fa-ellipsis-h"></i></span>
           </div>}
 
           {this.state.isShowSetting &&

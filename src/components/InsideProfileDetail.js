@@ -100,10 +100,17 @@ export default class InsideProfileDetail extends Component {
           </div>
           {/* <div className = 'ProfileFooter'></div> */}
         </div>
+        
+        {localStorage.getItem('userId') === User.Id && 
+            <div className = 'ProfileFooter'>
+              <span>Edit Profile</span>
+            </div>
+        }
 
-        <div className = 'ProfileFooter'>
-          <span>Edit Profile</span>
-        </div>
+        {localStorage.getItem('userId') !== User.Id &&
+            <div className = 'ProfileFooter Inactive'></div>
+        }
+      
       </div>
     );
   }
