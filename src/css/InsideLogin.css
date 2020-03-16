@@ -1,17 +1,18 @@
-.InsideLogin{
-  padding: 10% 10% 10% 10%;
-  margin: 10px 10px 10px 10px;
-  border: 1px solid #888;
-  height: 70%;
+.InsideLogin {
+	padding: 10% 10% 10% 10%;
+	margin: 10px 10px 10px 10px;
+	border: 1px solid #888;
+	height: 70%;
 }
 
 .Input {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 6px 12px;
-  width: 90%;
-  height: 30px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  background: #d6f9d8;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 6px 12px;
+	width: 90%;
+	height: 30px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	background: #d6f9d8;
 }
+
