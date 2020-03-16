@@ -68,21 +68,23 @@ export default class Newsmain extends Component {
 		read_more_Para = '';
 		curID = 0;
 
-		read_more_Para += `#${this.props.Announcement.id}\n`;
 		fullPara += `#${this.props.Announcement.id}\n`;
+		read_more_Para += `#${this.props.Announcement.id}\n`;
 		for (let word of words) {
 			fullPara += `<div>\n`;
+			if (curID <= maxParaLength) read_more_Para += `<div> \n`;
 			word = word.split(' ');
 			for (let i = 0; i < word.length; ++i) {
 				++curID;
 				if (word[i] !== '') {
+					fullPara += `<span>${word[i]} </span>`;
 					if (curID <= maxParaLength)
 						read_more_Para += `<span>${word[i]} </span>`;
-					fullPara += `<span>${word[i]} </span>`;
 				} else {
-					if (curID <= maxParaLength)
-						read_more_Para += '<div style="height: 1rem"></div>';
 					fullPara += '<div style="height: 1rem"></div>';
+					if (curID <= maxParaLength) {
+					}
+					read_more_Para += '<div style="height: 1rem"></div>';
 				}
 			}
 			fullPara += `</div>\n`;
@@ -94,16 +96,16 @@ export default class Newsmain extends Component {
 			this.setState({
 				content: fullPara,
 				read_more: true,
-        isReadMore: true,
+				isReadMore: true,
 				read_more_on: true,
 				read_more_content: read_more_Para
 			});
 		} else {
 			console.log('full ', fullPara);
 			this.setState({
-        isReadMore: false,
-        read_more: false,
-        read_more_on: false,
+				isReadMore: false,
+				read_more: false,
+				read_more_on: false,
 				content: fullPara
 			});
 		}
@@ -149,21 +151,23 @@ export default class Newsmain extends Component {
 		read_more_Para = '';
 		curID = 0;
 
-		read_more_Para += `#${this.props.Announcement.id}\n`;
 		fullPara += `#${this.props.Announcement.id}\n`;
+		read_more_Para += `#${this.props.Announcement.id}\n`;
 		for (let word of words) {
 			fullPara += `<div>\n`;
+			if (curID <= maxParaLength) read_more_Para += `<div> \n`;
 			word = word.split(' ');
 			for (let i = 0; i < word.length; ++i) {
 				++curID;
 				if (word[i] !== '') {
+					fullPara += `<span>${word[i]} </span>`;
 					if (curID <= maxParaLength)
 						read_more_Para += `<span>${word[i]} </span>`;
-					fullPara += `<span>${word[i]} </span>`;
 				} else {
-					if (curID <= maxParaLength)
-						read_more_Para += '<div style="height: 1rem"></div>';
 					fullPara += '<div style="height: 1rem"></div>';
+					if (curID <= maxParaLength) {
+					}
+					read_more_Para += '<div style="height: 1rem"></div>';
 				}
 			}
 			fullPara += `</div>\n`;
@@ -186,15 +190,15 @@ export default class Newsmain extends Component {
 						originValue: this.state.value,
 						content: fullPara,
 						read_more: true,
-            isReadMore: true,
+						isReadMore: true,
 						read_more_on: true,
 						read_more_content: read_more_Para
 					});
 				} else {
-          this.setState({
-            isReadMore: false,
-            read_more: false,
-            read_more_on: false,
+					this.setState({
+						isReadMore: false,
+						read_more: false,
+						read_more_on: false,
 						EditState: false,
 						isLoading: false,
 						originValue: this.state.value,
