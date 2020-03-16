@@ -68,6 +68,7 @@ export default class Newsmain extends Component {
 		read_more_Para = '';
 		curID = 0;
 
+		read_more_Para += `#${this.props.Announcement.id}\n`;
 		fullPara += `#${this.props.Announcement.id}\n`;
 		for (let word of words) {
 			fullPara += `<div>\n`;
@@ -148,6 +149,7 @@ export default class Newsmain extends Component {
 		read_more_Para = '';
 		curID = 0;
 
+		read_more_Para += `#${this.props.Announcement.id}\n`;
 		fullPara += `#${this.props.Announcement.id}\n`;
 		for (let word of words) {
 			fullPara += `<div>\n`;
