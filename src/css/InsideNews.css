@@ -51,17 +51,9 @@
 
 .News-icons {
 	/* display: inline-block; */
-	/* width: 3rem; */
-	/* height: 3rem; */
-	/* cursor: pointer; */
-	/* border-radius: 2px; */
-
-	font-size: 25px;
-	/* opacity: 0.7; */
-	/* color: #ffffff; */
+	width: 3rem;
+	height: 3rem;
 	text-align: center;
-	line-height: 35px;
-
 	margin-right: 5px;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -69,6 +61,11 @@
 	position: absolute;
 	right: 0;
 	top: 0;
+}
+
+.News-icons button {
+	width: 3rem;
+	height: 3rem;
 }
 
 #curIcon {
@@ -83,7 +80,7 @@
 	/* background-clip: padding-box; */
 	background-color: #eceff4 !important;
 	border-radius: 10px !important;
-	width: 8rem;
+	width: 7rem;
 }
 
 /* .News-setting ul { */
