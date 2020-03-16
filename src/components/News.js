@@ -30,6 +30,10 @@ export default class News extends Component {
     });
   }
 
+  // GetDB() {
+
+  // }
+
   render() {
     const { AnnouncementList } = this.state;
     return (

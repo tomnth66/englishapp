@@ -164,7 +164,8 @@ export default class InsideNews extends Component {
     const db = firebase.firestore();
     const ref = db.collection("Announcement").doc("A4TT0kGAgjKUxs2wrj8p");
     ref.get().then(data => {
-      let AnnouncementList = data.data().AnnouncementList;
+			let AnnouncementList = data.data().AnnouncementList;
+			console.log(AnnouncementList);
       let idx = AnnouncementList.findIndex(
         Ann => Ann.id === this.props.Announcement.id
       );
