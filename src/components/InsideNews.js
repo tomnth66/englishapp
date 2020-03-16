@@ -155,14 +155,19 @@ export default class InsideNews extends Component {
       let AnnouncementList = data.data().AnnouncementList;
       let idx = AnnouncementList.findIndex(Ann => Ann.id === this.props.Announcement.id);
       
-      // console.log(Users[idx]);
+      console.log('full ',AnnouncementList);
+      console.log(AnnouncementList[idx]);
       AnnouncementList.splice(idx, 1);
+      console.log('full2 ',AnnouncementList);
+
       ref.set({ AnnouncementList: AnnouncementList })
          .then( ()=>{
-                      this.setState({
-                        isShowSetting:false,
-                        isLoading: false
-                      },()=>this.props.GetDB())
+                      this.props.GetDB().then(
+                        ()=>this.setState({
+                            isShowSetting:false,
+                            isLoading: false
+                          })
+                      )
                     })
         //  .then( ()=> window.location.href = "/studentmanagement");
     });
