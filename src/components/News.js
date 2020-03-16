@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "../css/News.css";
-import InsideNews from './InsideNews.js'
+import InsideNews from "./InsideNews.js";
 import firebase from "../firebase";
 
 export default class News extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      AnnouncementList:[]
-    }
+      AnnouncementList: []
+    };
   }
 
   componentDidMount() {
@@ -33,13 +33,14 @@ export default class News extends Component {
     return(
       <div className="News">
         <h1>Announcement</h1>
-        
-        <div className = 'NewsMain'>
-          {
-            AnnouncementList.map((Announcement,idx)=>(
-              <InsideNews GetDB = {this.GetDB.bind(this)} Announcement = {Announcement}></InsideNews>
-            ))
-          }
+
+        <div className="NewsMain">
+          {AnnouncementList.map((Announcement, idx) => (
+            <InsideNews
+              GetDB={this.GetDB.bind(this)}
+              Announcement={Announcement}
+            ></InsideNews>
+          ))}
         </div>
       </div>
     );

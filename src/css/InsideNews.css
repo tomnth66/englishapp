@@ -49,12 +49,12 @@
   border-radius: 50%;
 } */
 
-.News-icons{
-	display: inline-block;
-	width: 35px;
-	height: 35px;
+.News-icons {
+	/* display: inline-block; */
+	/* width: 3rem; */
+	/* height: 3rem; */
 	/* cursor: pointer; */
-	border-radius: 2px;
+	/* border-radius: 2px; */
 
 	font-size: 25px;
 	/* opacity: 0.7; */
@@ -62,7 +62,8 @@
 	text-align: center;
 	line-height: 35px;
 
-	margin-right: 3px;
+	margin-right: 5px;
+	margin-top: 5px;
 	margin-bottom: 5px;
 
 	position: absolute;
@@ -70,46 +71,49 @@
 	top: 0;
 }
 
-#curIcon{
-	opacity: 0.7;
+#curIcon {
+	color: #2e3a4b;
+	font-size: 2rem;
 }
 
-#curIcon:hover{
-	cursor: pointer;
-	opacity: 1;
-}
-
-.News-setting{
+.News-setting {
 	position: absolute;
-
 	right: 0.5rem;
 	top: 1.5rem;
-
-	background-clip: padding-box;
-	background-color: #fff;
-	border: 1px solid rgba(0, 0, 0, .15);
-	border-radius: 3px;
-	box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+	/* background-clip: padding-box; */
+	background-color: #eceff4 !important;
+	border-radius: 10px !important;
+	width: 8rem;
 }
 
-.News-setting ul{
-	padding: 0;
-	margin: 0;
+/* .News-setting ul { */
+/* 	padding: 0; */
+/* 	margin: 0; */
+/* } */
+
+/* .News-setting ul li { */
+/* 	list-style: none; */
+/* 	padding: 0.4rem 0.7rem; */
+/* 	text-align: center; */
+/* } */
+
+.settings--list div {
+	/* display: flex !imp,/ortant; */
+	flex-direction: column !important;
+	width: 100%;
 }
 
-.News-setting ul li{
-	list-style: none;
-	padding: 0.4rem 0.7rem;
-	text-align: center;
+.settings--list button {
+	min-width: 100%;
 }
 
 /* .News-setting ul li:first-child{
 	padding-bottom: 0;
 } */
 
-.News-setting ul li:hover{
+.News-setting ul li:hover {
 	cursor: pointer;
-	background-color:#f3f5f8;
+	background-color: #f3f5f8;
 }
 
 .NewsContent {
@@ -122,16 +126,16 @@
 
 #EditTextArea {
 	height: 10rem;
-  width: 97%;
-  border: 0.15rem solid rgba(136, 192, 208, 0);
-  background: #eceff4;
-  resize: none;
-  padding: .5rem 0 0 .5rem;
-  font-size: 1rem;
-  font-family: Roboto;
-  overflow-y: auto;
-  outline: none;
-  /* margin-left: 14px; */
+	width: 97%;
+	border: 0.15rem solid rgba(136, 192, 208, 0);
+	background: #eceff4;
+	resize: none;
+	padding: 0.5rem 0 0 0.5rem;
+	font-size: 1rem;
+	font-family: Roboto;
+	overflow-y: auto;
+	outline: none;
+	/* margin-left: 14px; */
 	margin-bottom: 0.2rem;
 	white-space: pre-line;
 }
@@ -140,3 +144,4 @@
 	text-align: end;
 	margin: 1em 1.5em 0 0;
 }
+

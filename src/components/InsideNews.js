@@ -12,12 +12,12 @@ export default class InsideNews extends Component {
  
 
   render() {
-    const {Announcement} = this.props;
+    const { Announcement } = this.props;
     return (
       <div className = 'InsideNews'>
         <Newsmain Announcement = {Announcement} GetDB = {this.props.GetDB}></Newsmain>
 
-        <Newsfooter Announcement = {Announcement}></Newsfooter>
+        <Newsfooter Announcement={Announcement}></Newsfooter>
       </div>
     );
   }
