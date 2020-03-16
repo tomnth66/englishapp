@@ -7,6 +7,12 @@ import { Button, Card, Tab, IconButton } from '@material-ui/core';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Loading from './Loading.js';
 
+let words;
+let fullPara;
+let read_more_Para;
+let curID;
+let maxParaLength = 250; // 250 words is max => read more button
+
 export default class Newsmain extends Component {
 	constructor(props) {
 		super(props);
@@ -16,7 +22,11 @@ export default class Newsmain extends Component {
 			originValue: '',
 			value: '',
 			content: '',
-			isLoading: false
+			read_more_content: '',
+			isLoading: false,
+			read_more: false,
+			read_more_on: false,
+			isReadMore: false
 		};
 
 		this.inputElement1 = React.createRef();
@@ -53,27 +63,49 @@ export default class Newsmain extends Component {
 
 	updateRenderDB() {
 		let curAnn = this.props.Announcement.AnnouncementContent;
-		let words = curAnn.split('\n');
-		let fullPara = '';
+		words = curAnn.split('\n');
+		fullPara = '';
+		read_more_Para = '';
+		curID = 0;
 
 		fullPara += `#${this.props.Announcement.id}\n`;
-
 		for (let word of words) {
 			fullPara += `<div>\n`;
 			word = word.split(' ');
 			for (let i = 0; i < word.length; ++i) {
+				++curID;
 				if (word[i] !== '') {
-					fullPara += `${word[i]} `;
+					if (curID <= maxParaLength)
+						read_more_Para += `<span>${word[i]} </span>`;
+					fullPara += `<span>${word[i]} </span>`;
 				} else {
+					if (curID <= maxParaLength)
+						read_more_Para += '<div style="height: 1rem"></div>';
 					fullPara += '<div style="height: 1rem"></div>';
 				}
 			}
 			fullPara += `</div>\n`;
+			if (curID <= maxParaLength) read_more_Para += `</div>\n`;
 		}
 
-		this.setState({
-			content: fullPara
-		});
+		if (curID > maxParaLength) {
+			console.log(fullPara);
+			this.setState({
+				content: fullPara,
+				read_more: true,
+        isReadMore: true,
+				read_more_on: true,
+				read_more_content: read_more_Para
+			});
+		} else {
+			console.log('full ', fullPara);
+			this.setState({
+        isReadMore: false,
+        read_more: false,
+        read_more_on: false,
+				content: fullPara
+			});
+		}
 	}
 
 	showSetting() {
@@ -110,23 +142,30 @@ export default class Newsmain extends Component {
 		});
 		const db = firebase.firestore();
 		const ref = db.collection('Announcement').doc('A4TT0kGAgjKUxs2wrj8p');
-		let curAnn = document.getElementById('EditTextArea').value;
-		let words = curAnn.split('\n');
-		let fullPara = '';
+		let curAnn = this.props.Announcement.AnnouncementContent;
+		words = curAnn.split('\n');
+		fullPara = '';
+		read_more_Para = '';
+		curID = 0;
 
 		fullPara += `#${this.props.Announcement.id}\n`;
-
 		for (let word of words) {
 			fullPara += `<div>\n`;
 			word = word.split(' ');
 			for (let i = 0; i < word.length; ++i) {
+				++curID;
 				if (word[i] !== '') {
-					fullPara += `${word[i]} `;
+					if (curID <= maxParaLength)
+						read_more_Para += `<span>${word[i]} </span>`;
+					fullPara += `<span>${word[i]} </span>`;
 				} else {
+					if (curID <= maxParaLength)
+						read_more_Para += '<div style="height: 1rem"></div>';
 					fullPara += '<div style="height: 1rem"></div>';
 				}
 			}
 			fullPara += `</div>\n`;
+			if (curID <= maxParaLength) read_more_Para += `</div>\n`;
 		}
 
 		ref.get().then(data => {
@@ -138,12 +177,28 @@ export default class Newsmain extends Component {
 			AnnouncementList[idx].AnnouncementContent = curAnn;
 
 			ref.set({ AnnouncementList: AnnouncementList }).then(() => {
-				this.setState({
-					EditState: false,
-					content: fullPara,
-					isLoading: false,
-					originValue: this.state.value
-				});
+				if (curID > maxParaLength) {
+					this.setState({
+						EditState: false,
+						isLoading: false,
+						originValue: this.state.value,
+						content: fullPara,
+						read_more: true,
+            isReadMore: true,
+						read_more_on: true,
+						read_more_content: read_more_Para
+					});
+				} else {
+          this.setState({
+            isReadMore: false,
+            read_more: false,
+            read_more_on: false,
+						EditState: false,
+						isLoading: false,
+						originValue: this.state.value,
+						content: fullPara
+					});
+				}
 			});
 		});
 	}
@@ -204,6 +259,13 @@ export default class Newsmain extends Component {
 		});
 	}
 
+	readMore = () => {
+		this.setState({
+			read_more_on: !this.state.read_more_on,
+			read_more: !this.state.read_more
+		});
+	};
+
 	render() {
 		return (
 			<div className="Newsmain">
@@ -222,7 +284,7 @@ export default class Newsmain extends Component {
 								ref={this.inputElement1}
 								onClick={this.showSetting.bind(this)}
 							>
-                <MoreHorizIcon id="curIcon"/>
+								<MoreHorizIcon id="curIcon" />
 							</IconButton>
 						</div>
 					)}
@@ -245,7 +307,27 @@ export default class Newsmain extends Component {
 
 				<div className="NewsContent">
 					{!this.state.EditState && (
-						<div dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
+						<div>
+							{!this.state.read_more_on ? (
+								<div
+									onClick={() => {
+										if (this.state.isReadMore) this.readMore();
+									}}
+									dangerouslySetInnerHTML={{ __html: this.state.content }}
+								></div>
+							) : (
+								<div
+									dangerouslySetInnerHTML={{
+										__html: this.state.read_more_content
+									}}
+								></div>
+							)}
+							{this.state.read_more && (
+								<span className="read--more" onClick={this.readMore}>
+									... Read More
+								</span>
+							)}
+						</div>
 					)}
 
 					{this.state.EditState && (
