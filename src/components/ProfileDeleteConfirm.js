@@ -88,18 +88,18 @@ export default class ProfileDeleteConfirm extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <div className="DeleteConfirm">
+        <div className="ProfileDeleteConfirm">
           <div className="Cover"></div>
 
-          <div className="DeleteConfirmInside">
+          <div className="ProfileDeleteConfirmInside">
             <h2 style={{margin: 0}}>Confirmation</h2>
-            <div className = 'DeleteConfirmInput'>
+            <div className = 'ProfileDeleteConfirmInput'>
               <input placeholder = 'CONFIRM'
                      ref = {this.inputElement}
                      onKeyUp = {(event)=>
                                         this.handleInput.bind(this)(event)}></input>
             </div>
-            <div className="DeleteConfirmButton">
+            <div className="ProfileDeleteConfirmButton">
               <Button style = {{marginRight:'1rem'}} color="primary" variant="outlined" onClick={this.Unconfirmed.bind(this)}>
                 Back
               </Button>
