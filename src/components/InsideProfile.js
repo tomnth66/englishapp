@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/InsideProfile.css';
 import Avatar from './Avatar.js';
 // import Button from './Button.js';
-import { Button, Card, Tab } from '@material-ui/core';
+import { Button, Card, ButtonGroup } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 class InsideProfile extends Component {
@@ -30,22 +30,23 @@ class InsideProfile extends Component {
 					</div>
 
 					{localStorage.getItem('class') === 'admin' && (
-						<div className="Action">
-							<Link to="/createannouncement">
-								<Tab label="Create Announcement" />
-							</Link>
-							<Link to="/createmap">
-								<Tab label="Create Map" />
-							</Link>
-							<Link to="/studentmanagement">
-								<Tab label="Student Management" />
-							</Link>
-						</div>
+						<ButtonGroup variant="text" color="primary">
+							<Button>
+            <a href="/createannouncement">Post Annoucement</a>
+							</Button>
+							<Button>
+            <a href="/createmap">Create Map</a>
+							</Button>
+							<Button>
+            <a href="/studentmanagement">Student Management</a>
+							</Button>
+						</ButtonGroup>
 					)}
 					<Button
 						variant="contained"
 						color="primary"
 						onClick={this.handleLogOut.bind(this)}
+            style={{marginTop: '1rem', width: '95%'}}
 					>
 						Log Out
 					</Button>

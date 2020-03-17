@@ -19,24 +19,10 @@
 	/* padding-top: 0.5rem; */
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	/* justify-content: center; */
 	align-items: center;
 	text-align: center;
 	/* margin: 10px auto; */
-}
-
-.Action {
-	width: 100%;
-	margin-bottom: 10px;
-	display: flex;
-	flex-direction: column;
-}
-
-.Action button {
-	width: 200px;
-	text-align: center;
-	vertical-align: center;
-	border-radius: 10px;
 }
 
 .Information a:visited {

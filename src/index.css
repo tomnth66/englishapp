@@ -1,23 +1,20 @@
 body,
 html {
-  width: auto;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: #ECEFF4;
-  color: #2e3440;
-  font-family: Roboto;
+	width: auto;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: #eceff4;
+	color: #2e3440;
+	font-family: Roboto;
 }
 
 code {
-  font-family: monospace;
+	font-family: monospace;
 }
 
 a {
-  text-decoration: none;
-  margin: none;
+	text-decoration: none;
+	margin: none;
 }
 
-.MuiButton-root {
-  margin-left: 1rem !important;
-}
