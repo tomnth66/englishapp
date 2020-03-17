@@ -23,8 +23,10 @@ export default class Studentlist extends Component {
     const db = firebase.firestore();
     const ref = db.collection("Users").doc("45GCoMKDwQWciXc8193A");
     ref.get().then(data => {
+      let Users = data.data().Users;
+      let Students = Users.filter(user => user.Class === 'student')
       this.setState({
-        Users: data.data().Users
+        Users: Students
       });
     });
   }
