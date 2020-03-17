@@ -46,7 +46,9 @@ export default class ConfirmSelectedDiv extends Component {
           <div className="ConfirmSelectedDivInside">
             <h2 style={{margin: 0}}>{this.props.Keyword}</h2>
             <div className="ConfirmSelectedDivButton">
-              <Button color="primary" variant="outlined" onClick={this.Unconfirmed.bind(this)}>
+              <Button style = {{marginRight:'1rem'}} 
+                      color="primary" variant="outlined" 
+                      onClick={this.Unconfirmed.bind(this)}>
                 No
               </Button>
               <Button

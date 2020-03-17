@@ -4,7 +4,7 @@ import firebase from '../firebase.js';
 import Loading from './Loading.js';
 import Ava from '../img/stitch.jpg';
 // import {useParams} from 'react-router-dom';
-import DeleteConfirm from './DeleteConfirm';
+import ProfileDeleteConfirm from './ProfileDeleteConfirm';
 
 export default class InsideProfileDetail extends Component {
 	constructor(props) {
@@ -53,7 +53,7 @@ export default class InsideProfileDetail extends Component {
 				user => user.Id === this.props.match.params.id
 			);
 
-			console.log('after sorting ', CurUser);
+			// console.log('after sorting ', CurUser);
 
 			this.setState({
 				User: CurUser[0],
@@ -96,12 +96,11 @@ export default class InsideProfileDetail extends Component {
 							)}
 						</ul>
 						{ConfirmSelected && (
-							<DeleteConfirm
-								Keyword="Are you sure?"
+							<ProfileDeleteConfirm
 								CloseConfirmSelected={this.CloseConfirmSelected.bind(this)}
 								Id={User.Id}
 								showLoading={this.showLoading.bind(this)}
-							></DeleteConfirm>
+							></ProfileDeleteConfirm>
 						)}
 					</div>
 					{/* <div className = 'ProfileFooter'></div> */}

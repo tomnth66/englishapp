@@ -55,7 +55,8 @@ class App extends Component {
 						<Route path="/ranking" exact component={Ranking} />
 						<Route path="/createannouncement" exact component={Announcement} />
 						<Route path="/practice/:id/:idx" exact component={MapPlay} />
-						<Route path="/Profile/:id" exact render={(props) => ( <ProfileDetail {...props} /> )}/>
+						<Route path="/Profile/:id" exact render={(props) => ( <ProfileDetail key={props.match.params.id} 
+																																								 {...props} /> )}/>
 					</Switch>
 				</div>
 			</Router>

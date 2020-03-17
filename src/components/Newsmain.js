@@ -347,6 +347,7 @@ export default class Newsmain extends Component {
 							></textarea>
 							<div className="EditNewsBtn">
 								<Button
+                  style = {{marginRight:'1rem'}}
 									color="primary"
 									variant="contained"
 									onClick={this.closeEdit.bind(this)}
