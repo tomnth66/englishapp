@@ -75,12 +75,16 @@
 
 .News-setting {
 	position: absolute;
-	right: 0.5rem;
-	top: 1.5rem;
+	right: 1.1rem;
+	top: 2.6rem;
 	/* background-clip: padding-box; */
 	background-color: #eceff4 !important;
 	border-radius: 10px !important;
 	width: 7rem;
+}
+
+.News-setting .changeOnhover:hover{
+	background-color: #A8A8A8;
 }
 
 /* .News-setting ul { */

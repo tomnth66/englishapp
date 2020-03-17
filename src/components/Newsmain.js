@@ -299,12 +299,14 @@ export default class Newsmain extends Component {
 						<Card ref={this.inputElement2} className="News-setting">
 							<Tab
 								onClick={this.EditNews.bind(this)}
-								label="Edit"
+                label="Edit"
+                className = 'changeOnhover'
 								style={{ minWidth: '7rem' }}
 							/>
 							<Tab
 								onClick={this.DeleteNews.bind(this)}
-								label="Delete"
+                label="Delete"
+                className = 'changeOnhover'
 								style={{ minWidth: '7rem' }}
 							/>
 						</Card>
