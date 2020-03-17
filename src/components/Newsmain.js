@@ -25,7 +25,6 @@ export default class Newsmain extends Component {
 			read_more_content: '',
 			isLoading: false,
 			read_more: false,
-			read_more_on: false,
 			isReadMore: false
 		};
 
@@ -72,8 +71,10 @@ export default class Newsmain extends Component {
 		read_more_Para += `#${this.props.Announcement.id}\n`;
 		for (let word of words) {
 			fullPara += `<div>\n`;
-			if (curID <= maxParaLength) read_more_Para += `<div> \n`;
 			word = word.split(' ');
+			if (curID + word.length < maxParaLength) read_more_Para += `<div> \n`;
+			if (curID + word.length >= maxParaLength)
+				read_more_Para += `<div style="display: inline;"> \n`;
 			for (let i = 0; i < word.length; ++i) {
 				++curID;
 				if (word[i] !== '') {
@@ -83,8 +84,8 @@ export default class Newsmain extends Component {
 				} else {
 					fullPara += '<div style="height: 1rem"></div>';
 					if (curID <= maxParaLength) {
+						read_more_Para += '<div style="height: 1rem"></div>';
 					}
-					read_more_Para += '<div style="height: 1rem"></div>';
 				}
 			}
 			fullPara += `</div>\n`;
@@ -97,7 +98,6 @@ export default class Newsmain extends Component {
 				content: fullPara,
 				read_more: true,
 				isReadMore: true,
-				read_more_on: true,
 				read_more_content: read_more_Para
 			});
 		} else {
@@ -105,7 +105,6 @@ export default class Newsmain extends Component {
 			this.setState({
 				isReadMore: false,
 				read_more: false,
-				read_more_on: false,
 				content: fullPara
 			});
 		}
@@ -155,8 +154,10 @@ export default class Newsmain extends Component {
 		read_more_Para += `#${this.props.Announcement.id}\n`;
 		for (let word of words) {
 			fullPara += `<div>\n`;
-			if (curID <= maxParaLength) read_more_Para += `<div> \n`;
 			word = word.split(' ');
+			if (curID + word.length < maxParaLength) read_more_Para += `<div> \n`;
+			if (curID + word.length >= maxParaLength)
+				read_more_Para += `<div style="display: inline;"> \n`;
 			for (let i = 0; i < word.length; ++i) {
 				++curID;
 				if (word[i] !== '') {
@@ -166,8 +167,8 @@ export default class Newsmain extends Component {
 				} else {
 					fullPara += '<div style="height: 1rem"></div>';
 					if (curID <= maxParaLength) {
+						read_more_Para += '<div style="height: 1rem"></div>';
 					}
-					read_more_Para += '<div style="height: 1rem"></div>';
 				}
 			}
 			fullPara += `</div>\n`;
@@ -191,14 +192,12 @@ export default class Newsmain extends Component {
 						content: fullPara,
 						read_more: true,
 						isReadMore: true,
-						read_more_on: true,
 						read_more_content: read_more_Para
 					});
 				} else {
 					this.setState({
 						isReadMore: false,
 						read_more: false,
-						read_more_on: false,
 						EditState: false,
 						isLoading: false,
 						originValue: this.state.value,
@@ -267,7 +266,6 @@ export default class Newsmain extends Component {
 
 	readMore = () => {
 		this.setState({
-			read_more_on: !this.state.read_more_on,
 			read_more: !this.state.read_more
 		});
 	};
@@ -299,14 +297,14 @@ export default class Newsmain extends Component {
 						<Card ref={this.inputElement2} className="News-setting">
 							<Tab
 								onClick={this.EditNews.bind(this)}
-                label="Edit"
-                className = 'changeOnhover'
+								label="Edit"
+								className="changeOnhover"
 								style={{ minWidth: '7rem' }}
 							/>
 							<Tab
 								onClick={this.DeleteNews.bind(this)}
-                label="Delete"
-                className = 'changeOnhover'
+								label="Delete"
+								className="changeOnhover"
 								style={{ minWidth: '7rem' }}
 							/>
 						</Card>
@@ -316,7 +314,7 @@ export default class Newsmain extends Component {
 				<div className="NewsContent">
 					{!this.state.EditState && (
 						<div>
-							{!this.state.read_more_on ? (
+							{!this.state.read_more ? (
 								<div
 									onClick={() => {
 										if (this.state.isReadMore) this.readMore();
@@ -325,6 +323,7 @@ export default class Newsmain extends Component {
 								></div>
 							) : (
 								<div
+									style={{ display: 'inline' }}
 									dangerouslySetInnerHTML={{
 										__html: this.state.read_more_content
 									}}
