@@ -6,6 +6,7 @@ import Practicepage from './pages/Practicepage.js';
 import CreateMap from './pages/CreateMap';
 // import Test from "./pages/Test";
 import Studentmanagement from './pages/Studentmanagement.js';
+import CourseManagement from './pages/CourseManagement.js';
 import Ranking from './pages/Ranking.js';
 import MapPlay from './pages/MapPlay';
 import ProfileDetail from './pages/ProfileDetail.js';
@@ -43,10 +44,13 @@ class App extends Component {
 						<Route path="/" exact component={Homepage} />
 						<Route path="/practice" exact component={Practicepage} />
 						<Route path="/createmap" exact component={CreateMap} />
-						<Route
-							path="/studentmanagement"
-							exact
-							component={Studentmanagement}
+						<Route path="/studentmanagement"
+									 exact
+									 component={Studentmanagement}
+						/>
+						<Route path="/CourseManagement"
+									 exact
+									 component={CourseManagement}
 						/>
 						<Route path="/ranking" exact component={Ranking} />
 						<Route path="/createannouncement" exact component={Announcement} />

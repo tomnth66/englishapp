@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/Studentlist.css";
 import firebase from "../firebase";
 import ConfirmSelectedDiv from "./ConfirmSelectedDiv.js";
+import SettingCourse from './SettingCourse.js';
 // import { Button } from '@material-ui/core';
 
 export default class Studentlist extends Component {
@@ -9,7 +10,8 @@ export default class Studentlist extends Component {
     super(props);
     this.state = {
       Users: [],
-      ConfirmSelected: false
+      ConfirmSelected: false,
+      // isShowSettingCourse: false
     };
   }
 
@@ -41,8 +43,14 @@ export default class Studentlist extends Component {
     });
   }
 
-  showCourseList(){
+  // changeStateSettingCourse(){
+  //   this.setState({
+  //     isShowSettingCourse:!this.state.isShowSettingCourse
+  //   })
+  // }
 
+  MoveToCourseMan(){
+    window.location.href = '/CourseManagement';
   }
 
   render() {
@@ -58,7 +66,7 @@ export default class Studentlist extends Component {
               <th>STT</th>
               <th>Name</th>
               <th>Email</th>
-              <th className = 'CourseBtn'>
+              <th className = 'CourseBtn' onClick = {this.MoveToCourseMan.bind(this)}>
                 {/* <Button color="primary" variant="contained" onClick={this.showCourseList.bind(this)}>
                         Course
                 </Button> */}

@@ -1,0 +1,54 @@
+@keyframes seconds {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.Cover {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  top: 0px;
+  left: 0px;
+  background-color: #000;
+  animation: seconds 300ms forwards;
+  /* opacity: 1; */
+}
+
+.SettingCourseInside {
+  position: fixed;
+  width: 500px;
+  height: 250px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  background: #f3f5f8;
+  animation: secondss 300ms forwards;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+
+.SettingCourseInside .deleteBtn {
+  width: 4%;
+  position: absolute;
+  right: -7px;
+  top: -7px;
+}
+
+.SettingCourse .deleteBtn:hover{
+  cursor: pointer;
+}
+
+@keyframes secondss {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

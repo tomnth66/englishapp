@@ -11,7 +11,7 @@ let words;
 let fullPara;
 let read_more_Para;
 let curID;
-let maxParaLength = 250; // 250 words is max => read more button
+let maxParaLength = 150; // 200 words is max => read more button
 
 export default class Newsmain extends Component {
 	constructor(props) {

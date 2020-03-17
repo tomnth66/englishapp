@@ -5,11 +5,14 @@ import { Link } from 'react-router-dom';
 
 const Avatar = ({ id }) => {
 	return (
-    <Link to={`/Profile/${id}`}>
-			<div className="Avatar">
+		<div className="Avatar">
+			<Link to={`/Profile/${id}`}>
 				<img className="Picture" src={Ava}></img>
-			</div>
-    </Link>
+				<div className="ProfileLayer">
+					Profile
+				</div>
+    	</Link>
+		</div>
 	);
 };
 
