@@ -74,7 +74,7 @@ export default class InsideProfileDetail extends Component {
                       placeholder = 'Write your announcement in this area'></textarea>
 
 
-          <Button color="primary" variant="contained" onClick={this.handleSubmit.bind(this)}>
+          <Button style = {{width:'97.9%', marginLeft: '1rem'}} color="primary" variant="contained" onClick={this.handleSubmit.bind(this)}>
                         Post
           </Button>
 
