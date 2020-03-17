@@ -1,4 +1,4 @@
-.CourseSelector {
+.TypeSelector {
 	display: flex;
 	flex-direction: row;
 	width: 96%;
@@ -10,7 +10,7 @@
 	justify-content: space-around;
 }
 /* 
-.CourseSelector select {
+.TypeSelector select {
   width: 30%;
   height: 31px;
   text-align: center;
