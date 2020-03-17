@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/CourseManagement.css";
 import Navbar from "../components/Navbar.js";
 import Footer from '../components/Footer.js';
-import Studentlist from "../components/Studentlist.js";
+import Courselist from "../components/Courselist.js";
 import Login from "../components/Login.js";
 import Profile from "../components/Profile.js";
 
@@ -19,7 +19,7 @@ export default class CourseManagement extends Component {
         </div>
 
         <div className="StudentmanBody">
-          <Studentlist></Studentlist>
+          <Courselist></Courselist>
           {!localStorage.getItem('user') && <Login></Login>}
           {localStorage.getItem('user') &&  <Profile></Profile>}
         </div>

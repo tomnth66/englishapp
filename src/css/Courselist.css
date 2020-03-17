@@ -1,0 +1,100 @@
+.Courselist {
+  width: 70%;
+  height: 100%;
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CourseBtn {
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-left: 1px solid rgb(65, 90, 120);
+  border-right: 1px solid rgb(65, 90, 120);
+}
+
+.CourseBtn:hover{
+  cursor: pointer;
+  background-color: rgb(65, 90, 120);
+}
+
+
+.Course--amount {
+  width: 90%;
+  margin-bottom: 0;
+  margin-top: 2rem;
+}
+
+.CourselistTable{
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-right: 0.4rem;
+  overflow-y: scroll;
+}
+
+.Courselist table {
+  width: 90%;
+  border-collapse: collapse;
+  margin: auto;
+  margin-top: 3%;
+  text-align: center;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.Courselist--head {
+  background: #2e3440;
+  color: #eceff4;
+  overflow: hidden;
+  border: none !important;
+}
+
+.Courselist--head th {
+  height: 3rem;
+  font-size: 1.1rem;
+  background: #2e3440;
+  /* padding:0px; */
+}
+
+.Courselist table tr {
+  border-bottom: 1px solid rgba(46, 52, 64, 0.5);
+  line-height: 30px;
+}
+
+.Courselist table tr:last-child {
+  /* border-bottom: 1px solid #0c6; */
+  line-height: 30px;
+  border: none !important;
+}
+
+.Courselist table td {
+  padding: 0.75rem 0;
+  color: #2e3440;
+  background: #f3f5f8;
+}
+
+.Courselist table td a{
+  color: #111;
+}
+
+.Courselist table td a:visited{
+  color: #111;
+}
+
+.DetailCss {
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 600ms ease-in-out;
+  color: #111;
+}
+
+.DetailCss:hover {
+  background: rgba(136, 192, 208, 0.35);
+}
+
+.DetailCss:active {
+  opacity: 0.7;
+}

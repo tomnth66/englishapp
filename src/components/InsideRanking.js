@@ -55,7 +55,7 @@ export default class InsideRanking extends Component {
       // console.log(Users);
       // console.log('test', 'a'.localeCompare('b'))
       let CurUsers = Users.filter(
-        user => user.Course === this.state.Course[this.state.curCourse]
+        user => user.Course === this.state.Course[this.state.curCourse].Name
       );
 
       CurUsers.sort(function(user1, user2) {
@@ -108,7 +108,7 @@ export default class InsideRanking extends Component {
             >
               {/* <MenuItem value={-1} /> */}
               {Course.map((item, idx) => (
-                <MenuItem value={idx}>{item}</MenuItem>
+                <MenuItem value={idx}>{item.Name}</MenuItem>
               ))}
             </Select>
           </FormControl>
