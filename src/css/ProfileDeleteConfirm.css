@@ -19,13 +19,13 @@
   /* opacity: 1; */
 }
 
-.ConfirmSelectedDivInside {
+.ProfileDeleteConfirmInside {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   position: fixed;
   width: 350px;
-  height: 150px;
+  height: 200px;
   z-index: 15;
   top: 50%;
   left: 50%;
@@ -35,8 +35,23 @@
   transform: translate(-50%, -50%);
 }
 
-.ConfirmSelectedDivButton{
-  /* margin-right: 0.9rem; */
+::-webkit-input-placeholder {
+  color: #808080;
+  text-align: center;
+
+}
+
+:-moz-placeholder {
+  color: #808080;
+  text-align: center;
+
+}
+
+.ProfileDeleteConfirmInput input{
+  height: 30px;
+  width: 120px;
+  font-size: 16px;
+  text-align: center;
 }
 
 @keyframes secondss {
