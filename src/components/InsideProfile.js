@@ -30,15 +30,15 @@ class InsideProfile extends Component {
 					</div>
 
 					{localStorage.getItem('class') === 'admin' && (
-						<ButtonGroup variant="text" color="primary">
+						<ButtonGroup variant="text" color="primary" className="ActionButton">
 							<Button>
-            <a href="/createannouncement">Post Annoucement</a>
+								<a href="/createannouncement">Post Annoucement</a>
 							</Button>
 							<Button>
-            <a href="/createmap">Create Map</a>
+								<a href="/createmap">Create Map</a>
 							</Button>
 							<Button>
-            <a href="/studentmanagement">Student Management</a>
+								<a href="/studentmanagement">Student Management</a>
 							</Button>
 						</ButtonGroup>
 					)}
@@ -46,7 +46,7 @@ class InsideProfile extends Component {
 						variant="contained"
 						color="primary"
 						onClick={this.handleLogOut.bind(this)}
-            style={{marginTop: '1rem', width: '95%'}}
+						style={{ marginTop: '1rem', width: '95%' }}
 					>
 						Log Out
 					</Button>

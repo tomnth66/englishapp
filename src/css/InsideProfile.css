@@ -25,6 +25,15 @@
 	/* margin: 10px auto; */
 }
 
+.ActionButton {
+	width: 100%;
+}
+
+.ActionButton button {
+	font-size: 0.8rem !important;
+	min-width: 33%;
+}
+
 .Information a:visited {
 	color: #111;
 }
