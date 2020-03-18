@@ -106,9 +106,6 @@ const PopOutForm = () => {
 								<em>None</em>
 							</MenuItem>
 							{typeList.map((item, index) => {
-								{
-									/* console.log(index, item); */
-								}
 								return <MenuItem value={index}>{item}</MenuItem>;
 							})}
 							{/* <MenuItem value="0">Vocabulary</MenuItem>
