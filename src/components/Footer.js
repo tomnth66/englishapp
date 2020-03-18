@@ -41,10 +41,9 @@ changeFooterState(){
           <p class="footer-company-name">SYNTAXI © 2020</p>
 
           <div class="footer-icons">
-            <a href="#"><i className="fa fa-facebook"></i></a>
-            <a href="#"><i className="fa fa-twitter"></i></a>
-            <a href="#"><i className="fa fa-linkedin"></i></a>
-            <a href="#"><i className="fa fa-github"></i></a>
+            <a href="https://www.facebook.com/Virtual-English-lessons-with-San-Adams-244350032274158/" 
+               target="_blank"><i className="fa fa-facebook"></i></a>
+            <a href="https://zalo.me/0962394488" target="_blank"><i className="fa fa-phone"></i></a>
           </div>
         </div>
 
