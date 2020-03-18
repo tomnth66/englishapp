@@ -1,0 +1,32 @@
+.student-card {
+	height: 80%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+#studentAnswer {
+	height: 80%;
+	background: #eceff4;
+	display: block;
+	text-align: left;
+	border: 0.15rem solid rgba(63, 81, 181, 0.6);
+	padding: 0.5rem 0 0 0.5rem;
+	font-size: 1rem;
+	overflow-y: scroll;
+	border-radius: 10px;
+	/* Change firefox scroll bar */
+	scrollbar-color: #838fcd transparent;
+	scrollbar-width: thin;
+}
+
+/* Change Chromium scroll bar */
+#studentAnswer::-webkit-scrollbar {
+	background: transparent;
+	width: 0.5rem;
+}
+
+#studentAnswer::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: #838fcd;
+}

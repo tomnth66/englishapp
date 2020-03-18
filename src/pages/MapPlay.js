@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
 import React, { useEffect, useState } from 'react';
 import firebase from '../firebase.js';
+import 'flexboxgrid';
+import '../css/MapPlay.css'
 
 // import css
 // import "../css/MapPlay.css"
@@ -76,13 +78,26 @@ const MapPlay = ({ match }) => {
 	}, []);
 
 	return (
-		<div className="mapPlay">
+		<div style={{height: '100vh'}}>
 			{isLoading && <Loading />}
 			<Navbar />
-			<div className="answerSelector" id="studentAnswer"></div>
-			<Button color="primary" variant="contained" onClick={submit}>
-				Submit
-			</Button>
+			<div
+				className="row middle-xs center-xs"
+				style={{ height: 'calc(100% - 4rem)' }}
+			>
+				<div className="col-xs-10 student-card">
+					<div className="answerSelector" id="studentAnswer"></div>
+					<div className="button-area">
+						<Button
+							color="primary"
+							variant="contained"
+							onClick={submit}
+						>
+							Next
+						</Button>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

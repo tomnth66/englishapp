@@ -1,70 +1,69 @@
 .flip-card {
-  height: 80%;
+	height: 80%;
 }
 
 #inputArea {
-  height: 80%;
-  width: 100%;
-  border: 0.15rem solid rgba(136, 192, 208, 0);
-  background: #eceff4;
-  resize: none;
-  padding: .5rem 0 0 .5rem;
-  font-size: 1rem;
-  font-family: Roboto;
-  overflow-y: scroll;
-  outline: none;
+	height: 80%;
+	width: 100%;
+	border: 0.15rem solid rgba(136, 192, 208, 0);
+	background: #eceff4;
+	resize: none;
+	padding: 0.5rem 0 0 0.5rem;
+	font-size: 1rem;
+	font-family: Roboto;
+	overflow-y: scroll;
+	outline: none;
 }
 
 #inputArea:focus {
-  border: 0.15rem solid rgba(63, 81, 181, 0.6);
-  border-radius: 10px;
+	border: 0.15rem solid rgba(63, 81, 181, 0.6);
+	border-radius: 10px;
 }
 
 .button-area {
-  float: right;
-  height: 20%;
-  display: flex;
-  align-items: center;
+	float: right;
+	height: 20%;
+	display: flex;
+	align-items: center;
 }
 
 #answerSelector {
-  height: 80%;
-  width: 100%;
-  border: none;
-  background: #eceff4;
-  display: block;
-  text-align: left;
-  border: 0.15rem solid rgba(136, 192, 208, 0);
-  padding: .5rem 0 0 .5rem;
-  font-size: 1rem;
-  overflow-y: scroll;
+	height: 80%;
+	width: 100%;
+	border: none;
+	background: #eceff4;
+	display: block;
+	text-align: left;
+	border: 0.15rem solid rgba(136, 192, 208, 0);
+	padding: 0.5rem 0 0 0.5rem;
+	font-size: 1rem;
+	overflow-y: scroll;
 }
 
 .flippy-container {
-  height: 100%;
-  width: 100%;
+	height: 100%;
+	width: 100%;
 }
 
 #FileReader {
-  display: none;
+	display: none;
 }
 
 .teacher-para {
-  cursor: pointer;
-  transition: all 300ms ease-in-out;
+	cursor: pointer;
+	transition: all 300ms ease-in-out;
 }
 
 .teacher-para:hover {
-  background-color: rgba(59, 66, 82, 0.5);
-  color: #eceff4;
-  border-radius: 5px;
-  padding: 0 0.3rem 0 0.3rem;
+	background-color: rgba(59, 66, 82, 0.5);
+	color: #eceff4;
+	border-radius: 5px;
+	padding: 0 0.3rem 0 0.3rem;
 }
 
-
 .selected-answer {
-  border-radius: 5px;
-  background: #3b4252;
-  color: #eceff4;
-  padding: 0 0.3rem 0 0.3rem;
+	border-radius: 5px;
+	background: #3b4252;
+	color: #eceff4;
+	padding: 0 0.3rem 0 0.3rem;
 }
