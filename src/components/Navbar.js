@@ -42,8 +42,8 @@ const Navbar = () => {
 		console.log('vallidating...', link);
 		if (
 			!localStorage.getItem('user') &&
-			link !== './' &&
-			link !== './AboutApp'
+			link !== '/' &&
+			link !== '/AboutApp'
 		) {
 			setLogIn(false);
 			setTimeout(() => {

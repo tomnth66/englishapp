@@ -11,7 +11,7 @@ class InsideProfile extends Component {
 	}
 
 	handleLogOut() {
-		console.log('logging out');
+		// console.log('logging out');
 		localStorage.clear();
 		window.location.href = '/';
 	}

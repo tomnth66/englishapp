@@ -41,6 +41,7 @@ export default class Courselist extends Component {
   updateDB(event){
     if(event.keyCode === 13){
       let NewCourseName  = event.target.value;
+      
       if(!NewCourseName || NewCourseName === ''){
         alert('Type something');
         return;

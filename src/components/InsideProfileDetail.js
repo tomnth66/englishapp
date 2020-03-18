@@ -47,18 +47,21 @@ export default class InsideProfileDetail extends Component {
 
 		ref.get().then(data => {
 			let Users = data.data().Users;
-			// console.log(Users);
-			// console.log('test', 'a'.localeCompare('b'))
+
 			let CurUser = Users.filter(
 				user => user.Id === this.props.match.params.id
 			);
 
 			// console.log('after sorting ', CurUser);
-
-			this.setState({
-				User: CurUser[0],
-				isLoading: false
-			});
+			if(CurUser.length === 0){
+				window.location.href = '/studentmanagement'
+			}
+			else{
+				this.setState({
+					User: CurUser[0],
+					isLoading: false
+				});
+			}
 		});
 	}
 
@@ -68,7 +71,7 @@ export default class InsideProfileDetail extends Component {
 			<div className="InsideProfileDetail">
 				{isLoading && <Loading />}
 				<div className="InsideProfileHeader">
-					<h1>Student Detail</h1>
+					<h1>Profile</h1>
 				</div>
 
 				<div className="InsideProfileDetailMain">

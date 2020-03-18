@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../css/Studentlist.css";
 import firebase from "../firebase";
 import ConfirmSelectedDiv from "./ConfirmSelectedDiv.js";
-import SettingCourse from './SettingCourse.js';
 // import { Button } from '@material-ui/core';
 
 export default class Studentlist extends Component {
