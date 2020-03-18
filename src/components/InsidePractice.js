@@ -92,17 +92,17 @@ const InsidePractice = () => {
 	return (
 		<div className="InsidePractice">
 			{isLoading && <Loading />}
-			<div className="CourseSelector">
+			<div className="TypeSelector">
 				<h1>Practice</h1>
 				<FormControl
 					variant="outlined"
 					style={{ width: '30%', margin: '10 0' }}
 				>
-					<InputLabel htmlFor="PracticeCourseSelectId">Course</InputLabel>
+					<InputLabel htmlFor="PracticeTypeSelectId">Type</InputLabel>
 					<Select
-						id="PracticeCourseSelectId"
+						id="PracticeTypeSelectId"
 						onChange={handleChangeType}
-						labelWidth={60}
+						labelWidth={40}
 						value={type}
 						focused
 					>

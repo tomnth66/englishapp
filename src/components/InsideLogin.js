@@ -343,7 +343,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
-    margin: "67px 10px 0 0",
+    margin: "76px 10px 0 0",
     padding: "1rem 0",
     background: "#f3f5f8",
     border: "2px solid #5e81ac",

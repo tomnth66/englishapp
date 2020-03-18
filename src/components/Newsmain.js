@@ -67,8 +67,8 @@ export default class Newsmain extends Component {
 		read_more_Para = '';
 		curID = 0;
 
-		fullPara += `#${this.props.Announcement.id}\n`;
-		read_more_Para += `#${this.props.Announcement.id}\n`;
+		fullPara += `<p>#${this.props.Announcement.id}</p>\n`;
+		read_more_Para += `<p>#${this.props.Announcement.id}</p>\n`;
 		for (let word of words) {
 			fullPara += `<div>\n`;
 			word = word.split(' ');
@@ -150,8 +150,8 @@ export default class Newsmain extends Component {
 		read_more_Para = '';
 		curID = 0;
 
-		fullPara += `#${this.props.Announcement.id}\n`;
-		read_more_Para += `#${this.props.Announcement.id}\n`;
+		fullPara += `<p>#${this.props.Announcement.id}\n</p>`;
+		read_more_Para += `<p>#${this.props.Announcement.id}\n</p>`;
 		for (let word of words) {
 			fullPara += `<div>\n`;
 			word = word.split(' ');
