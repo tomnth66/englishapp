@@ -445,6 +445,7 @@ const InsideLogin = () => {
             localStorage.setItem("user", userInfo.Name);
             localStorage.setItem("class", userInfo.Class);
             localStorage.setItem("userId", userInfo.Id);
+            
             window.location.href = "/";
             return;
           }

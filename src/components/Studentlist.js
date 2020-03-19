@@ -23,7 +23,7 @@ export default class Studentlist extends Component {
     const ref = db.collection("Users").doc("45GCoMKDwQWciXc8193A");
     ref.get().then(data => {
       let Users = data.data().Users;
-      let Students = Users.filter(user => user.Class === 'student')
+      let Students = Users.filter(user => user.Class !== 'admin')
       this.setState({
         Users: Students
       });

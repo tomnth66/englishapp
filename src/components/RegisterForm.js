@@ -84,14 +84,16 @@ export default class RegisterForm extends Component {
 
         Users.unshift({
           Account: this.state.username,
-          Class: "student",
+          Class: this.state.course.toString() === 'Guest' ? "guest":"student",
           Id: Ids.generate(),
           Name: this.state.studentName,
           Password: this.state.password,
           Course: this.state.course,
           Email: this.state.email,
           TotalScore: 0,
-          Activated: false
+          Activated: false,
+          PlayTimes:1,
+          GameHistory:[]
         });
 
         // localStorage.setItem('user',this.state.studentName);

@@ -69,12 +69,12 @@ const InsidePractice = () => {
 						return aName.charCodeAt(0) - bName.charCodeAt(0);
 				}
 			});
-			console.log(tmp);
+			// console.log(tmp);
 		});
 		// console.log(typeMap);
 		setMapType(typeMap);
 		setMapCurType(typeMap[type]);
-		console.timeEnd('test');
+		// console.timeEnd('test');
 	}
 
 	useEffect(() => {
@@ -88,6 +88,51 @@ const InsidePractice = () => {
 		setMapCurType(mapType[e.target.value]);
 		console.log(mapList, typeList, mapType);
 	};
+
+	const moveToPlay = (id,idx)=>{
+			if(localStorage.getItem('class') === 'guest'){
+				const db = firebase.firestore();
+				const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
+				ref.get().then(data => {
+					// console.log('data after update in mount',data.data().ContractList);
+					let Users = data.data().Users;
+					let curId = localStorage.getItem('userId');
+
+					// console.log('debug', Users , curId);
+
+					let userIdx = Users.findIndex( user => user.Id === curId);
+
+					// console.log(Users[userIdx]);
+
+					let turn = Users[userIdx].PlayTimes;
+					let history = Users[userIdx].GameHistory;
+
+					let fil = history.filter((map)=>map.Id === id)
+					
+					if(fil.length > 0){
+						window.location.href = `/Practice/${id}/${idx}`;
+					}
+					else{
+						if(turn === 0) alert('You are out of turn, buy more');
+						else{
+							Users[userIdx].PlayTimes--;
+							Users[userIdx].GameHistory.unshift({
+								HighestScore:0,
+								Id:id
+							})
+
+							ref.set({ Users: Users }).then(() => {
+								window.location.href = `/Practice/${id}/${idx}`;
+							});
+						}
+					}
+
+			});
+		}
+		else{
+			window.location.href = `/Practice/${id}/${idx}`;
+		}
+	}
 
 	return (
 		<div className="InsidePractice">
@@ -129,12 +174,13 @@ const InsidePractice = () => {
 							</td>
 							<td width="82%">{map.Mapname}</td>
 							<td>
-								<Link
+								{/* <Link
 									style={{ color: '#2e3440' }}
 									to={`/Practice/${map.id}/${map.idx}`}
 								>
 									<span className="DetailCss">Play</span>
-								</Link>
+								</Link> */}
+								<span className="DetailCss" onClick = {moveToPlay.bind(this,map.id,map.idx)}>Play</span>
 							</td>
 						</tr>
 					))}

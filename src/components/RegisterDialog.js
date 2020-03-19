@@ -137,14 +137,16 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 
 			Users.unshift({
 				Account: values.userName,
-				Class: 'student',
+				Class: values.course.toString() === 'Guest' ? "guest":"student",
 				Id: Ids.generate(),
 				Name: values.studentName,
 				Password: values.password,
 				Course: values.course,
 				Email: values.email,
 				TotalScore: 0,
-				Activated: false
+				Activated: false,
+				PlayTimes:1,
+				GameHistory:[]
 			});
 
 			// localStorage.setItem('user',this.state.studentName);
