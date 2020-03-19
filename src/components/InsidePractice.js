@@ -130,7 +130,37 @@ const InsidePractice = () => {
 			});
 		}
 		else{
-			window.location.href = `/Practice/${id}/${idx}`;
+			const db = firebase.firestore();
+			const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
+
+			ref.get().then(data => {
+				// console.log('data after update in mount',data.data().ContractList);
+				let Users = data.data().Users;
+				let curId = localStorage.getItem('userId');
+
+				// console.log('debug', Users , curId);
+
+				let userIdx = Users.findIndex( user => user.Id === curId);
+
+				// console.log(Users[userIdx]);
+				let history = Users[userIdx].GameHistory;
+
+				let fil = history.filter((map)=>map.Id === id)
+				
+				if(fil.length > 0){
+					window.location.href = `/Practice/${id}/${idx}`;
+				}
+				else{
+					Users[userIdx].GameHistory.unshift({
+						HighestScore:0,
+						Id:id
+					});
+					
+					ref.set({ Users: Users }).then(() => {
+						window.location.href = `/Practice/${id}/${idx}`;
+					});
+				}
+			});
 		}
 	}
 
