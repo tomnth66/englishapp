@@ -64,8 +64,12 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 	};
 
 	const handleClose = e => {
+		// document.body.scrollIntoView(false);
+		// console.log('closing')
+		window.scrollTo(0,1000);
 		closeRegister();
 		setValues({ ...values, open: isOpen });
+		// window.scrollTo(0,document.body.scrollHeight);
 	};
 
 	const handleClickShowPassword = prop => () => {
@@ -446,7 +450,8 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 							{`Thank you for joining SYNTAXI`}
 						</DialogContentText>
 						<DialogContentText id="alert-dialog-description">
-							{`Please wait until your account is activated`}
+							{`Please send us a massage with content "YOUR NAME - I want to activate my account"
+							  through CONTACT US and wait until your account is activated. `}
 						</DialogContentText>
 					</DialogContent>
 					<div
@@ -473,7 +478,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 								onClick={handleClose}
 								color="primary"
 							>
-								Continue
+								Finish
 							</Button>
 						</div>
 					</div>

@@ -445,7 +445,7 @@ const InsideLogin = () => {
             localStorage.setItem("user", userInfo.Name);
             localStorage.setItem("class", userInfo.Class);
             localStorage.setItem("userId", userInfo.Id);
-            
+
             window.location.href = "/";
             return;
           }
@@ -467,7 +467,7 @@ const InsideLogin = () => {
       <Card
         className={classes.root}
         onKeyPress={e => {
-          console.log(e.key);
+          // console.log(e.key);
           if (e.key === "Enter" && !values.openRegister) {
             handleLogIn();
           }
