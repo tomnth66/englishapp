@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import firebase from '../firebase';
 import Ids from 'short-id';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,7 +6,6 @@ import theme from '../theme/muiTheme';
 import { Button } from '@material-ui/core';
 import {
 	Dialog,
-	DialogActions,
 	DialogContent,
 	DialogContentText,
 	DialogTitle
@@ -66,7 +65,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 	const handleClose = e => {
 		// document.body.scrollIntoView(false);
 		// console.log('closing')
-		window.scrollTo(0,1000);
+		window.scrollTo(0, 1000);
 		closeRegister();
 		setValues({ ...values, open: isOpen });
 		// window.scrollTo(0,document.body.scrollHeight);
@@ -141,7 +140,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 
 			Users.unshift({
 				Account: values.userName,
-				Class: values.course.toString() === 'Guest' ? "guest":"student",
+				Class: values.course.toString() === 'Guest' ? 'guest' : 'student',
 				Id: Ids.generate(),
 				Name: values.studentName,
 				Password: values.password,
@@ -149,8 +148,8 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 				Email: values.email,
 				TotalScore: 0,
 				Activated: false,
-				PlayTimes:1,
-				GameHistory:[]
+				PlayTimes: 1,
+				GameHistory: []
 			});
 
 			// localStorage.setItem('user',this.state.studentName);
@@ -163,6 +162,10 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 			// handleClose();
 			setValues({ ...values, stage: 'finished' });
 		});
+	};
+
+	const sendConfirmation = () => {
+		handleClose();
 	};
 
 	return (
@@ -374,8 +377,10 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 										<em>None</em>
 									</MenuItem>
 									{values.courseList.map(course => {
-										return <MenuItem value={course.Name}>{course.Name}</MenuItem>;
-                  })}
+										return (
+											<MenuItem value={course.Name}>{course.Name}</MenuItem>
+										);
+									})}
 								</Select>
 							</FormControl>
 							<FormControl
@@ -475,7 +480,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 								style={{
 									marginRight: '10px'
 								}}
-								onClick={handleClose}
+								onClick={sendConfirmation}
 								color="primary"
 							>
 								Finish
