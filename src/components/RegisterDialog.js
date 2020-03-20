@@ -23,6 +23,8 @@ import {
 } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+// import Mailer from '../smtpjs';
+import email from 'emailjs';
 
 const useStyles = makeStyles(theme => ({
 	container: {
