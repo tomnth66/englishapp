@@ -23,8 +23,9 @@ import {
 } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import emailjs from 'emailjs-com';
 // import Mailer from '../smtpjs';
-import email from 'emailjs';
+// import email from 'emailjs';
 
 const useStyles = makeStyles(theme => ({
 	container: {
@@ -168,6 +169,22 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 
 	const sendConfirmation = () => {
 		handleClose();
+		let template_params = {
+			to_name: 'San',
+			from_name: 'S Y N T A X I',
+			message_html: `<h1>SIGN UP MESSAGE</h1><p><b>${values.studentName}</b> registered</p>`
+		};
+		let service_id = 'default_service';
+		let template_id = 'template_8xv1PQtf';
+		let user_id = 'user_tTkqMN8lV4BZw66MgH1eF';
+		emailjs.send(service_id, template_id, template_params, user_id).then(
+			response => {
+				console.log('SUCCESS!', response.status, response.text);
+			},
+			err => {
+				console.log('FAILED...', err);
+			}
+		);
 	};
 
 	return (
