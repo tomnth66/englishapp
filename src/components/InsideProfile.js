@@ -30,16 +30,20 @@ class InsideProfile extends Component {
 					</div>
 
 					{localStorage.getItem('class') === 'admin' && (
-						<ButtonGroup variant="text" color="primary" className="ActionButton">
-							<Button>
-								<a href="/createannouncement">Post Annoucement</a>
-							</Button>
-							<Button>
-								<a href="/createmap">Create Map</a>
-							</Button>
-							<Button>
-								<a href="/studentmanagement">Student Management</a>
-							</Button>
+						<ButtonGroup
+							variant="text"
+							color="primary"
+							className="ActionButton"
+						>
+							<Link to="/createannoucement">
+								<Button>Post Annoucement</Button>
+							</Link>
+							<Link to="/createmap">
+								<Button>Create Map</Button>
+							</Link>
+							<Link to="/studentmanagement">
+								<Button>Student Management</Button>
+							</Link>
 						</ButtonGroup>
 					)}
 					<Button
