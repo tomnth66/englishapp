@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../css/Avatar.css';
-import Ava from '../img/stitch.jpg';
+// import Ava from '../img/stitch.jpg';
 import { Link } from 'react-router-dom';
 
-const Avatar = ({ id }) => {
+const Avatar = ({ Ava,id }) => {
 	return (
 		<div className="Avatar">
 			<Link to={`/Profile/${id}`}>

@@ -143,6 +143,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 
 			Users.unshift({
 				Account: values.userName,
+				Avatar:'',
 				Class: values.course.toString() === 'Guest' ? 'guest' : 'student',
 				Id: Ids.generate(),
 				Name: values.studentName,

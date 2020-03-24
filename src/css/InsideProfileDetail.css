@@ -61,6 +61,11 @@
 	width: 70%;
 }
 
+
+.AvatarRight{
+	width: 70%;
+}
+
 .Right ul {
 	margin-top: 2.5rem;
 	padding-left: 0px;
@@ -86,6 +91,32 @@
 	width: 160px;
 	height: 160px;
 	border: 5px solid #fff;
+	position: relative;
+}
+
+.StudentProfileLayer{
+	/* display: none; */
+	width: 160px;
+	height: 160px;
+	line-height: 150px;
+	text-align: center;
+	color: #ECEFF4;
+	font-size: 19px;
+	/* border-radius: 50%; */
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 50%;
+	opacity: 0;
+	transition: .3s all ease;
+}
+
+.StudentProfileLayer:hover{
+	/* display: block; */
+	cursor: pointer;
+	opacity: 1;
+	transition: .3s all ease;
 }
 
 .DeleteCss {
@@ -102,6 +133,34 @@
 .DeleteCss:active {
 	opacity: 0.7;
 }
+
+.ChangeCss {
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 600ms ease-in-out;
+	position: absolute;
+	top: 9rem;
+	left: 0;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.ChangeCss:hover {
+	padding: 0.3rem 0.5rem;
+	background: rgba(136, 192, 208, 0.35);
+}
+
+.ChangeCss:active {
+	opacity: 0.7;
+}
+
+
+
+
+
+
+
+
 
 .ProfileFooter {
 	height: 7vh;
@@ -132,5 +191,83 @@
 
 .ProfileFooter span {
 	margin-left: 29vw;
+}
+
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.Avabtn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#avaInput:hover{
+	cursor: pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.AvatarRight{
+	position: relative;
+}
+
+.AvatarRight .backBtn{
+	position: absolute;
+	top: 2.4rem;
+	left: 12rem;
+}
+
+
+.AvatarRight .footer-icons{
+	margin-top: 40px;
+}
+
+.AvatarRight .footer-icons span{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	border-radius: 2px;
+
+	font-size: 25px;
+	color: #000000;
+	text-align: center;
+	line-height: 35px;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
+}
+
+.AvatarRight .footer-icons a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	background-color:  #33383b;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
 }
 

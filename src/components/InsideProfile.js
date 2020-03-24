@@ -4,11 +4,67 @@ import Avatar from './Avatar.js';
 // import Button from './Button.js';
 import { Button, Card, ButtonGroup } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import firebase from '../firebase.js';
 
 class InsideProfile extends Component {
 	constructor(props) {
 		super(props);
+		this.state = ({
+			Avatar:{}
+		})
 	}
+
+
+	componentDidMount() {
+		this.GetDB1();
+		// this.GetDB();
+	}
+
+
+	GetDB1() {
+		const db = firebase.firestore();
+		const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
+		// const { id } = useParams();
+
+		ref.get().then(data => {
+			let Users = data.data().Users;
+			let CurUser = Users.filter(
+				user => user.Id === localStorage.getItem('userId')
+			);
+
+			// console.log('after sorting ', CurUser);
+			if(CurUser.length === 0){
+				window.location.href = '/'
+			}
+			else{
+				let gs = firebase.storage();
+				let storageRef = gs.ref('UsersAvatar/'+CurUser[0].Id + '/' + CurUser[0].Avatar);
+
+				let imageFolder = [];
+				const arrImageUrl = [];
+				
+				arrImageUrl.push(storageRef.getDownloadURL());
+
+				// console.log(arrImageUrl)
+
+				Promise.all(arrImageUrl).then((result) => {
+					imageFolder = result;
+					this.setState(function(state){
+						return {
+							Avatar:imageFolder
+						}
+					})
+				}, (error) => {
+
+				})
+			}
+		});
+	}
+
+
+
+
+
 
 	handleLogOut() {
 		// console.log('logging out');
@@ -19,7 +75,7 @@ class InsideProfile extends Component {
 	render() {
 		return (
 			<Card className="InsideProfile">
-				<Avatar id={localStorage.getItem('userId')}></Avatar>
+				<Avatar Ava = {this.state.Avatar} id={localStorage.getItem('userId')}></Avatar>
 				{/* <Button></Button> */}
 				<div className="Information">
 					<div className="UserInfo">
