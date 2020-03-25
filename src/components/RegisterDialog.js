@@ -55,7 +55,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 		email: '',
 		studentName: '',
 		courseList: [],
-		course: '',
+		course: 'Guest',
 		stage: 'setUserName',
 		wrongReTypePass: false,
 		existedAccount: false
@@ -143,7 +143,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 
 			Users.unshift({
 				Account: values.userName,
-				Avatar:'',
+				Avatar: '',
 				Class: values.course.toString() === 'Guest' ? 'guest' : 'student',
 				Id: Ids.generate(),
 				Name: values.studentName,
@@ -393,9 +393,6 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
 									onChange={handleChange('course')}
 									input={<OutlinedInput />}
 								>
-									<MenuItem value="">
-										<em>None</em>
-									</MenuItem>
 									{values.courseList.map(course => {
 										return (
 											<MenuItem value={course.Name}>{course.Name}</MenuItem>
