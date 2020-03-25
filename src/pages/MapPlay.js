@@ -104,11 +104,24 @@ const MapPlay = ({ match }) => {
 					style={{ width: '50%', height: '100%' }}
 				>
 					<span
-						style={{ position: 'absolute', left: '0.5rem' }}
+						style={{
+							position: 'absolute',
+							left: '0.5rem',
+							fontWeight: 'bold',
+							fontSize: '1.5rem'
+						}}
 					>{`POINT: ${values.score}`}</span>
 					<div className="point--status"></div>
 				</div>
 				<div className="time--container" style={{ width: '50%' }}>
+					<span
+						style={{
+							position: 'absolute',
+							right: '0.5rem',
+							fontWeight: 'bold',
+							fontSize: '1.5rem'
+						}}
+					>{`${values.time}s`}</span>
 					<div className="time--status"></div>
 				</div>
 			</div>

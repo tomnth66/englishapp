@@ -78,7 +78,7 @@ const PopOutForm = () => {
 	// };
 
 	const handleClose = () => {
-    setOpen(false);
+		setOpen(false);
 		setExercise(name, type, typeList);
 		console.log(type);
 	};
@@ -92,7 +92,7 @@ const PopOutForm = () => {
 		>
 			<DialogTitle>Quick create</DialogTitle>
 			<DialogContent>
-				<form className={classes.container}>
+				<div className={classes.container}>
 					<FormControl className={classes.formControl} required>
 						<InputLabel id="demo-dialog-select-label">Map Type</InputLabel>
 						<Select
@@ -125,7 +125,7 @@ const PopOutForm = () => {
                   We'll never share your email.
                 </FormHelperText> */}
 					</FormControl>
-				</form>
+				</div>
 			</DialogContent>
 			<DialogActions>
 				<Button

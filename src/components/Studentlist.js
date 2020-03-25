@@ -1,138 +1,143 @@
-import React, { Component } from "react";
-import "../css/Studentlist.css";
-import firebase from "../firebase";
-import ConfirmSelectedDiv from "./ConfirmSelectedDiv.js";
+import React, { Component } from 'react';
+import '../css/Studentlist.css';
+import firebase from '../firebase';
+import ConfirmSelectedDiv from './ConfirmSelectedDiv.js';
 // import { Button } from '@material-ui/core';
 
 export default class Studentlist extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      Users: [],
-      ConfirmSelected: false,
-      // isShowSettingCourse: false
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			Users: [],
+			ConfirmSelected: false
+			// isShowSettingCourse: false
+		};
+	}
 
-  componentDidMount() {
-    this.GetDB();
-  }
+	componentDidMount() {
+		this.GetDB();
+	}
 
-  GetDB() {
-    const db = firebase.firestore();
-    const ref = db.collection("Users").doc("45GCoMKDwQWciXc8193A");
-    ref.get().then(data => {
-      let Users = data.data().Users;
-      let Students = Users.filter(user => user.Class !== 'admin')
-      this.setState({
-        Users: Students
-      });
-    });
-  }
+	GetDB() {
+		const db = firebase.firestore();
+		const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
+		ref.get().then(data => {
+			let Users = data.data().Users;
+			let Students = Users.filter(user => user.Class !== 'admin');
+			this.setState({
+				Users: Students
+			});
+		});
+	}
 
-  ChangeActivated(selectedId) {
-    // console.log('select is changing',selectId);
-    this.setState({
-      ConfirmSelected: true,
-      SelectedId: selectedId
-    });
-  }
+	ChangeActivated(selectedId) {
+		// console.log('select is changing',selectId);
+		this.setState({
+			ConfirmSelected: true,
+			SelectedId: selectedId
+		});
+	}
 
-  CloseConfirmSelected() {
-    this.setState({
-      ConfirmSelected: false
-    });
-  }
+	CloseConfirmSelected() {
+		this.setState({
+			ConfirmSelected: false
+		});
+	}
 
-  // changeStateSettingCourse(){
-  //   this.setState({
-  //     isShowSettingCourse:!this.state.isShowSettingCourse
-  //   })
-  // }
+	// changeStateSettingCourse(){
+	//   this.setState({
+	//     isShowSettingCourse:!this.state.isShowSettingCourse
+	//   })
+	// }
 
-  MoveToCourseMan(){
-    window.location.href = '/CourseManagement';
-  }
+	MoveToCourseMan() {
+		window.location.href = '/CourseManagement';
+	}
 
-  render() {
-    const { Users, ConfirmSelected, SelectedId } = this.state;
-    return (
-      <div className="Studentlist">
-        <h2 className="student--amount">
-          The numbers of the student: {Users.length}
-        </h2>
-        <div className = 'studentlistTable'>
-          <table>
-            <tr className="studentlist--head">
-              <th>STT</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th className = 'CourseBtn' onClick = {this.MoveToCourseMan.bind(this)}>
-                {/* <Button color="primary" variant="contained" onClick={this.showCourseList.bind(this)}>
+	render() {
+		const { Users, ConfirmSelected, SelectedId } = this.state;
+		return (
+			<div className="Studentlist">
+				<h2 className="student--amount">
+					The numbers of the student: {Users.length}
+				</h2>
+				<div className="studentlistTable">
+					<table>
+						<tr className="studentlist--head">
+							<th>STT</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th
+								className="CourseBtn"
+								onClick={this.MoveToCourseMan.bind(this)}
+							>
+								{/* <Button color="primary" variant="contained" onClick={this.showCourseList.bind(this)}>
                         Course
                 </Button> */}
-                {/* <span className = 'CourseBtn'>Course</span> */}
-                Course
-              </th>
-              <th>Activated</th>
-              <th></th>
-            </tr>
+								{/* <span className = 'CourseBtn'>Course</span> */}
+								Course
+							</th>
+							<th>Activated</th>
+							<th></th>
+						</tr>
 
-            {Users.map((user, idx) => (
-            <tr>
-              <td>{++idx}</td>
-              <td>{user.Name}</td>
-              <td>{user.Email}</td>
-              <td>{user.Course}</td>
-              <td>
-                {user.Activated ? (
-                  <select
-                    id={"select" + user.Id}
-                    className="Confirm"
-                    onChange={this.ChangeActivated.bind(
-                      this,
-                      "select" + user.Id
-                    )}
-                  >
-                    <option value="N">NO</option>
-                    <option value="Y" selected>
-                      YES
-                    </option>
-                  </select>
-                ) : (
-                  <select
-                    id={"select" + user.Id}
-                    className="Confirm"
-                    onChange={this.ChangeActivated.bind(
-                      this,
-                      "select" + user.Id
-                    )}
-                  >
-                    <option value="N" selected>
-                      NO
-                    </option>
-                    <option value="Y">YES</option>
-                  </select>
-                )}
-              </td>
+						{Users.map((user, idx) => (
+							<tr>
+								<td>{++idx}</td>
+								<td>{user.Name}</td>
+								<td>{user.Email}</td>
+								<td>{user.Course}</td>
+								<td>
+									{user.Activated ? (
+										<select
+											id={'select' + user.Id}
+											className="Confirm"
+											onChange={this.ChangeActivated.bind(
+												this,
+												'select' + user.Id
+											)}
+										>
+											<option value="N">NO</option>
+											<option value="Y" selected>
+												YES
+											</option>
+										</select>
+									) : (
+										<select
+											id={'select' + user.Id}
+											className="Confirm"
+											onChange={this.ChangeActivated.bind(
+												this,
+												'select' + user.Id
+											)}
+										>
+											<option value="N" selected>
+												NO
+											</option>
+											<option value="Y">YES</option>
+										</select>
+									)}
+								</td>
 
-              <td>
-                <a href = {'./Profile/'+user.Id}><span className="DetailCss">Detail</span></a>
-              </td>
+								<td>
+									<a href={'./Profile/' + user.Id}>
+										<span className="DetailCss">Detail</span>
+									</a>
+								</td>
 
-              {ConfirmSelected && SelectedId === "select" + user.Id && (
-                <ConfirmSelectedDiv
-                  Keyword = 'Are you sure?'
-                  CloseConfirmSelected={this.CloseConfirmSelected.bind(this)}
-                  SelectedId={"select" + user.Id}
-                  Id={user.Id}
-                ></ConfirmSelectedDiv>
-              )}
-            </tr>
-            ))}
-          </table>
-        </div>
-      </div>
-    );
-  }
+								{ConfirmSelected && SelectedId === 'select' + user.Id && (
+									<ConfirmSelectedDiv
+										Keyword="Are you sure?"
+										CloseConfirmSelected={this.CloseConfirmSelected.bind(this)}
+										SelectedId={'select' + user.Id}
+										Id={user.Id}
+									></ConfirmSelectedDiv>
+								)}
+							</tr>
+						))}
+					</table>
+				</div>
+			</div>
+		);
+	}
 }
