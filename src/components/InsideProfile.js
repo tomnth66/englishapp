@@ -94,7 +94,7 @@ class InsideProfile extends Component {
 							color="primary"
 							className="ActionButton"
 						>
-							<Link to="/createannoucement">
+							<Link to="/postannouncement">
 								<Button>Post Annoucement</Button>
 							</Link>
 							<Link to="/createmap">

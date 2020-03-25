@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 import Ids from "short-id";
 // import {useParams} from 'react-router-dom';
 
-export default class InsideProfileDetail extends Component {
+export default class InsideAnnouncement extends Component {
   constructor(props) {
     super(props);
     this.state = {

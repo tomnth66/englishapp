@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage.js';
 import Practicepage from './pages/Practicepage.js';
-import CreateMap from './pages/CreateMap';
+import CreateMap from './pages/CreateMap.js';
 // import Test from "./pages/Test";
 import Studentmanagement from './pages/Studentmanagement.js';
 import CourseManagement from './pages/CourseManagement.js';
@@ -53,7 +53,7 @@ class App extends Component {
 									 component={CourseManagement}
 						/>
 						<Route path="/ranking" exact component={Ranking} />
-						<Route path="/createannouncement" exact component={Announcement} />
+						<Route path="/postannouncement" exact component={Announcement} />
 						<Route path="/practice/:id/:idx" exact component={MapPlay} />
 						<Route path="/Profile/:id" exact render={(props) => ( <ProfileDetail key={props.match.params.id} 
 																																								 {...props} /> )}/>
