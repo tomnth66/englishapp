@@ -63,7 +63,10 @@ export default class InsideProfileDetail extends Component {
 			}
 			else{
 				let gs = firebase.storage();
-				let storageRef = gs.ref('UsersAvatar/'+CurUser[0].Id + '/' + CurUser[0].Avatar);
+
+				let storageRef = (CurUser[0].Avatar !== "" &&  CurUser[0].Avatar !== undefined) 
+												?gs.ref('UsersAvatar/'+CurUser[0].Id + '/' + CurUser[0].Avatar)
+												:gs.ref('UsersAvatar/standard/avatar.png');
 
 				let imageFolder = [];
 				const arrImageUrl = [];
