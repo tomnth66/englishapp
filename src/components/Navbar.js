@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
-import { IconButton } from '@material-ui/core';
+import { IconButton, ButtonBase } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import '../css/Navbar.css';
 import 'flexboxgrid';
@@ -63,18 +63,23 @@ const Navbar = () => {
 				<nav className="col-xs-5 nav-links">
 					{links.map(link => {
 						return (
-							<div
-								className="Menuitem"
-								// href={link.href}
-								key={link.id}
-								onMouseOver={hoverLink}
-								onMouseLeave={leaveLink}
-								onClick={() => {
-									Validate(link.href);
-								}}
+							<ButtonBase
+								focusRipple
+								style={{ borderRadius: '10px', fontSize: '1rem' }}
 							>
-								{link.name}
-							</div>
+								<div
+									className="Menuitem"
+									// href={link.href}
+									key={link.id}
+									onMouseOver={hoverLink}
+									onMouseLeave={leaveLink}
+									onClick={() => {
+										Validate(link.href);
+									}}
+								>
+									{link.name}
+								</div>
+							</ButtonBase>
 						);
 					})}
 					<div
