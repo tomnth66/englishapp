@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
 import React, { useEffect, useState } from 'react';
 import firebase from '../firebase.js';
+import { TaskTimer } from 'tasktimer';
 import 'flexboxgrid';
 import '../css/MapPlay.css';
 
@@ -12,11 +13,24 @@ import '../css/MapPlay.css';
 const MapPlay = ({ match }) => {
 	// get map
 	let [map, setMap] = useState({});
+	// fullPara values but only show up after ready
+	let [mapPara, setMapPara] = useState('');
 	// loading screen while getting map
 	let [isLoading, setIsLoading] = useState(true);
+	let [isReady, setIsReady] = useState(true);
 	let [values, setValues] = useState({
-		score: 0,
-		time: 60
+		score: 10,
+		time: 60,
+		startTime: 0
+	});
+	let timer = new TaskTimer(1000);
+	timer.add({
+		id: `${match.params.id}`,
+		tickDelay: 1,
+		totalRuns: 60,
+		callback(task) {
+			setValues({ ...values, time: --values.time });
+		}
 	});
 
 	// console.log(match);
@@ -36,8 +50,9 @@ const MapPlay = ({ match }) => {
 			});
 		console.timeEnd('getMap');
 		setIsLoading(false);
+		setIsReady(false);
 
-		let studentAnswerSelector = document.getElementById('studentAnswer');
+		// let studentAnswerSelector = document.getElementById('studentAnswer');
 		let para = curMap.paragraph;
 
 		console.log(para);
@@ -69,10 +84,24 @@ const MapPlay = ({ match }) => {
 			fullPara += `</div>\n`;
 		}
 
-		console.log(fullPara);
+		// console.log(fullPara);
 
-		studentAnswerSelector.innerHTML = fullPara;
+		// studentAnswerSelector.innerHTML = fullPara;
+		setMapPara(fullPara);
 	}
+
+	const checkIsReady = e => {
+		setIsReady(true);
+		console.log(e);
+		console.log(mapPara);
+		let studentAnswerSelector = document.getElementById('studentAnswer');
+		studentAnswerSelector.innerHTML = mapPara;
+		setValues({ ...values, startTime: new Date() });
+		// let myTimer = setInterval(() => {
+		// 	setValues({ ...values, time: --values.time });
+		// }, 1000);
+		timer.start();
+	};
 
 	const submit = () => {};
 
@@ -84,6 +113,12 @@ const MapPlay = ({ match }) => {
 	return (
 		<div className="map--play" style={{ height: '100vh' }}>
 			{isLoading && <Loading />}
+			{!isReady && (
+				<div className="is--ready" onClick={checkIsReady}>
+					<h1 style={{ fontSize: '5rem' }}>R E A D Y ?</h1>
+					<h5>Click on the screen to start the game</h5>
+				</div>
+			)}
 			<Navbar />
 			<div
 				className="row middle-xs center-xs"
@@ -99,30 +134,19 @@ const MapPlay = ({ match }) => {
 				</div>
 			</div>
 			<div className="map--bar">
-				<div
-					className="point--container"
-					style={{ width: '50%', height: '100%' }}
-				>
-					<span
-						style={{
-							position: 'absolute',
-							left: '0.5rem',
-							fontWeight: 'bold',
-							fontSize: '1.5rem'
-						}}
-					>{`POINT: ${values.score}`}</span>
-					<div className="point--status"></div>
+				<div className="point--container">
+					<span style={{ left: '0.5rem' }}>{`POINT: ${values.score}`}</span>
+					<div
+						className="point--status"
+						style={{ width: `${0 + values.score}%` }}
+					></div>
 				</div>
-				<div className="time--container" style={{ width: '50%' }}>
-					<span
-						style={{
-							position: 'absolute',
-							right: '0.5rem',
-							fontWeight: 'bold',
-							fontSize: '1.5rem'
-						}}
-					>{`${values.time}s`}</span>
-					<div className="time--status"></div>
+				<div className="time--container">
+					<span style={{ right: '0.5rem' }}>{`${values.time}s`}</span>
+					<div
+						className="time--status"
+						style={{ width: `${(values.time / 60) * 100}%` }}
+					></div>
 				</div>
 			</div>
 		</div>

@@ -23,7 +23,6 @@
 	bottom: 0;
 	width: 100vw;
 	height: 2rem;
-	border-top: 2px solid red;
 	display: flex;
 	align-items: center;
 }
@@ -31,9 +30,57 @@
 .map--play .map--bar div {
 	display: flex;
 	align-items: center;
+	height: 100%;
+	width: 50%;
 }
 
-.map--play .map--bar div div {
-	-webkit-box-shadow: inset 0 0 6px 3px rgba(0, 0, 0, 0.6);
-	box-shadow: inset 0 0 6px 3px rgba(0, 0, 0, 0.6);
+.map--play .map--bar {
+	-webkit-box-shadow: inset 0 0 6px 2px rgba(0, 0, 0, 0.6);
+	box-shadow: inset 0 0 6px 2px rgba(0, 0, 0, 0.6);
+}
+
+.map--play .map--bar div {
+	box-shadow: inset 0 0 6px 2px rgba(0, 0, 0, 0.6);
+	display: flex;
+}
+
+.map--play .map--bar div span {
+	z-index: 2;
+	position: absolute;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+.point--status {
+	background: #ebcb8b;
+}
+
+.point--container {
+	justify-content: flex-start;
+}
+
+.time--container {
+	justify-content: flex-end;
+}
+
+.time--status {
+	background: #a3be8c;
+	/* opacity: 0.8; */
+}
+
+.is--ready {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 100;
+	background: rgba(0, 0, 0, 0.5);
+
+	/* center the word */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	text-shadow: #2e3440 1px 0 10px;
+	color: #eceff4;
 }
