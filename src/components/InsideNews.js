@@ -9,11 +9,12 @@ export default class InsideNews extends Component {
 	}
 
 	render() {
-		const { Announcement } = this.props;
+		const { Announcement , Avatar} = this.props;
 		return (
 			<div className="InsideNews">
 				<Newsmain
 					Announcement={Announcement}
+					Avatar = {Avatar}
 					GetDB={this.props.GetDB}
 				></Newsmain>
 

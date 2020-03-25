@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/InsideNews.css';
 import firebase from '../firebase.js';
-import Ava from '../img/stitch.jpg';
+// import Ava from '../img/stitch.jpg';
 import 'font-awesome/css/font-awesome.min.css';
 import { Button, Card, Tab, IconButton } from '@material-ui/core';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -276,7 +276,7 @@ export default class Newsmain extends Component {
 				{this.state.isLoading && <Loading />}
 				<div className="Auther">
 					<div className="AutherAvatar">
-						<img className="Picture" src={Ava}></img>
+						<img className="Picture" src={this.props.Avatar}></img>
 					</div>
 					<div className="AutherName">
 						<span>San</span>

@@ -7,7 +7,8 @@ export default class News extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      AnnouncementList: []
+      AnnouncementList: [],
+      Avatar:{}
     };
   }
 
@@ -21,14 +22,62 @@ export default class News extends Component {
       ref.get().then(data => {
         this.setState({
           AnnouncementList: data.data().AnnouncementList
-        });
+        },()=>this.GetDB1());
       });
   }
 
 
+  GetDB1() {
+		const db = firebase.firestore();
+		const ref = db.collection('Users').doc('45GCoMKDwQWciXc8193A');
+		// const { id } = useParams();
+
+		ref.get().then(data => {
+			let Users = data.data().Users;
+			let CurUser = Users.filter(
+				user => user.Class === 'admin'
+			);
+
+			// console.log('after sorting ', CurUser);
+			if(CurUser.length === 0){
+				window.location.href = '/'
+			}
+			else{
+				let gs = firebase.storage();
+
+				let storageRef = (CurUser[0].Avatar !== "" &&  CurUser[0].Avatar !== undefined) 
+												?gs.ref('UsersAvatar/'+CurUser[0].Id + '/' + CurUser[0].Avatar)
+												:gs.ref('UsersAvatar/standard/avatar.png');
+
+				let imageFolder = [];
+				const arrImageUrl = [];
+				
+				arrImageUrl.push(storageRef.getDownloadURL());
+
+				// console.log(arrImageUrl)
+
+				Promise.all(arrImageUrl).then((result) => {
+					imageFolder = result;
+					this.setState(function(state){
+						return {
+							Avatar:imageFolder
+						}
+					})
+				}, (error) => {
+
+				})
+			}
+		});
+	}
+
+
+
+
+
+
 
   render() {
-    const {AnnouncementList} = this.state;
+    const {AnnouncementList,Avatar} = this.state;
     
     return(
       <div className="News">
@@ -39,6 +88,7 @@ export default class News extends Component {
             <InsideNews
               GetDB={this.GetDB.bind(this)}
               Announcement={Announcement}
+              Avatar = {Avatar}
             ></InsideNews>
           ))}
         </div>
