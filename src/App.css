@@ -1,4 +1,6 @@
 :root {
+	scrollbar-color: #838fcd transparent;
+	scrollbar-width: thin;
 	font-size: 16px;
 }
 
@@ -6,3 +8,18 @@ body {
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+::-webkit-scrollbar {
+	background: transparent;
+	width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: #838fcd;
+}
+

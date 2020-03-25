@@ -16,17 +16,24 @@
 	overflow-y: scroll;
 	border-radius: 10px;
 	/* Change firefox scroll bar */
-	scrollbar-color: #838fcd transparent;
-	scrollbar-width: thin;
 }
 
-/* Change Chromium scroll bar */
-#studentAnswer::-webkit-scrollbar {
-	background: transparent;
-	width: 0.5rem;
+.map--play .map--bar {
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	height: 2rem;
+	border-top: 2px solid red;
+	display: flex;
+	align-items: center;
 }
 
-#studentAnswer::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	background: #838fcd;
+.map--play .map--bar div {
+	display: flex;
+	align-items: center;
+}
+
+.map--play .map--bar div div {
+	-webkit-box-shadow: inset 0 0 6px 3px rgba(0, 0, 0, 0.6);
+	box-shadow: inset 0 0 6px 3px rgba(0, 0, 0, 0.6);
 }

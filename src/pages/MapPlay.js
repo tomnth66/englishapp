@@ -4,7 +4,7 @@ import Loading from '../components/Loading';
 import React, { useEffect, useState } from 'react';
 import firebase from '../firebase.js';
 import 'flexboxgrid';
-import '../css/MapPlay.css'
+import '../css/MapPlay.css';
 
 // import css
 // import "../css/MapPlay.css"
@@ -14,6 +14,10 @@ const MapPlay = ({ match }) => {
 	let [map, setMap] = useState({});
 	// loading screen while getting map
 	let [isLoading, setIsLoading] = useState(true);
+	let [values, setValues] = useState({
+		score: 0,
+		time: 60
+	});
 
 	// console.log(match);
 	console.time('getMap');
@@ -78,24 +82,34 @@ const MapPlay = ({ match }) => {
 	}, []);
 
 	return (
-		<div style={{height: '100vh'}}>
+		<div className="map--play" style={{ height: '100vh' }}>
 			{isLoading && <Loading />}
 			<Navbar />
 			<div
 				className="row middle-xs center-xs"
-				style={{ height: 'calc(100% - 4rem)' }}
+				style={{ height: 'calc(100% - 6rem)' }}
 			>
 				<div className="col-xs-10 student-card">
 					<div className="answerSelector" id="studentAnswer"></div>
 					<div className="button-area">
-						<Button
-							color="primary"
-							variant="contained"
-							onClick={submit}
-						>
+						<Button color="primary" variant="contained" onClick={submit}>
 							Next
 						</Button>
 					</div>
+				</div>
+			</div>
+			<div className="map--bar">
+				<div
+					className="point--container"
+					style={{ width: '50%', height: '100%' }}
+				>
+					<span
+						style={{ position: 'absolute', left: '0.5rem' }}
+					>{`POINT: ${values.score}`}</span>
+					<div className="point--status"></div>
+				</div>
+				<div className="time--container" style={{ width: '50%' }}>
+					<div className="time--status"></div>
 				</div>
 			</div>
 		</div>
