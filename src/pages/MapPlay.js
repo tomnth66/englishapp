@@ -1,9 +1,11 @@
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
 import React, { useEffect, useState } from 'react';
 import firebase from '../firebase.js';
 import { TaskTimer } from 'tasktimer';
+import WbIncandescentTwoToneIcon from '@material-ui/icons/WbIncandescentTwoTone';
+import SendIcon from '@material-ui/icons/Send';
 import 'flexboxgrid';
 import '../css/MapPlay.css';
 
@@ -30,6 +32,7 @@ const MapPlay = ({ match }) => {
 		totalRuns: 60,
 		callback(task) {
 			setValues({ ...values, time: --values.time });
+			console.log(`${task.id} task has run ${task.currentRuns} times.`);
 		}
 	});
 
@@ -127,13 +130,26 @@ const MapPlay = ({ match }) => {
 				<div className="col-xs-10 student-card">
 					<div className="answerSelector" id="studentAnswer"></div>
 					<div className="button-area">
-						<Button color="primary" variant="contained" onClick={submit}>
-							Next
+						<Button
+							color="primary"
+							variant="contained"
+							onClick={submit}
+							endIcon={<SendIcon />}
+						>
+							Submit
 						</Button>
 					</div>
 				</div>
 			</div>
 			<div className="map--bar">
+				<Button
+					className="clue--btn"
+					variant="contained"
+					color="primary"
+					endIcon={<WbIncandescentTwoToneIcon />}
+				>
+					{`C l u e`}
+				</Button>
 				<div className="point--container">
 					<span style={{ left: '0.5rem' }}>{`POINT: ${values.score}`}</span>
 					<div
