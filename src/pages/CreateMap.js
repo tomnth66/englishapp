@@ -37,8 +37,8 @@ const useStyles = makeStyles(theme => ({
 let titleName = '';
 let exerciseType = '';
 let exerciseTypeList = [];
-let exerciseTime = 0;
-let exerciseDifficulty = 0;
+let exerciseTime = '';
+let exerciseDifficulty = '';
 let ids = new Ids();
 
 const setExercise = (name, type, typeList, duration, difficulty) => {
