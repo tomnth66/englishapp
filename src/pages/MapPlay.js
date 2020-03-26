@@ -22,19 +22,10 @@ const MapPlay = ({ match }) => {
 	let [isReady, setIsReady] = useState(true);
 	let [values, setValues] = useState({
 		score: 10,
-		time: 60,
-		startTime: 0
+		time: 0,
+		defaultTime: 0
 	});
 	let timer = new TaskTimer(1000);
-	timer.add({
-		id: `${match.params.id}`,
-		tickDelay: 1,
-		totalRuns: 60,
-		callback(task) {
-			setValues({ ...values, time: --values.time });
-			console.log(`${task.id} task has run ${task.currentRuns} times.`);
-		}
-	});
 
 	// console.log(match);
 	console.time('getMap');
@@ -54,6 +45,12 @@ const MapPlay = ({ match }) => {
 		console.timeEnd('getMap');
 		setIsLoading(false);
 		setIsReady(false);
+
+		setValues({
+			...values,
+			time: parseInt(curMap.Maptime),
+			defaultTime: parseInt(curMap.Maptime)
+		});
 
 		// let studentAnswerSelector = document.getElementById('studentAnswer');
 		let para = curMap.paragraph;
@@ -99,10 +96,18 @@ const MapPlay = ({ match }) => {
 		console.log(mapPara);
 		let studentAnswerSelector = document.getElementById('studentAnswer');
 		studentAnswerSelector.innerHTML = mapPara;
-		setValues({ ...values, startTime: new Date() });
 		// let myTimer = setInterval(() => {
 		// 	setValues({ ...values, time: --values.time });
 		// }, 1000);
+		timer.add({
+			id: `${match.params.id}`,
+			tickDelay: 1,
+			totalRuns: values.defaultTime,
+			callback(task) {
+				setValues({ ...values, time: --values.time });
+				console.log(`${task.id} task has run ${task.currentRuns} times.`);
+			}
+		});
 		timer.start();
 	};
 
@@ -161,7 +166,7 @@ const MapPlay = ({ match }) => {
 					<span style={{ right: '0.5rem' }}>{`${values.time}s`}</span>
 					<div
 						className="time--status"
-						style={{ width: `${(values.time / 60) * 100}%` }}
+						style={{ width: `${(values.time / values.defaultTime) * 100}%` }}
 					></div>
 				</div>
 			</div>
