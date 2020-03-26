@@ -330,8 +330,7 @@ import {
 	FormHelperText
 } from '@material-ui/core';
 import { Card, Button } from '@material-ui/core';
-import theme from '../theme/muiTheme';
-import { makeStyles, ThemeProvider } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import RegisterDialog from '../components/RegisterDialog';
@@ -463,87 +462,85 @@ const InsideLogin = () => {
 	};
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Card
-				className={classes.root}
-				onKeyPress={e => {
-					// console.log(e.key);
-					if (e.key === 'Enter' && !values.openRegister) {
-						handleLogIn();
+		<Card
+			className={classes.root}
+			onKeyPress={e => {
+				// console.log(e.key);
+				if (e.key === 'Enter' && !values.openRegister) {
+					handleLogIn();
+				}
+			}}
+		>
+			<FormControl className={classes.formControl}>
+				<TextField
+					error={values.isError}
+					variant="outlined"
+					label="User Name"
+					onChange={handleChange('userName')}
+				/>
+			</FormControl>
+			<FormControl className={classes.formControl} variant="outlined">
+				<InputLabel
+					error={values.isError}
+					htmlFor="outlined-adornment-password"
+				>
+					Password
+				</InputLabel>
+				<OutlinedInput
+					error={values.isError}
+					id="outlined-adornment-password"
+					type={values.showPassword ? 'text' : 'password'}
+					value={values.password}
+					onChange={handleChange('password')}
+					endAdornment={
+						<InputAdornment position="end" tabIndex="-1">
+							<IconButton
+								aria-label="toggle password visibility"
+								onClick={handleClickShowPassword}
+								onMouseDown={handleMouseDownPassword}
+								edge="end"
+								tabIndex="-1"
+							>
+								{values.showPassword ? <Visibility /> : <VisibilityOff />}
+							</IconButton>
+						</InputAdornment>
 					}
+					labelWidth={70}
+				/>
+				<FormHelperText style={{ marginTop: '1rem' }} error={values.isError}>
+					{values.errorMesseage}
+				</FormHelperText>
+			</FormControl>
+			<div
+				style={{
+					display: 'flex',
+					width: '80%',
+					height: '3em',
+					alignItems: 'center',
+					justifyContent: 'flex-end'
 				}}
 			>
-				<FormControl className={classes.formControl}>
-					<TextField
-						error={values.isError}
-						variant="outlined"
-						label="User Name"
-						onChange={handleChange('userName')}
-					/>
-				</FormControl>
-				<FormControl className={classes.formControl} variant="outlined">
-					<InputLabel
-						error={values.isError}
-						htmlFor="outlined-adornment-password"
-					>
-						Password
-					</InputLabel>
-					<OutlinedInput
-						error={values.isError}
-						id="outlined-adornment-password"
-						type={values.showPassword ? 'text' : 'password'}
-						value={values.password}
-						onChange={handleChange('password')}
-						endAdornment={
-							<InputAdornment position="end" tabIndex="-1">
-								<IconButton
-									aria-label="toggle password visibility"
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
-									edge="end"
-									tabIndex="-1"
-								>
-									{values.showPassword ? <Visibility /> : <VisibilityOff />}
-								</IconButton>
-							</InputAdornment>
-						}
-						labelWidth={70}
-					/>
-					<FormHelperText style={{ marginTop: '1rem' }} error={values.isError}>
-						{values.errorMesseage}
-					</FormHelperText>
-				</FormControl>
-				<div
-					style={{
-						display: 'flex',
-						width: '80%',
-						height: '3em',
-						alignItems: 'center',
-						justifyContent: 'flex-end'
-					}}
+				<Button color="primary" onClick={openRegisterDialog}>
+					Register
+				</Button>
+				<Button
+					color="primary"
+					variant="contained"
+					disabled={!values.userName || !values.password}
+					onClick={handleLogIn}
 				>
-					<Button color="primary" onClick={openRegisterDialog}>
-						Register
-					</Button>
-					<Button
-						color="primary"
-						variant="contained"
-						disabled={!values.userName || !values.password}
-						onClick={handleLogIn}
-					>
-						LogIn
-					</Button>
-				</div>
-				{values.openRegister && (
-					<RegisterDialog
-						isOpen={values.openRegister}
-						closeRegister={() => {
-							setValues({ ...values, openRegister: false });
-						}}
-					/>
-				)}
-			</Card>
-		</ThemeProvider>
+					LogIn
+				</Button>
+			</div>
+			{values.openRegister && (
+				<RegisterDialog
+					isOpen={values.openRegister}
+					closeRegister={() => {
+						setValues({ ...values, openRegister: false });
+					}}
+				/>
+			)}
+		</Card>
 	);
 };
 

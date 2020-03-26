@@ -37,12 +37,16 @@ const useStyles = makeStyles(theme => ({
 let titleName = '';
 let exerciseType = '';
 let exerciseTypeList = [];
+let exerciseTime = 0;
+let exerciseDifficulty = 0;
 let ids = new Ids();
 
-const setExercise = (name, type, typeList) => {
+const setExercise = (name, type, typeList, duration, difficulty) => {
 	titleName = name.trim();
 	exerciseType = type;
 	exerciseTypeList = typeList;
+	exerciseTime = duration;
+	exerciseDifficulty = difficulty;
 };
 
 const PopOutForm = () => {
@@ -51,6 +55,8 @@ const PopOutForm = () => {
 	const [type, setType] = useState(-1);
 	const [typeList, setTypeList] = useState([]);
 	const [name, setName] = useState('');
+	const [duration, setDuration] = useState();
+	const [difficulty, setDifficulty] = useState();
 
 	useEffect(() => {
 		const db = firebase.firestore();
@@ -72,13 +78,21 @@ const PopOutForm = () => {
 		setName(event.target.value || '');
 	};
 
+	const handleChangeDuration = event => {
+		setDuration(event.target.value);
+	};
+
+	const handleChangeDifficulty = event => {
+		setDifficulty(event.target.value);
+	};
+
 	// const handleClickOpen = () => {
 	//   setOpen(true);
 	// };
 
 	const handleClose = () => {
 		setOpen(false);
-		setExercise(name, type, typeList);
+		setExercise(name, type, typeList, duration, difficulty);
 		console.log(type);
 	};
 
@@ -91,39 +105,67 @@ const PopOutForm = () => {
 		>
 			<DialogTitle>Quick create</DialogTitle>
 			<DialogContent>
-				<div className={classes.container}>
-					<FormControl className={classes.formControl} required>
-						<InputLabel id="demo-dialog-select-label">Map Type</InputLabel>
-						<Select
-							labelId="demo-dialog-select-label"
-							id="demo-dialog-select"
-							value={typeList[type]}
-							onChange={handleChangeType}
-							input={<Input />}
-						>
-							<MenuItem value="">
-								<em>None</em>
-							</MenuItem>
-							{typeList.map((item, index) => {
-								return <MenuItem value={index}>{item}</MenuItem>;
-							})}
-							{/* <MenuItem value="0">Vocabulary</MenuItem>
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
+					<div className={classes.container}>
+						<FormControl className={classes.formControl} required>
+							<InputLabel id="demo-dialog-select-label">Map Type</InputLabel>
+							<Select
+								labelId="demo-dialog-select-label"
+								id="demo-dialog-select"
+								value={typeList[type]}
+								onChange={handleChangeType}
+								input={<Input />}
+							>
+								<MenuItem value="">
+									<em>None</em>
+								</MenuItem>
+								{typeList.map((item, index) => {
+									return <MenuItem value={index}>{item}</MenuItem>;
+								})}
+								{/* <MenuItem value="0">Vocabulary</MenuItem>
               <MenuItem value="1">Grammar</MenuItem>
               <MenuItem value="2">Logic</MenuItem> */}
-						</Select>
-					</FormControl>
-					<FormControl className={classes.formControl} required>
-						<InputLabel htmlFor="my-input">Map Name</InputLabel>
-						<Input
-							id="my-input"
-							aria-describedby="my-helper-text"
-							value={name}
-							onChange={handleChangeName}
-						/>
-						{/* <FormHelperText id="my-helper-text">
+							</Select>
+						</FormControl>
+						<FormControl className={classes.formControl} required>
+							<InputLabel htmlFor="my-input">Map Name</InputLabel>
+							<Input
+								id="my-input"
+								aria-describedby="my-helper-text"
+								value={name}
+								onChange={handleChangeName}
+							/>
+							{/* <FormHelperText id="my-helper-text">
                   We'll never share your email.
                 </FormHelperText> */}
-					</FormControl>
+						</FormControl>
+					</div>
+					<div className={classes.container}>
+						<FormControl className={classes.formControl} required>
+							<InputLabel htmlFor="my-input">Map Duration</InputLabel>
+							<Input
+								id="my-input"
+								aria-describedby="my-helper-text"
+								value={duration}
+								onChange={handleChangeDuration}
+							/>
+							{/* <FormHelperText id="my-helper-text">
+                  We'll never share your email.
+                </FormHelperText> */}
+						</FormControl>
+						<FormControl className={classes.formControl} required>
+							<InputLabel htmlFor="my-input">Map Difficulty</InputLabel>
+							<Input
+								id="my-input"
+								aria-describedby="my-helper-text"
+								value={difficulty}
+								onChange={handleChangeDifficulty}
+							/>
+							{/* <FormHelperText id="my-helper-text">
+                  We'll never share your email.
+                </FormHelperText> */}
+						</FormControl>
+					</div>
 				</div>
 			</DialogContent>
 			<DialogActions>
@@ -140,7 +182,7 @@ const PopOutForm = () => {
 					onClick={handleClose}
 					color="primary"
 					variant="contained"
-					disabled={type === -1 || !name}
+					disabled={type === -1 || !name || !duration || !difficulty}
 				>
 					Ok
 				</Button>
@@ -322,6 +364,8 @@ const CreateMap = () => {
 				Clue: ['clue1', 'clue2', 'clue3'],
 				Mapname: titleName,
 				Maptype: exerciseTypeList[exerciseType],
+				Maptime: exerciseTime,
+				Mapdifficulty: exerciseDifficulty,
 				paragraph: para,
 				id: ids.next(),
 				idx: MapList.length
