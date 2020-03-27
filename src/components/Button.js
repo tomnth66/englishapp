@@ -2,7 +2,7 @@ import "../css/Button.css";
 import React from "react";
 import Ripples from "react-ripples";
 import '@fortawesome/fontawesome-free/css/all.css';
-  // var classNames = require("classnames");
+  
 
 const Button = props => {
   // custom color button
