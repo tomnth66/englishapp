@@ -292,6 +292,9 @@ const CreateMap = () => {
       for (let i = 0; i < wordArray.length; ++i) {
         if (wordArray[i] !== "") {
           fullPara += `\t<span id="${currentID}" class="teacher-para">${wordArray[i]}</span>\n`;
+          for (let j = 0; j < wordArray[i].length; ++j) {
+            if (wordArray[i][j] === "&nbsp") console.error("error");
+          }
           ++currentID;
           // correctAnswer.push(false);
         } else {
@@ -299,11 +302,11 @@ const CreateMap = () => {
           fullPara += '\t<div style="height: 1rem"></div>';
         }
       }
-      console.log(`Đây là từng từ một ${word}`);
+      // console.log(`Đây là từng từ một ${word}`);
       fullPara += `</div>\n`;
     }
 
-    console.log(fullPara);
+    // console.log(fullPara);
 
     answerSelectorArea.innerHTML = fullPara;
 
