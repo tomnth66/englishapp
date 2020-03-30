@@ -284,21 +284,15 @@ const CreateMap = () => {
 		for (let word of words) {
 			fullPara += `<div>\n`;
 
-			word = word.split(' ');
-			for (let i = 0; i < word.length; ++i) {
-				if (word[i] !== '') {
-					word[i] = word[i].split('&nbsp;');
-					console.log('wordp[i]: ', word[i]);
-					for (let j = 0; j < word[i].length; ++j) {
-						console.log(word[i][j]);
-						if (word[i][j] !== '') {
-							fullPara += `\t<span id="${currentID}" class="teacher-para">${word[i][j]}</span>\n`;
-							++currentID;
-						} else {
-							// don't count " " or "\n"
-							fullPara += '\t<div style="height: 1rem"></div>';
-						}
-					}
+			word = word.replace('&#160;', ' ');
+			word = word.replace('&nbsp;', ' ');
+
+			// split create array instead of string => should not change type
+			let wordArray = word.split(' ');
+			for (let i = 0; i < wordArray.length; ++i) {
+				if (wordArray[i] !== '') {
+					fullPara += `\t<span id="${currentID}" class="teacher-para">${wordArray[i]}</span>\n`;
+					++currentID;
 					// correctAnswer.push(false);
 				} else {
 					// don't count " " or "\n"
