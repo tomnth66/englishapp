@@ -74,6 +74,9 @@ export default class Newsmain extends Component {
 		for (let word of words) {
 			console.log('debug 3 - each word ', word , ' cach ');
 			fullPara += `<div>\n`;
+
+			word = word.replace("&#160;", ' ');
+      word = word.replace("&nbsp;", ' ');
 			word = word.replace(/\s/g,' ');
 			word = word.split(' ');
 			// word = word.replace(/(&nbsp;)*/g,"");
