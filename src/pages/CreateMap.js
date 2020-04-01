@@ -284,8 +284,8 @@ const CreateMap = () => {
     for (let word of words) {
       fullPara += `<div>\n`;
 
-      // word = word.replace("&#160;", " ");
-      // word = word.replace("&nbsp;", " ");
+      word = word.replace("&#160;", ' ');
+      word = word.replace("&nbsp;", ' ');
 
       // split create array instead of string => should not change type
       word = word.replace(/\s/g,' ');
