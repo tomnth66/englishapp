@@ -62,7 +62,9 @@ export default class Newsmain extends Component {
 
 	updateRenderDB() {
 		let curAnn = this.props.Announcement.AnnouncementContent;
+		console.log('debug1 - full para ', curAnn);
 		words = curAnn.split('\n');
+		console.log('debug2 - words ',words);
 		fullPara = '';
 		read_more_Para = '';
 		curID = 0;
@@ -70,14 +72,20 @@ export default class Newsmain extends Component {
 		fullPara += `<p>#${this.props.Announcement.id}</p>\n`;
 		read_more_Para += `<p>#${this.props.Announcement.id}</p>\n`;
 		for (let word of words) {
+			console.log('debug 3 - each word ', word , ' cach ');
 			fullPara += `<div>\n`;
+			word = word.replace(/\s/g,' ');
 			word = word.split(' ');
+			// word = word.replace(/(&nbsp;)*/g,"");
+
+			console.log('debug 4 - word after split ',word);
 			if (curID + word.length < maxParaLength) read_more_Para += `<div> \n`;
 			if (curID + word.length >= maxParaLength)
 				read_more_Para += `<div style="display: inline;"> \n`;
 			for (let i = 0; i < word.length; ++i) {
 				++curID;
 				if (word[i] !== '') {
+					console.log('debug here',this.props.Announcement.id,word[i]);
 					fullPara += `<span>${word[i]} </span>`;
 					if (curID <= maxParaLength)
 						read_more_Para += `<span>${word[i]} </span>`;
@@ -88,6 +96,7 @@ export default class Newsmain extends Component {
 					}
 				}
 			}
+
 			fullPara += `</div>\n`;
 			if (curID <= maxParaLength) read_more_Para += `</div>\n`;
 		}
