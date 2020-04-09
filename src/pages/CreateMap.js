@@ -10,35 +10,38 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle,
 } from "@material-ui/core";
 import {
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  Input
+  Input,
 } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import "flexboxgrid";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 240
-  }
+    minWidth: 240,
+  },
 }));
+
+let clueTypeList = ["test1", "test2", "test3"];
 
 let titleName = "";
 let exerciseType = "";
 let exerciseTypeList = [];
 let exerciseTime = "";
 let exerciseDifficulty = "";
+let curClue = "";
 let ids = new Ids();
 
 const setExercise = (name, type, typeList, duration, difficulty) => {
@@ -47,6 +50,75 @@ const setExercise = (name, type, typeList, duration, difficulty) => {
   exerciseTypeList = typeList;
   exerciseTime = duration;
   exerciseDifficulty = difficulty;
+};
+
+const PopOutClueForm = ({ id, closeFunc, checkOpen }) => {
+  const classes = useStyles();
+  const [values, setValues] = useState({
+    isOpen: checkOpen,
+    clueID: -1,
+    clueList: [
+      "Wrong Linking Word",
+      "Wrong Article",
+      "Wrong Word Choice",
+      "Wrong Spelling",
+      "Preposition",
+      "Wrong Use Of Model Verb",
+    ],
+  });
+
+  const handleClose = () => {
+    curClue = values.clueList[values.clueID];
+    setValues({ ...values, isOpen: false });
+    closeFunc();
+  };
+
+  const handleChange = (prop) => (e) => {
+    console.log(prop);
+    setValues({ ...values, [prop]: e.target.value });
+  };
+
+  return (
+    <Dialog
+      disableBackdropClick
+      disableEscapeKeyDown
+      open={values.isOpen}
+      onClose={handleClose}
+    >
+      <DialogTitle>Add Clue</DialogTitle>
+      <DialogContent>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className={classes.container}>
+            <FormControl className={classes.formControl} required>
+              <InputLabel id="demo-dialog-select-label">Clue</InputLabel>
+              <Select
+                labelId="demo-dialog-select-label"
+                id="demo-dialog-select"
+                value={values.clueList[values.clueID]}
+                onChange={handleChange("clueID")}
+                input={<Input />}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {values.clueList.map((item, index) => {
+                  return <MenuItem value={index}>{item}</MenuItem>;
+                })}
+                {/* <MenuItem value="0">Vocabulary</MenuItem>
+              <MenuItem value="1">Grammar</MenuItem>
+              <MenuItem value="2">Logic</MenuItem> */}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          OK
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 };
 
 const PopOutForm = () => {
@@ -63,27 +135,27 @@ const PopOutForm = () => {
     db.collection("Type")
       .doc("f0nojqJzfHFkagp9UfLe")
       .get()
-      .then(data => {
+      .then((data) => {
         setTypeList(data.data().TypeList);
         // console.log(data.data().TypeList);
       });
   });
 
-  const handleChangeType = event => {
-    setType(event.target.value);
-    console.log(event.target.value);
+  const handleChangeType = (e) => {
+    setType(e.target.value);
+    console.log(e.target.value);
   };
 
-  const handleChangeName = event => {
-    setName(event.target.value || "");
+  const handleChangeName = (e) => {
+    setName(e.target.value || "");
   };
 
-  const handleChangeDuration = event => {
-    setDuration(event.target.value);
+  const handleChangeDuration = (e) => {
+    setDuration(e.target.value);
   };
 
-  const handleChangeDifficulty = event => {
-    setDifficulty(event.target.value);
+  const handleChangeDifficulty = (e) => {
+    setDifficulty(e.target.value);
   };
 
   // const handleClickOpen = () => {
@@ -184,7 +256,7 @@ const PopOutForm = () => {
           variant="contained"
           disabled={type === -1 || !name || !duration || !difficulty}
         >
-          Ok
+          OK
         </Button>
       </DialogActions>
     </Dialog>
@@ -241,6 +313,7 @@ let correctAnswer = [];
 
 const CreateMap = () => {
   let [flip, setFlip] = useState(false);
+  let [settingClue, setSettingClue] = useState(false);
 
   const flipCard = () => {
     setFlip(!flip);
@@ -253,7 +326,7 @@ const CreateMap = () => {
     if (file.type.match(textType)) {
       var reader = new FileReader();
 
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         document.getElementById("inputArea").value = reader.result;
       };
 
@@ -284,11 +357,11 @@ const CreateMap = () => {
     for (let word of words) {
       fullPara += `<div>\n`;
 
-      word = word.replace("&#160;", ' ');
-      word = word.replace("&nbsp;", ' ');
+      word = word.replace("&#160;", " ");
+      word = word.replace("&nbsp;", " ");
 
       // split create array instead of string => should not change type
-      word = word.replace(/\s/g,' ');
+      word = word.replace(/\s/g, " ");
       let wordArray = word.split(" ");
       for (let i = 0; i < wordArray.length; ++i) {
         if (wordArray[i] !== "") {
@@ -313,8 +386,10 @@ const CreateMap = () => {
 
     let teacher_paras = document.querySelectorAll(".teacher-para");
     for (let p of teacher_paras) {
-      p.addEventListener("click", e => {
-        console.log(p);
+      p.addEventListener("click", (e) => {
+        if (!e.currentTarget.classList.contains("selected-answer")) {
+          setSettingClue(true);
+        }
         e.currentTarget.classList.toggle("selected-answer");
         // console.log(e.currentTarget.id);
         // correctAnswer[e.currentTarget.id] = !correctAnswer[e.currentTarget.id];
@@ -322,32 +397,44 @@ const CreateMap = () => {
         let start = 0;
         let end = correctAnswer.length - 1;
         let mid;
-        switch (correctAnswer) {
-          case []:
-            correctAnswer.push(parseInt(e.currentTarget.id));
-            break;
-          default:
-            while (start <= end) {
-              mid = Math.floor((start + end) / 2);
-              // console.log(start, mid, end);
-              if (correctAnswer[mid] === parseInt(e.currentTarget.id)) {
-                start = mid;
-                console.log(mid);
-                break;
-              }
-              switch (correctAnswer[mid] > parseInt(e.currentTarget.id)) {
-                case true:
-                  end = mid - 1;
+        // check if correctAnswer is empty or not
+        // not empty => binary search
+        if (!settingClue) {
+          switch (correctAnswer.length) {
+            case 0:
+              correctAnswer.push({
+                id: parseInt(e.currentTarget.id),
+                clue: curClue,
+              });
+              break;
+            default:
+              while (start <= end) {
+                mid = Math.floor((start + end) / 2);
+                // console.log(start, mid, end);
+                if (correctAnswer[mid].id === parseInt(e.currentTarget.id)) {
+                  start = mid;
+                  console.log(mid);
                   break;
-                default:
-                  start = mid + 1;
-                  break;
+                }
+                switch (correctAnswer[mid].id > parseInt(e.currentTarget.id)) {
+                  case true:
+                    end = mid - 1;
+                    break;
+                  default:
+                    start = mid + 1;
+                    break;
+                }
               }
-            }
-            correctAnswer[mid] === parseInt(e.currentTarget.id)
-              ? correctAnswer.splice(mid, 1)
-              : correctAnswer.splice(start, 0, parseInt(e.currentTarget.id));
-            break;
+              console.log(correctAnswer);
+              correctAnswer[mid].id === parseInt(e.currentTarget.id)
+                ? correctAnswer.splice(mid, 1)
+                : correctAnswer.splice(start, 0, {
+                    id: parseInt(e.currentTarget.id),
+                    clue: curClue,
+                  });
+              break;
+          }
+          curClue = "";
         }
         console.log(correctAnswer);
       });
@@ -363,11 +450,12 @@ const CreateMap = () => {
     const db = firebase.firestore();
     const ref = db.collection("Map").doc("wCj3hteHUHgCtiWl98yq");
 
-    ref.get().then(data => {
+    ref.get().then((data) => {
       // console.log('dữ liệu', data.data().Maplist);
       let MapList = data.data().MapList;
       // console.log(para);
 
+      console.log(correctAnswer);
       MapList.push({
         Answer: correctAnswer,
         Clue: ["clue1", "clue2", "clue3"],
@@ -377,7 +465,7 @@ const CreateMap = () => {
         Mapdifficulty: exerciseDifficulty,
         paragraph: para,
         id: ids.next(),
-        idx: MapList.length
+        idx: MapList.length,
       });
 
       console.log(MapList);
@@ -395,6 +483,14 @@ const CreateMap = () => {
 
   return (
     <div style={{ height: "100vh" }}>
+      {settingClue && (
+        <PopOutClueForm
+          closeFunc={() => {
+            setSettingClue(false);
+          }}
+          checkOpen={setSettingClue}
+        />
+      )}
       <PopOutForm />
       <Navbar />
       <div
