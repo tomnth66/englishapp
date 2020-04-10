@@ -52,29 +52,21 @@ const setExercise = (name, type, typeList, duration, difficulty) => {
   exerciseDifficulty = difficulty;
 };
 
-const PopOutClueForm = ({ id, closeFunc, checkOpen }) => {
+const PopOutClueForm = ({ id, closeFunc, checkOpen, checkID }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     isOpen: checkOpen,
-    clueID: -1,
-    clueList: [
-      "Wrong Linking Word",
-      "Wrong Article",
-      "Wrong Word Choice",
-      "Wrong Spelling",
-      "Preposition",
-      "Wrong Use Of Model Verb",
-    ],
+    clue: "",
   });
 
   const handleClose = () => {
-    curClue = values.clueList[values.clueID];
-    setValues({ ...values, isOpen: false });
+    curClue = values.clue;
+    checkID(id);
+    setValues({ ...values, clue: "", isOpen: false });
     closeFunc();
   };
 
   const handleChange = (prop) => (e) => {
-    console.log(prop);
     setValues({ ...values, [prop]: e.target.value });
   };
 
@@ -90,30 +82,21 @@ const PopOutClueForm = ({ id, closeFunc, checkOpen }) => {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className={classes.container}>
             <FormControl className={classes.formControl} required>
-              <InputLabel id="demo-dialog-select-label">Clue</InputLabel>
-              <Select
-                labelId="demo-dialog-select-label"
-                id="demo-dialog-select"
-                value={values.clueList[values.clueID]}
-                onChange={handleChange("clueID")}
-                input={<Input />}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {values.clueList.map((item, index) => {
-                  return <MenuItem value={index}>{item}</MenuItem>;
-                })}
-                {/* <MenuItem value="0">Vocabulary</MenuItem>
-              <MenuItem value="1">Grammar</MenuItem>
-              <MenuItem value="2">Logic</MenuItem> */}
-              </Select>
+              <InputLabel htmlFor="my-input">Clue Message</InputLabel>
+              <Input
+                id="my-input"
+                value={values.clue}
+                onChange={handleChange("clue")}
+              />
+              {/* <FormHelperText id="my-helper-text">
+                  We'll never share your email.
+                </FormHelperText> */}
             </FormControl>
           </div>
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="primary" variant="contained">
           OK
         </Button>
       </DialogActions>
@@ -314,6 +297,7 @@ let correctAnswer = [];
 const CreateMap = () => {
   let [flip, setFlip] = useState(false);
   let [settingClue, setSettingClue] = useState(false);
+  let [curClueID, setCurClueID] = useState(-1);
 
   const flipCard = () => {
     setFlip(!flip);
@@ -334,6 +318,49 @@ const CreateMap = () => {
     } else {
       document.getElementById("inputArea").value = "File not supported!";
     }
+  };
+
+  const binarySearchAnswerSelector = (id) => {
+    let start = 0;
+    let end = correctAnswer.length - 1;
+    let mid;
+    // check if correctAnswer is empty or not
+    // not empty => binary search
+    switch (correctAnswer.length) {
+      case 0:
+        correctAnswer.push({
+          id: id,
+          clue: curClue,
+        });
+        break;
+      default:
+        while (start <= end) {
+          mid = Math.floor((start + end) / 2);
+          // console.log(start, mid, end);
+          if (correctAnswer[mid].id === id) {
+            start = mid;
+            console.log(mid);
+            break;
+          }
+          switch (correctAnswer[mid].id > id) {
+            case true:
+              end = mid - 1;
+              break;
+            default:
+              start = mid + 1;
+              break;
+          }
+        }
+        console.log(correctAnswer);
+        correctAnswer[mid].id === id
+          ? correctAnswer.splice(mid, 1)
+          : correctAnswer.splice(start, 0, {
+              id: id,
+              clue: curClue,
+            });
+        break;
+    }
+    console.log(correctAnswer);
   };
 
   // let correctAnswer = [];
@@ -387,56 +414,15 @@ const CreateMap = () => {
     let teacher_paras = document.querySelectorAll(".teacher-para");
     for (let p of teacher_paras) {
       p.addEventListener("click", (e) => {
-        if (!e.currentTarget.classList.contains("selected-answer")) {
+        if (
+          !e.currentTarget.classList.contains("selected-answer") ||
+          correctAnswer.length === 0
+        ) {
+          curClue = "";
           setSettingClue(true);
+          setCurClueID(parseInt(e.currentTarget.id));
         }
         e.currentTarget.classList.toggle("selected-answer");
-        // console.log(e.currentTarget.id);
-        // correctAnswer[e.currentTarget.id] = !correctAnswer[e.currentTarget.id];
-        // console.log(correctAnswer[e.currentTarget.id]);
-        let start = 0;
-        let end = correctAnswer.length - 1;
-        let mid;
-        // check if correctAnswer is empty or not
-        // not empty => binary search
-        if (!settingClue) {
-          switch (correctAnswer.length) {
-            case 0:
-              correctAnswer.push({
-                id: parseInt(e.currentTarget.id),
-                clue: curClue,
-              });
-              break;
-            default:
-              while (start <= end) {
-                mid = Math.floor((start + end) / 2);
-                // console.log(start, mid, end);
-                if (correctAnswer[mid].id === parseInt(e.currentTarget.id)) {
-                  start = mid;
-                  console.log(mid);
-                  break;
-                }
-                switch (correctAnswer[mid].id > parseInt(e.currentTarget.id)) {
-                  case true:
-                    end = mid - 1;
-                    break;
-                  default:
-                    start = mid + 1;
-                    break;
-                }
-              }
-              console.log(correctAnswer);
-              correctAnswer[mid].id === parseInt(e.currentTarget.id)
-                ? correctAnswer.splice(mid, 1)
-                : correctAnswer.splice(start, 0, {
-                    id: parseInt(e.currentTarget.id),
-                    clue: curClue,
-                  });
-              break;
-          }
-          curClue = "";
-        }
-        console.log(correctAnswer);
       });
     }
   };
@@ -489,6 +475,8 @@ const CreateMap = () => {
             setSettingClue(false);
           }}
           checkOpen={setSettingClue}
+          id={curClueID}
+          checkID={binarySearchAnswerSelector}
         />
       )}
       <PopOutForm />
