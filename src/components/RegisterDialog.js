@@ -151,7 +151,7 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
         Course: values.course,
         Email: values.email,
         TotalScore: 0,
-        Activated: false,
+        Activated: values.course.toString() === "Guest" ? true : false,
         PlayTimes: 1,
         GameHistory: [],
       });
@@ -471,10 +471,13 @@ const RegisterDialog = ({ isOpen, closeRegister }) => {
             <DialogContentText id="alert-dialog-description">
               {`Thank you for joining SYNTAXI`}
             </DialogContentText>
-            <DialogContentText id="alert-dialog-description">
-              {`Please send us a massage with content "YOUR NAME - I want to activate my account"
-							  through CONTACT US and wait until your account is activated. `}
-            </DialogContentText>
+            
+            {values.course.toString() !== 'Guest' &&
+              <DialogContentText id="alert-dialog-description">
+                {`Please send us a massage with content "YOUR NAME - I want to activate my account"
+                  through CONTACT US and wait until your account is activated. `}
+              </DialogContentText>
+            }
           </DialogContent>
           <div
             style={{

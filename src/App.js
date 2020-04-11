@@ -12,6 +12,7 @@ import MapPlay from './pages/MapPlay';
 import ProfileDetail from './pages/ProfileDetail.js';
 import Announcement from './pages/Announcement.js';
 import AboutApp from './pages/AboutApp.js';
+import Package from './pages/Package.js';
 import theme from './theme/muiTheme';
 import { ThemeProvider } from '@material-ui/core/styles';
 
@@ -45,6 +46,7 @@ class App extends Component {
 						<Route path="/" exact component={Homepage} />
 						<Route path="/practice" exact component={Practicepage} />
 						<Route path="/AboutApp" exact component={AboutApp} />
+						<Route path="/package" exact component={Package} />
 						<Route path="/createmap" exact component={CreateMap} />
 						<Route path="/studentmanagement"
 									 exact
