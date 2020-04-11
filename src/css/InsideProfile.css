@@ -25,13 +25,18 @@
   /* margin: 10px auto; */
 }
 
-.ActionButton {
+.ActionButton,
+.PackageButton {
   width: 100%;
 }
 
 .ActionButton button {
   font-size: 0.8rem !important;
   min-width: 33%;
+  min-height: 65px;
+}
+
+.PackageButton button {
   min-height: 65px;
 }
 

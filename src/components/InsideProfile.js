@@ -105,10 +105,22 @@ class InsideProfile extends Component {
             <ButtonGroup
               variant="text"
               color="primary"
-              className="ActionButton"
+              className="PackageButton"
             >
-              <Link style={{ minWidth: "100%" }} to ='/package'>
-                <Button style={{ minWidth: "100%"}}>Buy Package</Button>
+              <Link
+                style={{ minWidth: "10%", cursor: "auto", outline: "none" }}
+              >
+                {/** <Button style={{ minWidth: "100%" }}></Button> */}
+              </Link>
+              <Link style={{ minWidth: "80%" }} to="/package">
+                <Button style={{ minWidth: "100%", fontSize: "1.2rem" }}>
+                  Buy Package
+                </Button>
+              </Link>
+              <Link
+                style={{ minWidth: "10%", cursor: "auto", outline: "none" }}
+              >
+                {/** <Button style={{ minWidth: "100%" }}></Button> */}
               </Link>
             </ButtonGroup>
           )}
