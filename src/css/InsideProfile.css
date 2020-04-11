@@ -1,43 +1,44 @@
 .InsideProfile {
-	margin: 76px 10px 0 0;
-	border: 2px solid #5e81ac;
-	background: #f3f5f8 !important;
-	border-radius: 10px !important;
-	height: auto;
-	padding: 1rem 0;
+  margin: 76px 10px 0 0;
+  border: 2px solid #5e81ac;
+  background: #f3f5f8 !important;
+  border-radius: 10px !important;
+  height: auto;
+  padding: 1rem 0;
 }
 
 .InsideProfile a {
-	color: #111;
+  color: #111;
 }
 
 .Information {
-	width: 100%;
-	height: auto;
-	/* background-color: #d9edf7; */
-	/* background-color: #eceff4; */
-	/* padding-top: 0.5rem; */
-	display: flex;
-	flex-direction: column;
-	/* justify-content: center; */
-	align-items: center;
-	text-align: center;
-	/* margin: 10px auto; */
+  width: 100%;
+  height: auto;
+  /* background-color: #d9edf7; */
+  /* background-color: #eceff4; */
+  /* padding-top: 0.5rem; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  text-align: center;
+  /* margin: 10px auto; */
 }
 
 .ActionButton {
-	width: 100%;
+  width: 100%;
 }
 
 .ActionButton button {
-	font-size: 0.8rem !important;
-	min-width: 33%;
+  font-size: 0.8rem !important;
+  min-width: 33%;
+  min-height: 65px;
 }
 
 .Information a:visited {
-	color: #111;
+  color: #111;
 }
 
 .UserInfo {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
