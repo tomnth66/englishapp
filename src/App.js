@@ -28,13 +28,28 @@ class App extends Component {
 	// }
 
 	render() {
-		if (
-			window.location.pathname !== '/' &&
-			window.location.pathname !== '/AboutApp'
-		) {
-			if (!localStorage.getItem('user')) {
+		if (!localStorage.getItem('user')) {
+			// console.log('case 1');
+			if (
+				window.location.pathname !== '/' &&
+				window.location.pathname !== '/AboutApp'
+			){
 				window.location.href = '/';
 				return null;
+			}
+		}
+		else{
+			if (localStorage.getItem('class')!=='admin') {
+				// console.log('case 2');
+				if (
+					window.location.pathname === '/postannouncement' ||
+					window.location.pathname === '/createmap' ||
+					window.location.pathname === '/studentmanagement'||
+					window.location.pathname === '/CourseManagement'
+				){
+					window.location.href = '/';
+					return null;
+				}
 			}
 		}
 
