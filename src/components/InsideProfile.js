@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../css/InsideProfile.css";
 import Avatar from "./Avatar.js";
-// import Button from './Button.js';
 import { Button, Card, ButtonGroup } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import firebase from "../firebase.js";
@@ -118,7 +117,7 @@ class InsideProfile extends Component {
             variant="contained"
             color="primary"
             onClick={this.handleLogOut.bind(this)}
-            style={{ marginTop: "1rem", width: "95%" }}
+            style={{ marginTop: "1rem", width: "80%" }}
           >
             Log Out
           </Button>

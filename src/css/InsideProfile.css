@@ -19,7 +19,7 @@
   /* padding-top: 0.5rem; */
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   text-align: center;
   /* margin: 10px auto; */
@@ -39,14 +39,6 @@
 .PackageButton button {
   min-height: 65px;
   transition: all 300ms ease-in-out;
-  background: -webkit-linear-gradient(#ebcb8b, #d08770);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.PackageButton button:hover {
-  transition: all 300ms ease-in-out;
   background: -webkit-linear-gradient(
     rgba(235, 203, 139, 0.6),
     rgba(208, 135, 112, 0.9)
@@ -54,6 +46,14 @@
   -webkit-text-fill-color: #f3f5f8;
   background-clip: border-box;
   -webkit-background-clip: border-box;
+}
+
+.PackageButton button:hover {
+  transition: all 300ms ease-in-out;
+  background: -webkit-linear-gradient(#ebcb8b, #d08770);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .Information a:visited {
