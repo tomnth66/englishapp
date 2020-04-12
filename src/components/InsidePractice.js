@@ -8,7 +8,7 @@ import Loading from './Loading.js';
 import { Link } from 'react-router-dom';
 import '../css/InsidePractice.css';
 
-const InsidePractice = () => {
+const InsidePractice = (props) => {
 	// get typeList
 	let [type, setType] = useState(0);
 	let [typeList, setTypeList] = useState([]);
@@ -184,6 +184,7 @@ const InsidePractice = () => {
 					</Select>
 				</FormControl>
 			</div>
+
 			<div className="InsidePracticeMain">
 				<table>
 					<tr className="studentlist--head">
@@ -191,7 +192,13 @@ const InsidePractice = () => {
 						<th>Name</th>
 						<th>Duration</th>
 						<th>Difficulty</th>
-						<th style={{ width: '12%' }} />
+						{props.Player.Class === 'guest' &&
+							<th style={{ width: '15%' }}>Turn: {props.Player.PlayTimes}</th>
+						}
+
+						{props.Player.Class !== 'guest' &&
+							<th style={{ width: '15%' }}></th>
+						}
 					</tr>
 
 					{mapCurType.map((map, idx) => (
@@ -201,7 +208,7 @@ const InsidePractice = () => {
 							<td>{map.Maptime + 's'}</td>
 							<td>{map.Mapdifficulty}</td>
 
-							<td style={{ width: '12%' }}>
+							<td style={{ width: '15%' }}>
 								{/* <Link
 									style={{ color: '#2e3440' }}
 									to={`/Practice/${map.id}/${map.idx}`}
