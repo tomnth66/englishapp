@@ -163,9 +163,11 @@ export default class InsideProfileDetail extends Component {
 					<div className="Left">
 						<div className="StudentAvatar">
 							<img className="Picture" src={Avatar}></img>
-							<div className="StudentProfileLayer" onClick = {this.ChangingAva.bind(this)}>
-								Change Avatar
-							</div>
+							{localStorage.getItem('userId') === User.Id && (
+								<div className="StudentProfileLayer" onClick = {this.ChangingAva.bind(this)}>
+									Change Avatar
+								</div>
+							)}
 						</div>
 					</div>
 
