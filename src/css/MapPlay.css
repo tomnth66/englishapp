@@ -3,6 +3,17 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 1rem;
   box-sizing: border-box;
+
+  /* Stop Watch */
+  transition: background-size 300ms ease-in-out;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to right, #88c0d0 100%, #88c0d0 100%),
+    linear-gradient(to bottom, #88c0d0 100%, #88c0d0 100%),
+    linear-gradient(to right, #88c0d0 100%, #88c0d0 100%),
+    linear-gradient(to bottom, #88c0d0 100%, #88c0d0 100%);
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  background-size: 0 3px, 3px 0, 0 3px, 3px 0;
+  position: relative;
 }
 
 #studentAnswer {
@@ -108,4 +119,19 @@
   background: #3b4252;
   color: #eceff4;
   padding: 0 0.3rem 0 0.3rem;
+}
+
+.hint--button {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0.5rem !important;
+  box-sizing: content-box !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  min-width: 0 !important;
+  border-radius: 50% !important;
+  transform: translate(-60%, -40%) rotate(180deg);
+  box-shadow: none !important;
 }

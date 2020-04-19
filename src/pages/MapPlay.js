@@ -9,9 +9,6 @@ import SendIcon from "@material-ui/icons/Send";
 import "flexboxgrid";
 import "../css/MapPlay.css";
 
-// import css
-// import "../css/MapPlay.css"
-
 const MapPlay = ({ match }) => {
   // get map
   let [map, setMap] = useState({});
@@ -21,11 +18,12 @@ const MapPlay = ({ match }) => {
   let [isLoading, setIsLoading] = useState(true);
   let [isReady, setIsReady] = useState(true);
   let [values, setValues] = useState({
-    score: 10,
     time: 0,
     defaultTime: 0,
   });
+
   let timer = new TaskTimer(1000);
+  let student_card = document.getElementById("student-card");
 
   // console.log(match);
   console.time("getMap");
@@ -98,27 +96,82 @@ const MapPlay = ({ match }) => {
     console.log(mapPara);
     let studentAnswerSelector = document.getElementById("studentAnswer");
     studentAnswerSelector.innerHTML = mapPara;
-    // let myTimer = setInterval(() => {
-    // 	setValues({ ...values, time: --values.time });
-    // }, 1000);
-    timer.add({
-      id: `${match.params.id}`,
-      tickDelay: 1,
-      totalRuns: values.defaultTime,
-      callback(task) {
-        setValues({ ...values, time: --values.time });
-        console.log(`${task.id} task has run ${task.currentRuns} times.`);
-
-        // only check answer when task is running
-        let student_paras = document.querySelectorAll(".student-para");
-        for (let p of student_paras) {
-          p.addEventListener("click", (e) => {
-            e.currentTarget.classList.toggle("student-selected-answer");
-          });
-        }
-      },
-    });
+    // timer.add({
+    //   id: `${match.params.id}`,
+    //   tickDelay: 1,
+    //   totalRuns: values.defaultTime,
+    //   callback(task) {
+    //   }
+    // });
     timer.start();
+    timer.on("tick", () => {
+      // console.log("tick count: " + timer.tickCount);
+      // console.log("elapsed time: " + timer.time.elapsed + " ms.");
+      console.log(values.defaultTime * 1000, timer.time.elapsed);
+      /**
+       * -----------------
+       *  BACKGROUND SIZE
+       * -----------------
+       * percentage and size  || top border     - animation left  -> right
+       * size percentage      || right border   - animation top   -> bottom
+       * percentage size      || bottom border  - animation right -> left
+       * size percentage      || left border    - animation bottm -> top
+       *
+       */
+      // update border => to show how much time left
+      const min = (a, b) => {
+        return a < b ? a : b;
+      };
+      const max = (a, b) => {
+        return a > b ? a : b;
+      };
+
+      // console.error(topBorder, rightBorder, bottomBorder, leftBorder);
+      student_card.style.cssText = `background-size: ${min(
+        400 - (values.time / values.defaultTime) * 400,
+        100
+      )}% 3px, 3px ${min(
+        max(0, 300 - (values.time / values.defaultTime) * 400),
+        100
+      )}%, ${min(
+        max(0, 200 - (values.time / values.defaultTime) * 400),
+        100
+      )}% 3px, 3px ${min(
+        max(0, 100 - (values.time / values.defaultTime) * 400),
+        100
+      )}%`;
+      console.error((values.time / values.defaultTime) * 100);
+
+      setValues({
+        ...values,
+        time: --values.time,
+      });
+
+      // edit css second time after update values.time for better animation
+      student_card.style.cssText = `background-size: ${min(
+        400 - (values.time / values.defaultTime) * 400,
+        100
+      )}% 3px, 3px ${min(
+        max(0, 300 - (values.time / values.defaultTime) * 400),
+        100
+      )}%, ${min(
+        max(0, 200 - (values.time / values.defaultTime) * 400),
+        100
+      )}% 3px, 3px ${min(
+        max(0, 100 - (values.time / values.defaultTime) * 400),
+        100
+      )}%`;
+      console.error((values.time / values.defaultTime) * 100);
+
+      // only check answer when task is running
+      let student_paras = document.querySelectorAll(".student-para");
+      for (let p of student_paras) {
+        p.addEventListener("click", (e) => {
+          e.currentTarget.classList.toggle("student-selected-answer");
+        });
+      }
+      if (timer.tickCount >= values.defaultTime) timer.stop();
+    });
   };
 
   const submit = () => {};
@@ -142,7 +195,10 @@ const MapPlay = ({ match }) => {
         className="row middle-xs center-xs"
         style={{ height: "calc(100% - 6rem)" }}
       >
-        <div className="col-xs-10 student-card">
+        <div className="col-xs-10 student-card" id="student-card">
+          <Button color="primary" variant="contained" className="hint--button">
+            <WbIncandescentTwoToneIcon />
+          </Button>
           <div className="answerSelector" id="studentAnswer"></div>
           <div className="button-area">
             <Button
@@ -156,32 +212,19 @@ const MapPlay = ({ match }) => {
           </div>
         </div>
       </div>
-      <div className="map--bar">
-        <Button
-          className="clue--btn"
-          variant="contained"
-          color="primary"
-          endIcon={<WbIncandescentTwoToneIcon />}
-        >
-          {`C l u e`}
-        </Button>
-        <div className="point--container">
-          <span style={{ left: "0.5rem" }}>{`POINT: ${values.score}`}</span>
-          <div
-            className="point--status"
-            style={{ width: `${0 + values.score}%` }}
-          ></div>
-        </div>
-        <div className="time--container">
-          <span style={{ right: "0.5rem" }}>{`${values.time}s`}</span>
-          <div
-            className="time--status"
-            style={{ width: `${(values.time / values.defaultTime) * 100}%` }}
-          ></div>
-        </div>
-      </div>
     </div>
   );
 };
 
 export default MapPlay;
+
+// width: 2rem;
+//     border-radius: 50%;
+//     min-width: 2rem !important;
+//     height: 2rem;
+//     padding: 0.5rem;
+//     box-sizing: content-box;
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+// }
