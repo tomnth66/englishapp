@@ -10,47 +10,6 @@ import "flexboxgrid";
 import "../css/MapPlay.css";
 
 let answer = [];
-const binarySearchAnswerStudent = (id) => {
-  let start = 0;
-  let end = answer.length - 1;
-  let mid;
-
-  // check if correctAnswer is empty or not
-  // not empty => binary search
-  switch (answer.length) {
-    case 0:
-      answer.push({ id: id });
-      break;
-    default:
-      while (start <= end) {
-        // in case of big num
-        // => don't use (end + start) / 2
-        mid = Math.floor((end - start) / 2 + start);
-      }
-
-      if (answer[mid].id === id) {
-        start = mid;
-        // console.log(mid);
-        break;
-      }
-      switch (answer[mid].id > id) {
-        case true:
-          end = mid - 1;
-          break;
-        default:
-          start = mid + 1;
-          break;
-      }
-      console.log(answer);
-      answer[mid].id === id
-        ? answer.splice(mid, 1)
-        : answer.splice(start, 0, {
-            id: id,
-          });
-      break;
-  }
-  console.log(answer);
-};
 
 const MapPlay = ({ match }) => {
   // get map
@@ -150,7 +109,7 @@ const MapPlay = ({ match }) => {
     timer.on("tick", () => {
       // console.log("tick count: " + timer.tickCount);
       // console.log("elapsed time: " + timer.time.elapsed + " ms.");
-      // console.log(values.defaultTime * 1000, timer.time.elapsed);
+      console.log(values.defaultTime * 1000, timer.time.elapsed);
       /**
        * -----------------
        *  BACKGROUND SIZE
@@ -185,7 +144,7 @@ const MapPlay = ({ match }) => {
         max(0, 100 - (values.time / values.defaultTime) * 400),
         100
       )}%`;
-      // console.error((values.time / values.defaultTime) * 100);
+      console.error((values.time / values.defaultTime) * 100);
 
       setValues({
         ...values,
@@ -206,13 +165,57 @@ const MapPlay = ({ match }) => {
         max(0, 100 - (values.time / values.defaultTime) * 400),
         100
       )}%`;
-      // console.error((values.time / values.defaultTime) * 100);
+      console.error((values.time / values.defaultTime) * 100);
+
+      const binarySearchAnswerStudent = (id) => {
+        let start = 0;
+        let end = answer.length - 1;
+        let mid;
+
+        // check if correctAnswer is empty or not
+        // not empty => binary search
+        switch (answer.length) {
+          case 0:
+            answer.push({ id: id });
+            break;
+          default:
+            while (start <= end) {
+              // in case of big num
+              // => don't use (end + start) / 2
+              mid = Math.floor((end - start) / 2 + start);
+            }
+
+            if (answer[mid].id === id) {
+              start = mid;
+              // console.log(mid);
+              break;
+            }
+            switch (answer[mid].id > id) {
+              case true:
+                end = mid - 1;
+                break;
+              default:
+                start = mid + 1;
+                break;
+            }
+            console.log(answer);
+            answer[mid].id === id
+              ? answer.splice(mid, 1)
+              : answer.splice(start, 0, {
+                  id: id,
+                });
+            break;
+        }
+        console.log(answer);
+      };
 
       // only check answer when task is running
       let student_paras = document.querySelectorAll(".student-para");
       for (let p of student_paras) {
         p.addEventListener("click", (e) => {
           e.currentTarget.classList.toggle("student-selected-answer");
+          binarySearchAnswerStudent(e.currentTarget.id);
+          console.log(answer);
         });
       }
 

@@ -335,7 +335,9 @@ const CreateMap = () => {
         break;
       default:
         while (start <= end) {
-          mid = Math.floor((start + end) / 2);
+          // in case of big num
+          // => don't use (end + start) / 2
+          mid = Math.floor((end - start) / 2 + start);
           // console.log(start, mid, end);
           if (correctAnswer[mid].id === id) {
             start = mid;
