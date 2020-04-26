@@ -1,4 +1,4 @@
-/* eslint-disable no-loop-func */
+// eslint-disable no-loop-func
 import React, { useState, useEffect } from "react";
 import "../css/CreateMap.css";
 import firebase from "../firebase.js";

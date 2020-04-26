@@ -3,43 +3,47 @@ import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
 import React, { useEffect, useState } from "react";
 import firebase from "../firebase.js";
-import { TaskTimer } from "tasktimer";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 import SendIcon from "@material-ui/icons/Send";
 import "flexboxgrid";
 import "../css/MapPlay.css";
 
 let answer = [];
+
+let timer;
+let ready = false;
+
 const binarySearchAnswerStudent = (id) => {
   let start = 0;
   let end = answer.length - 1;
   let mid;
-
-  // check if correctAnswer is empty or not
+  // check if answer is empty or not
   // not empty => binary search
   switch (answer.length) {
     case 0:
-      answer.push({ id: id });
+      answer.push({
+        id: id,
+      });
       break;
     default:
       while (start <= end) {
         // in case of big num
         // => don't use (end + start) / 2
         mid = Math.floor((end - start) / 2 + start);
-      }
-
-      if (answer[mid].id === id) {
-        start = mid;
-        // console.log(mid);
-        break;
-      }
-      switch (answer[mid].id > id) {
-        case true:
-          end = mid - 1;
+        // console.log(start, mid, end);
+        if (answer[mid].id === id) {
+          start = mid;
+          console.log(mid);
           break;
-        default:
-          start = mid + 1;
-          break;
+        }
+        switch (answer[mid].id > id) {
+          case true:
+            end = mid - 1;
+            break;
+          default:
+            start = mid + 1;
+            break;
+        }
       }
       console.log(answer);
       answer[mid].id === id
@@ -65,7 +69,6 @@ const MapPlay = ({ match }) => {
     defaultTime: 0,
   });
 
-  let timer = new TaskTimer(1000);
   let student_card = document.getElementById("student-card");
 
   // console.log(match);
@@ -86,6 +89,7 @@ const MapPlay = ({ match }) => {
     console.timeEnd("getMap");
     setIsLoading(false);
     setIsReady(false);
+    ready = false;
 
     setValues({
       ...values,
@@ -105,8 +109,8 @@ const MapPlay = ({ match }) => {
     // id is start from 0
     let currentID = 0;
 
-    // clear the old answer correctAnswer;
-    // correctAnswer = [];
+    // clear the old answer answer;
+    // answer = [];
 
     for (let word of words) {
       fullPara += `<div>\n`;
@@ -115,7 +119,7 @@ const MapPlay = ({ match }) => {
         if (word[i] !== "") {
           fullPara += `\t<span id="${currentID}" class="student-para">${word[i]}</span>\n`;
           ++currentID;
-          // correctAnswer.push(false);
+          // answer.push(false);
         } else {
           //  don't count " " or "\n"
           fullPara += '\t<div style="height: 1rem"></div>';
@@ -135,22 +139,31 @@ const MapPlay = ({ match }) => {
   // check answer with document.querySelector
   const checkIsReady = (e) => {
     setIsReady(true);
+    ready = true;
     console.log(e);
     console.log(mapPara);
     let studentAnswerSelector = document.getElementById("studentAnswer");
     studentAnswerSelector.innerHTML = mapPara;
-    // timer.add({
-    //   id: `${match.params.id}`,
-    //   tickDelay: 1,
-    //   totalRuns: values.defaultTime,
-    //   callback(task) {
-    //   }
-    // });
-    timer.start();
-    timer.on("tick", () => {
-      // console.log("tick count: " + timer.tickCount);
-      // console.log("elapsed time: " + timer.time.elapsed + " ms.");
-      // console.log(values.defaultTime * 1000, timer.time.elapsed);
+
+    let start_time = new Date().getTime();
+
+    let student_paras = document.querySelectorAll(".student-para");
+    for (let p of student_paras) {
+      p.addEventListener("click", (e) => {
+        if (ready) {
+          e.currentTarget.classList.toggle("student-selected-answer");
+          binarySearchAnswerStudent(e.currentTarget.id);
+          console.log("click!");
+        }
+      });
+    }
+
+    timer = setInterval(() => {
+      let cur_time = new Date().getTime();
+      let time_diff =
+        values.defaultTime - Math.floor((cur_time - start_time) / 1000);
+
+      setValues({ ...values, time: time_diff });
       /**
        * -----------------
        *  BACKGROUND SIZE
@@ -165,6 +178,7 @@ const MapPlay = ({ match }) => {
       const min = (a, b) => {
         return a < b ? a : b;
       };
+
       const max = (a, b) => {
         return a > b ? a : b;
       };
@@ -173,55 +187,31 @@ const MapPlay = ({ match }) => {
 
       // console.error(topBorder, rightBorder, bottomBorder, leftBorder);
       student_card.style.cssText = `background-size: ${min(
-        400 - (values.time / values.defaultTime) * 400,
+        400 - (time_diff / values.defaultTime) * 400,
         100
       )}% ${time_border_size}px, ${time_border_size}px ${min(
-        max(0, 300 - (values.time / values.defaultTime) * 400),
+        max(0, 300 - (time_diff / values.defaultTime) * 400),
         100
       )}%, ${min(
-        max(0, 200 - (values.time / values.defaultTime) * 400),
+        max(0, 200 - (time_diff / values.defaultTime) * 400),
         100
       )}% ${time_border_size}px, ${time_border_size}px ${min(
-        max(0, 100 - (values.time / values.defaultTime) * 400),
+        max(0, 100 - (time_diff / values.defaultTime) * 400),
         100
       )}%`;
-      // console.error((values.time / values.defaultTime) * 100);
 
-      setValues({
-        ...values,
-        time: --values.time,
-      });
-
-      // edit css second time after update values.time for better animation
-      student_card.style.cssText = `background-size: ${min(
-        400 - (values.time / values.defaultTime) * 400,
-        100
-      )}% ${time_border_size}px, ${time_border_size}px ${min(
-        max(0, 300 - (values.time / values.defaultTime) * 400),
-        100
-      )}%, ${min(
-        max(0, 200 - (values.time / values.defaultTime) * 400),
-        100
-      )}% ${time_border_size}px, ${time_border_size}px ${min(
-        max(0, 100 - (values.time / values.defaultTime) * 400),
-        100
-      )}%`;
-      // console.error((values.time / values.defaultTime) * 100);
-
-      // only check answer when task is running
-      let student_paras = document.querySelectorAll(".student-para");
-      for (let p of student_paras) {
-        p.addEventListener("click", (e) => {
-          e.currentTarget.classList.toggle("student-selected-answer");
-        });
+      if (time_diff <= 0) {
+        console.log("end");
+        ready = false;
+        clearInterval(timer);
       }
-
-      // stopper
-      if (timer.tickCount >= values.defaultTime) timer.stop();
-    });
+    }, 20);
   };
 
-  const submit = () => {};
+  const submit = () => {
+    ready = false;
+    clearInterval(timer);
+  };
 
   useEffect(() => {
     console.log(match);
