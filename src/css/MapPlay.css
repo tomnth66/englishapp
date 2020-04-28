@@ -7,10 +7,10 @@
   /* Stop Watch */
   transition: background-size 300ms ease-in-out;
   background-repeat: no-repeat;
-  background-image: linear-gradient(to right, #88c0d0 100%, #88c0d0 100%),
-    linear-gradient(to bottom, #88c0d0 100%, #88c0d0 100%),
-    linear-gradient(to right, #88c0d0 100%, #88c0d0 100%),
-    linear-gradient(to bottom, #88c0d0 100%, #88c0d0 100%);
+  background-image: linear-gradient(to right, #8fbcbb 100%, #8fbcbb 100%),
+    linear-gradient(to bottom, #8fbcbb 100%, #8fbcbb 100%),
+    linear-gradient(to right, #8fbcbb 100%, #8fbcbb 100%),
+    linear-gradient(to bottom, #8fbcbb 100%, #8fbcbb 100%);
   background-position: 0 0, 100% 0, 100% 100%, 0 100%;
   background-size: 0 3px, 3px 0, 0 3px, 3px 0;
   position: relative;
@@ -18,10 +18,10 @@
 
 #studentAnswer {
   height: 80%;
-  background: #eceff4;
+  background: #d8dee9;
   display: block;
   text-align: left;
-  border: 0.15rem solid rgba(63, 81, 181, 0.6);
+  border: 3px solid #8fbcbb;
   padding: 0.5rem 0 0 0.5rem;
   font-size: 1rem;
   overflow-y: scroll;
