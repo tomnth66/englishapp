@@ -39,9 +39,10 @@
 .PackageButton button {
   min-height: 65px;
   transition: all 300ms ease-in-out;
+  /* background-color: #ff9547; */
   background: -webkit-linear-gradient(
-    rgba(235, 203, 139, 0.6),
-    rgba(208, 135, 112, 0.9)
+    rgba(255, 95, 47, 0.6),
+    rgba(255, 95, 47, 0.9)
   );
   -webkit-text-fill-color: #f3f5f8;
   background-clip: border-box;
