@@ -14,15 +14,11 @@
 .Information {
   width: 100%;
   height: auto;
-  /* background-color: #d9edf7; */
-  /* background-color: #eceff4; */
-  /* padding-top: 0.5rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* margin: 10px auto; */
 }
 
 .ActionButton,
@@ -39,11 +35,9 @@
 .PackageButton button {
   min-height: 65px;
   transition: all 300ms ease-in-out;
-  /* background-color: #ff9547; */
-  background: -webkit-linear-gradient(
-    rgba(255, 95, 47, 0.6),
-    rgba(255, 95, 47, 0.9)
-  );
+  background-color: #08aeea;
+  background-image: linear-gradient(62deg, #08aeea 0%, #2af598 100%);
+  background-image: -webkit-linear-gradient(62deg, #08aeea 0%, #2af598 100%);
   -webkit-text-fill-color: #f3f5f8;
   background-clip: border-box;
   -webkit-background-clip: border-box;
@@ -52,11 +46,12 @@
 
 .PackageButton button:hover {
   transition: all 300ms ease-in-out;
-  background: -webkit-linear-gradient(#ebcb8b, #d08770);
+  background-image: linear-gradient(152deg, #08aeea 0%, #2af598 100%);
+  background-image: -webkit-linear-gradient(152deg, #08aeea 0%, #2af598 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  border: 3px solid #ddac92;
+  border: 3px solid #08aeea;
 }
 
 .Information a:visited {

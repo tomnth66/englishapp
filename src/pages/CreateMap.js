@@ -18,6 +18,8 @@ import {
   Select,
   MenuItem,
   Input,
+  Slider,
+  Typography,
 } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
@@ -27,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
+    justifyContent: "center",
   },
   formControl: {
     margin: theme.spacing(1),
@@ -34,13 +37,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let clueTypeList = ["test1", "test2", "test3"];
-
 let titleName = "";
 let exerciseType = "";
 let exerciseTypeList = [];
 let exerciseTime = "";
-let exerciseDifficulty = "";
+let exerciseDifficulty = 0;
 let curClue = "";
 let ids = new Ids();
 
@@ -111,7 +112,7 @@ const PopOutForm = () => {
   const [typeList, setTypeList] = useState([]);
   const [name, setName] = useState("");
   const [duration, setDuration] = useState();
-  const [difficulty, setDifficulty] = useState();
+  const [difficulty, setDifficulty] = useState(0);
 
   useEffect(() => {
     const db = firebase.firestore();
@@ -126,7 +127,7 @@ const PopOutForm = () => {
 
   const handleChangeType = (e) => {
     setType(e.target.value);
-    console.log(e.target.value);
+    console.log(e);
   };
 
   const handleChangeName = (e) => {
@@ -137,8 +138,9 @@ const PopOutForm = () => {
     setDuration(e.target.value);
   };
 
-  const handleChangeDifficulty = (e) => {
-    setDifficulty(e.target.value);
+  const handleChangeDifficulty = (e, val) => {
+    setDifficulty(val);
+    // console.log(e, val);
   };
 
   // const handleClickOpen = () => {
@@ -160,7 +162,13 @@ const PopOutForm = () => {
     >
       <DialogTitle>Quick create</DialogTitle>
       <DialogContent>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
           <div className={classes.container}>
             <FormControl className={classes.formControl} required>
               <InputLabel id="demo-dialog-select-label">Map Type</InputLabel>
@@ -208,6 +216,7 @@ const PopOutForm = () => {
                   We'll never share your email.
                 </FormHelperText> */}
             </FormControl>
+            {/*
             <FormControl className={classes.formControl} required>
               <InputLabel htmlFor="my-input">Map Difficulty</InputLabel>
               <Input
@@ -216,10 +225,29 @@ const PopOutForm = () => {
                 value={difficulty}
                 onChange={handleChangeDifficulty}
               />
-              {/* <FormHelperText id="my-helper-text">
-                  We'll never share your email.
-                </FormHelperText> */}
             </FormControl>
+            */}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "1rem",
+            }}
+          >
+            <Typography id="difficulty--slider" style={{ color: "#777777" }}>
+              Difficulty
+            </Typography>
+            <Slider
+              defaultValue={0}
+              aria-labelledby="difficulty--slider"
+              valueLabelDisplay="auto"
+              min={0}
+              max={1000}
+              style={{ width: "240px" }}
+              onChange={handleChangeDifficulty}
+            />
           </div>
         </div>
       </DialogContent>
@@ -446,7 +474,6 @@ const CreateMap = () => {
       console.log(correctAnswer);
       MapList.push({
         Answer: correctAnswer,
-        Clue: ["clue1", "clue2", "clue3"],
         Mapname: titleName,
         Maptype: exerciseTypeList[exerciseType],
         Maptime: exerciseTime,

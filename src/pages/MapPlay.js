@@ -22,7 +22,7 @@ const binarySearchAnswerStudent = (id) => {
   switch (answer.length) {
     case 0:
       answer.push({
-        id: id,
+        id: parseInt(id),
       });
       break;
     default:
@@ -49,7 +49,7 @@ const binarySearchAnswerStudent = (id) => {
       answer[mid].id === id
         ? answer.splice(mid, 1)
         : answer.splice(start, 0, {
-            id: id,
+            id: parseInt(id),
           });
       break;
   }
@@ -211,6 +211,51 @@ const MapPlay = ({ match }) => {
   const submit = () => {
     ready = false;
     clearInterval(timer);
+
+    // calculate score
+    let score = 0;
+    let correct = 0;
+    let wrong = 0;
+    let correct_answer = map.Answer;
+    let curID = 0;
+
+    for (let i = 0; i < answer.length; ++i) {
+      let start = curID;
+      let end = answer.length - 1;
+      let mid;
+
+      while (start <= end) {
+        // in case of big num
+        // => don't use (end + start) / 2
+        mid = Math.floor((end - start) / 2 + start);
+        console.log(start, mid, end);
+        if (correct_answer[mid].id === answer[i].id) {
+          start = mid;
+          ++correct;
+          break;
+        }
+        switch (correct_answer[mid].id > answer[i].id) {
+          case true:
+            end = mid - 1;
+            break;
+          default:
+            start = mid + 1;
+            break;
+        }
+      }
+      switch (answer[i].id) {
+        case correct_answer[mid].id:
+          curID = mid;
+          // correct++;
+          break;
+        default:
+          curID = start;
+          wrong++;
+          break;
+      }
+    }
+    score = Math.max(0, 10 * correct - wrong);
+    console.log(`Correct: ${correct}\nWrong: ${wrong}\nScore: ${score}`);
   };
 
   useEffect(() => {
