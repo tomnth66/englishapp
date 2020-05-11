@@ -13,6 +13,8 @@ let answer = [];
 let timer;
 let ready = false;
 
+let currentID;
+
 const binarySearchAnswerStudent = (id) => {
   let start = 0;
   let end = answer.length - 1;
@@ -67,6 +69,7 @@ const MapPlay = ({ match }) => {
   let [values, setValues] = useState({
     time: 0,
     defaultTime: 0,
+    difficulty: 1000,
   });
 
   let student_card = document.getElementById("student-card");
@@ -85,6 +88,7 @@ const MapPlay = ({ match }) => {
         console.log(data.data().MapList[match.params.idx]);
         setMap(data.data().MapList[match.params.idx]);
         curMap = data.data().MapList[match.params.idx];
+        console.error(data.data().MapList[match.params.idx]);
       });
     console.timeEnd("getMap");
     setIsLoading(false);
@@ -93,6 +97,7 @@ const MapPlay = ({ match }) => {
 
     setValues({
       ...values,
+      difficulty: curMap.Mapdifficulty,
       time: parseInt(curMap.Maptime),
       defaultTime: parseInt(curMap.Maptime),
     });
@@ -107,7 +112,7 @@ const MapPlay = ({ match }) => {
     let fullPara = "";
 
     // id is start from 0
-    let currentID = 0;
+    currentID = 0;
 
     // clear the old answer answer;
     // answer = [];
@@ -214,6 +219,8 @@ const MapPlay = ({ match }) => {
 
     // calculate score
     let score = 0;
+    let correctScore = 0;
+    let wrongScore = 0;
     let correct = 0;
     let wrong = 0;
     let correct_answer = map.Answer;
@@ -221,7 +228,7 @@ const MapPlay = ({ match }) => {
 
     for (let i = 0; i < answer.length; ++i) {
       let start = curID;
-      let end = answer.length - 1;
+      let end = correct_answer.length - 1;
       let mid;
 
       while (start <= end) {
@@ -254,7 +261,9 @@ const MapPlay = ({ match }) => {
           break;
       }
     }
-    score = Math.max(0, 10 * correct - wrong);
+    correctScore = (correct / correct_answer.length) * 100;
+    wrongScore = (wrong / (currentID - correct_answer.length)) * 100;
+    score = correctScore - wrongScore * (values.difficulty / 1000);
     console.log(`Correct: ${correct}\nWrong: ${wrong}\nScore: ${score}`);
   };
 
