@@ -71,6 +71,7 @@ const MapPlay = ({ match }) => {
     defaultTime: 0,
     difficulty: 1000,
   });
+  let [clueList, setClueList] = useState([]);
 
   let student_card = document.getElementById("student-card");
 
@@ -85,7 +86,6 @@ const MapPlay = ({ match }) => {
       .doc("wCj3hteHUHgCtiWl98yq")
       .get()
       .then((data) => {
-        console.log(data.data().MapList[match.params.idx]);
         setMap(data.data().MapList[match.params.idx]);
         curMap = data.data().MapList[match.params.idx];
         console.error(data.data().MapList[match.params.idx]);
