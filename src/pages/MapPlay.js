@@ -5,15 +5,40 @@ import React, { useEffect, useState } from "react";
 import firebase from "../firebase.js";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 import SendIcon from "@material-ui/icons/Send";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 import "flexboxgrid";
 import "../css/MapPlay.css";
 
 let answer = [];
+let clueList = [];
 
 let timer;
 let ready = false;
 
 let currentID;
+
+const getRand = (seed) => {
+  if (!seed) {
+    seed = new Date().getMilliseconds();
+  }
+  seed = Math.sin(seed) * 1000;
+  return seed - Math.floor(seed);
+};
+
+const shuffle = (arr) => {
+  let size = arr.length;
+
+  while (size) {
+    let id = Math.floor(getRand() * size--);
+
+    let swapVal = arr[id];
+    arr[id] = arr[size];
+    arr[size] = swapVal;
+  }
+
+  return arr;
+};
 
 const binarySearchAnswerStudent = (id) => {
   let start = 0;
@@ -71,7 +96,12 @@ const MapPlay = ({ match }) => {
     defaultTime: 0,
     difficulty: 1000,
   });
-  let [clueList, setClueList] = useState([]);
+  let [showClue, setShowClue] = useState(false);
+
+  let handleCloseClue = (event, reason) => {
+    if (reason === "clickaway") return;
+    setShowClue(false);
+  };
 
   let student_card = document.getElementById("student-card");
 
@@ -86,9 +116,10 @@ const MapPlay = ({ match }) => {
       .doc("wCj3hteHUHgCtiWl98yq")
       .get()
       .then((data) => {
-        setMap(data.data().MapList[match.params.idx]);
         curMap = data.data().MapList[match.params.idx];
-        console.error(data.data().MapList[match.params.idx]);
+        setMap(curMap);
+        clueList = shuffle(curMap.Answer);
+        console.error(clueList);
       });
     console.timeEnd("getMap");
     setIsLoading(false);
@@ -213,6 +244,12 @@ const MapPlay = ({ match }) => {
     }, 20);
   };
 
+  const getClue = () => {
+    console.log(clueList[0]);
+    setShowClue(true);
+    clueList.shift();
+  };
+
   const submit = () => {
     ready = false;
     clearInterval(timer);
@@ -292,7 +329,12 @@ const MapPlay = ({ match }) => {
         style={{ height: "calc(100% - 6rem)" }}
       >
         <div className="col-xs-10 student-card" id="student-card">
-          <Button color="primary" variant="contained" className="hint--button">
+          <Button
+            color="primary"
+            variant="contained"
+            className="hint--button"
+            onClick={getClue}
+          >
             <WbIncandescentTwoToneIcon />
           </Button>
           <div className="answerSelector" id="studentAnswer"></div>
@@ -308,6 +350,15 @@ const MapPlay = ({ match }) => {
           </div>
         </div>
       </div>
+      <Snackbar
+        open={showClue}
+        autoHideDuration={30000}
+        onClose={handleCloseClue}
+      >
+        <Alert severity="info" onClose={handleCloseClue}>
+          This is an information message!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
