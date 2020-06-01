@@ -1,9 +1,9 @@
 // eslint-disable no-loop-func
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import "../css/CreateMap.css";
 import firebase from "../firebase.js";
-import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {Button} from "@material-ui/core";
 import Ids from "ids";
 import {
   Dialog,
@@ -22,7 +22,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import Navbar from "../components/Navbar";
-import Flippy, { FrontSide, BackSide } from "react-flippy";
+import Flippy, {FrontSide, BackSide} from "react-flippy";
 import "flexboxgrid";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +53,7 @@ const setExercise = (name, type, typeList, duration, difficulty) => {
   exerciseDifficulty = difficulty;
 };
 
-const PopOutClueForm = ({ id, closeFunc, checkOpen, checkID }) => {
+const PopOutClueForm = ({id, closeFunc, checkOpen, checkID}) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     isOpen: checkOpen,
@@ -63,12 +63,12 @@ const PopOutClueForm = ({ id, closeFunc, checkOpen, checkID }) => {
   const handleClose = () => {
     curClue = values.clue;
     checkID(id);
-    setValues({ ...values, clue: "", isOpen: false });
+    setValues({...values, clue: "", isOpen: false});
     closeFunc();
   };
 
   const handleChange = (prop) => (e) => {
-    setValues({ ...values, [prop]: e.target.value });
+    setValues({...values, [prop]: e.target.value});
   };
 
   return (
@@ -80,7 +80,7 @@ const PopOutClueForm = ({ id, closeFunc, checkOpen, checkID }) => {
     >
       <DialogTitle>Add Clue</DialogTitle>
       <DialogContent>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{display: "flex", flexDirection: "column"}}>
           <div className={classes.container}>
             <FormControl className={classes.formControl} required>
               <InputLabel htmlFor="my-input">Clue Message</InputLabel>
@@ -236,7 +236,7 @@ const PopOutForm = () => {
               marginTop: "1rem",
             }}
           >
-            <Typography id="difficulty--slider" style={{ color: "#777777" }}>
+            <Typography id="difficulty--slider" style={{color: "#777777"}}>
               Difficulty
             </Typography>
             <Slider
@@ -245,7 +245,7 @@ const PopOutForm = () => {
               valueLabelDisplay="auto"
               min={0}
               max={1000}
-              style={{ width: "240px" }}
+              style={{width: "240px"}}
               onChange={handleChangeDifficulty}
             />
           </div>
@@ -274,7 +274,7 @@ const PopOutForm = () => {
   );
 };
 
-const PopOutAlert = ({ isOpen }) => {
+const PopOutAlert = ({isOpen}) => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
 
@@ -292,7 +292,7 @@ const PopOutAlert = ({ isOpen }) => {
       disableEscapeKeyDown
       open={open}
       onClose={handleClose}
-      style={{ minWidth: "400" }}
+      style={{minWidth: "400"}}
     >
       <DialogTitle>Success</DialogTitle>
       <DialogContent className={classes.container}>
@@ -383,11 +383,11 @@ const CreateMap = () => {
         }
         console.log(correctAnswer);
         correctAnswer[mid].id === id
-          ? correctAnswer.splice(mid, 1)
+          ? correctAnswer.splice(start, 1)
           : correctAnswer.splice(start, 0, {
-              id: id,
-              clue: curClue,
-            });
+            id: id,
+            clue: curClue,
+          });
         break;
     }
     console.log(correctAnswer);
@@ -451,6 +451,8 @@ const CreateMap = () => {
           curClue = "";
           setSettingClue(true);
           setCurClueID(parseInt(e.currentTarget.id));
+        } else {
+          binarySearchAnswerSelector(parseInt(e.currentTarget.id));
         }
         e.currentTarget.classList.toggle("selected-answer");
       });
@@ -485,7 +487,7 @@ const CreateMap = () => {
 
       console.log(MapList);
 
-      ref.set({ MapList: MapList }).then(() => {
+      ref.set({MapList: MapList}).then(() => {
         // window.location.href = "/";
       });
       // .then(() => {});
@@ -497,7 +499,7 @@ const CreateMap = () => {
   };
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{height: "100vh"}}>
       {settingClue && (
         <PopOutClueForm
           closeFunc={() => {
@@ -512,7 +514,7 @@ const CreateMap = () => {
       <Navbar />
       <div
         className="row middle-xs center-xs"
-        style={{ height: "calc(100% - 4rem)" }}
+        style={{height: "calc(100% - 4rem)"}}
       >
         <div className="col-xs-10 flip-card">
           <Flippy

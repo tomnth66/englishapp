@@ -1,7 +1,7 @@
-import { Button, IconButton } from "@material-ui/core";
+import {Button, IconButton} from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import firebase from "../firebase.js";
 import WbIncandescentTwoToneIcon from "@material-ui/icons/WbIncandescentTwoTone";
 import SendIcon from "@material-ui/icons/Send";
@@ -76,14 +76,14 @@ const binarySearchAnswerStudent = (id) => {
       answer[mid].id === id
         ? answer.splice(mid, 1)
         : answer.splice(start, 0, {
-            id: parseInt(id),
-          });
+          id: parseInt(id),
+        });
       break;
   }
   console.log(answer);
 };
 
-const MapPlay = ({ match }) => {
+const MapPlay = ({match}) => {
   // get map
   let [map, setMap] = useState({});
   // fullPara values but only show up after ready
@@ -97,10 +97,14 @@ const MapPlay = ({ match }) => {
     difficulty: 1000,
   });
   let [showClue, setShowClue] = useState(false);
+  let [clue, setClue] = useState("");
 
-  let handleCloseClue = (event, reason) => {
+  const handleCloseClue = (event, reason) => {
     if (reason === "clickaway") return;
     setShowClue(false);
+    let curClue = document.getElementById(clueList[0].id);
+    curClue.classList.toggle('highlight--clue');
+    clueList.shift();
   };
 
   let student_card = document.getElementById("student-card");
@@ -199,7 +203,7 @@ const MapPlay = ({ match }) => {
       let time_diff =
         values.defaultTime - Math.floor((cur_time - start_time) / 1000);
 
-      setValues({ ...values, time: time_diff });
+      setValues({...values, time: time_diff});
       /**
        * -----------------
        *  BACKGROUND SIZE
@@ -245,9 +249,22 @@ const MapPlay = ({ match }) => {
   };
 
   const getClue = () => {
-    console.log(clueList[0]);
-    setShowClue(true);
-    clueList.shift();
+    if (clueList.length > 0) {
+      let curClue = document.getElementById(clueList[0].id);
+      if (curClue.classList.contains('highlight--clue')) {
+        curClue.classList.toggle('highlight--clue');
+        clueList.shift();
+        if (clueList.length > 0) {
+          curClue = document.getElementById(clueList[0].id);
+        }
+      }
+      curClue.classList.toggle('highlight--clue');
+      console.log(curClue);
+      setShowClue(true);
+      if (clueList.length > 0) {
+        setClue(clueList[0].clue);
+      }
+    }
   };
 
   const submit = () => {
@@ -310,11 +327,11 @@ const MapPlay = ({ match }) => {
   }, []);
 
   return (
-    <div className="map--play" style={{ height: "100vh" }}>
+    <div className="map--play" style={{height: "100vh"}}>
       {isLoading && <Loading />}
       {!isReady && (
         <div className="is--ready" onClick={checkIsReady}>
-          <h1 style={{ fontSize: "5rem" }}>HOW TO PLAY?</h1>
+          <h1 style={{fontSize: "5rem"}}>HOW TO PLAY?</h1>
           <p>After click the screen, the timer will start running</p>
           <p>
             Click the work to select your answers, after the timer runs out or
@@ -326,7 +343,7 @@ const MapPlay = ({ match }) => {
       <Navbar />
       <div
         className="row middle-xs center-xs"
-        style={{ height: "calc(100% - 6rem)" }}
+        style={{height: "calc(100% - 6rem)"}}
       >
         <div className="col-xs-10 student-card" id="student-card">
           <Button
@@ -352,11 +369,10 @@ const MapPlay = ({ match }) => {
       </div>
       <Snackbar
         open={showClue}
-        autoHideDuration={30000}
         onClose={handleCloseClue}
       >
         <Alert severity="info" onClose={handleCloseClue}>
-          This is an information message!
+          {clue}
         </Alert>
       </Snackbar>
     </div>

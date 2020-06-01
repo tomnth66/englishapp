@@ -147,3 +147,17 @@
   align-items: flex-start;
   justify-content: center;
 }
+
+/* .highlight--clue { */
+/*   color: red; */
+/* } */
+
+.highlight--clue::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 1.1rem;
+  background: rgba(235, 203, 139, 0.3);
+  right: 0;
+}
